@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CheckoutModal } from "./components/CheckoutModal";
-import { listPublicPlans, type Plan } from "./lib/api";
+import { listPublicPlans, type Plan, type PlanPrice } from "./lib/api";
 
 const APP_URL = import.meta.env.VITE_APP_URL as string;
 
@@ -38,16 +38,31 @@ const FEATURES = [
   },
 ];
 
-function formatPrice(price: string): string {
-  const value = Number(price);
-  return value === 0 ? "Gratis" : `$${value.toFixed(2)}`;
+const CYCLES = [
+  { months: 1, label: "Mensual" },
+  { months: 3, label: "3 meses" },
+  { months: 6, label: "6 meses" },
+  { months: 12, label: "12 meses" },
+];
+
+function formatMoney(cents: number): string {
+  return `$${(cents / 100).toFixed(2)}`;
+}
+
+function priceForCycle(plan: Plan, months: number): PlanPrice | undefined {
+  return plan.prices.find((price) => price.commitment_months === months);
 }
 
 export default function App() {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [plansLoading, setPlansLoading] = useState(true);
   const [plansError, setPlansError] = useState<string | null>(null);
-  const [checkoutPlan, setCheckoutPlan] = useState<Plan | null>(null);
+  const [cycleMonths, setCycleMonths] = useState(12);
+  const [checkout, setCheckout] = useState<{ plan: Plan; price: PlanPrice } | null>(null);
+  const [checkoutResult] = useState<"success" | "cancel" | null>(() => {
+    const result = new URLSearchParams(window.location.search).get("checkout");
+    return result === "success" || result === "cancel" ? result : null;
+  });
 
   useEffect(() => {
     listPublicPlans()
@@ -55,6 +70,15 @@ export default function App() {
       .catch(() => setPlansError("No se pudieron cargar los planes."))
       .finally(() => setPlansLoading(false));
   }, []);
+
+  useEffect(() => {
+    if (checkoutResult) window.history.replaceState(null, "", window.location.pathname);
+  }, [checkoutResult]);
+
+  // Only plans with billing-cycle prices attached belong on the pricing page
+  // — that's exactly the subscription catalog, as opposed to any legacy/free
+  // plan rows that don't have a Stripe checkout flow behind them.
+  const subscriptionPlans = useMemo(() => plans.filter((plan) => plan.prices.length > 0), [plans]);
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_14%_4%,rgba(213,240,79,.08),transparent_27rem),radial-gradient(circle_at_95%_70%,rgba(239,170,98,.06),transparent_24rem),var(--bg)]">
@@ -73,6 +97,25 @@ export default function App() {
         </a>
       </header>
 
+      {checkoutResult && (
+        <div
+          className={`mx-auto mt-2 w-[min(1100px,calc(100%-48px))] rounded-[8px] border p-4 text-sm ${
+            checkoutResult === "success"
+              ? "border-[var(--accent)] bg-[var(--accent)]/8 text-[var(--text)]"
+              : "border-[var(--line)] bg-[var(--surface)]/70 text-[var(--muted)]"
+          }`}
+        >
+          {checkoutResult === "success" ? (
+            <>
+              <strong className="text-[var(--accent)]">¡Pago de prueba confirmado!</strong> Revisa tu
+              correo — te enviamos un enlace real para activar tu cuenta.
+            </>
+          ) : (
+            "El pago se canceló. Puedes intentarlo de nuevo cuando quieras."
+          )}
+        </div>
+      )}
+
       <main className="mx-auto w-[min(1100px,calc(100%-48px))]">
         <section className="flex flex-col items-center gap-5 py-[70px] text-center">
           <span className="text-[10px] font-bold uppercase tracking-[.2em] text-[var(--muted)]">
@@ -89,7 +132,7 @@ export default function App() {
             href="#planes"
             className="mt-2 rounded-[7px] bg-[var(--accent)] px-6 py-3 text-sm font-bold text-[#111] transition hover:brightness-95"
           >
-            Empezar gratis
+            Ver planes
           </a>
         </section>
 
@@ -117,15 +160,16 @@ export default function App() {
         </section>
 
         <section id="planes" className="py-[50px]">
-          <div className="mb-10 text-center">
+          <div className="mb-8 text-center">
             <span className="text-[10px] font-bold uppercase tracking-[.2em] text-[var(--muted)]">
               Planes
             </span>
             <h2 className="mt-2 font-serif text-2xl font-normal tracking-[-.03em]">
               Elige el plan de tu alianza
             </h2>
-            <p className="mx-auto mt-2 max-w-[480px] text-[13px] text-[var(--muted)]">
-              Demo: la compra es simulada, no se realiza ningún cobro real. Sí recibirás un correo real
+            <p className="mx-auto mt-2 max-w-[520px] text-[13px] text-[var(--muted)]">
+              Demo con Stripe en modo de prueba — usa la tarjeta 4242 4242 4242 4242, cualquier fecha
+              futura y cualquier CVC. No se realiza ningún cobro real, pero sí recibirás un correo real
               para activar tu cuenta.
             </p>
           </div>
@@ -135,42 +179,97 @@ export default function App() {
           ) : plansError ? (
             <p className="text-center text-sm text-[var(--danger)]">{plansError}</p>
           ) : (
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-              {plans.map((plan, index) => (
-                <div
-                  key={plan.id}
-                  className={`flex flex-col gap-4 rounded-[10px] border p-7 ${
-                    index === 1
-                      ? "border-[var(--accent)] bg-[var(--accent)]/6"
-                      : "border-[var(--line)] bg-[var(--surface)]/70"
-                  }`}
-                >
-                  <div>
-                    <h3 className="font-serif text-xl font-normal">{plan.name}</h3>
-                    <p className="mt-2 font-serif text-3xl font-normal tracking-[-.03em]">
-                      {formatPrice(plan.price)}
-                      {Number(plan.price) > 0 && <span className="text-sm text-[var(--muted)]"> /mes</span>}
-                    </p>
-                  </div>
-                  <ul className="flex flex-1 flex-col gap-2 text-[13px] text-[var(--muted)]">
-                    <li>Hasta {plan.max_members} miembros</li>
-                    <li>{plan.max_requests_per_day} análisis de OCR al día</li>
-                    <li>Hacienda, War Room y Rankings incluidos</li>
-                  </ul>
+            <>
+              <div className="mb-8 flex justify-center gap-2">
+                {CYCLES.map((cycle) => (
                   <button
+                    key={cycle.months}
                     type="button"
-                    onClick={() => setCheckoutPlan(plan)}
-                    className={`rounded-[6px] px-4 py-2.5 text-sm font-bold transition ${
-                      index === 1
-                        ? "bg-[var(--accent)] text-[#111] hover:brightness-95"
-                        : "border border-[var(--line)] text-[var(--text)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                    onClick={() => setCycleMonths(cycle.months)}
+                    className={`rounded-[6px] px-4 py-2 text-xs font-bold uppercase tracking-[.08em] transition ${
+                      cycleMonths === cycle.months
+                        ? "bg-[var(--accent)] text-[#111]"
+                        : "border border-[var(--line)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
                     }`}
                   >
-                    Elegir plan
+                    {cycle.label}
                   </button>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                {subscriptionPlans.map((plan) => {
+                  const selectedPrice = priceForCycle(plan, cycleMonths);
+                  const basePrice = priceForCycle(plan, 1);
+                  const discount =
+                    selectedPrice && basePrice && basePrice.monthly_price_cents > 0
+                      ? Math.round(
+                          (1 - selectedPrice.monthly_price_cents / basePrice.monthly_price_cents) * 100,
+                        )
+                      : 0;
+                  const highlighted = plan.tier === "intelligence";
+
+                  return (
+                    <div
+                      key={plan.id}
+                      className={`flex flex-col gap-4 rounded-[10px] border p-7 ${
+                        highlighted
+                          ? "border-[var(--accent)] bg-[var(--accent)]/6"
+                          : "border-[var(--line)] bg-[var(--surface)]/70"
+                      }`}
+                    >
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-[.15em] text-[var(--muted)]">
+                          {plan.player_min}–{plan.player_max} jugadores
+                        </span>
+                        <h3 className="mt-1 font-serif text-xl font-normal">{plan.name}</h3>
+                        {selectedPrice && (
+                          <p className="mt-2 flex items-baseline gap-2 font-serif text-3xl font-normal tracking-[-.03em]">
+                            {formatMoney(selectedPrice.monthly_price_cents)}
+                            <span className="text-sm text-[var(--muted)]">/mes</span>
+                            {basePrice && discount > 0 && (
+                              <>
+                                <span className="text-sm text-[var(--muted)] line-through">
+                                  {formatMoney(basePrice.monthly_price_cents)}
+                                </span>
+                                <span className="text-xs font-bold text-[var(--accent)]">-{discount}%</span>
+                              </>
+                            )}
+                          </p>
+                        )}
+                        {cycleMonths > 1 && (
+                          <p className="mt-1 text-[11px] text-[var(--muted)]">
+                            Compromiso de {cycleMonths} meses, facturado mes a mes
+                          </p>
+                        )}
+                      </div>
+                      <ul className="flex flex-1 flex-col gap-2 text-[13px] text-[var(--muted)]">
+                        {(plan.features ?? []).map((feature) => (
+                          <li key={feature} className="flex gap-2">
+                            <span className="text-[var(--accent)]" aria-hidden="true">
+                              ✓
+                            </span>
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                      <button
+                        type="button"
+                        disabled={!selectedPrice}
+                        onClick={() => selectedPrice && setCheckout({ plan, price: selectedPrice })}
+                        className={`rounded-[6px] px-4 py-2.5 text-sm font-bold transition disabled:opacity-50 ${
+                          highlighted
+                            ? "bg-[var(--accent)] text-[#111] hover:brightness-95"
+                            : "border border-[var(--line)] text-[var(--text)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                        }`}
+                      >
+                        Elegir plan
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
           )}
         </section>
       </main>
@@ -182,8 +281,8 @@ export default function App() {
         </a>
       </footer>
 
-      {checkoutPlan && (
-        <CheckoutModal plan={checkoutPlan} onClose={() => setCheckoutPlan(null)} />
+      {checkout && (
+        <CheckoutModal plan={checkout.plan} price={checkout.price} onClose={() => setCheckout(null)} />
       )}
     </div>
   );

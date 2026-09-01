@@ -27,18 +27,34 @@ async function apiFetch<T>(path: string, options: { method?: string; body?: unkn
   return response.json() as Promise<T>;
 }
 
+export interface PlanPrice {
+  id: number;
+  plan_id: number;
+  commitment_months: number;
+  monthly_price_cents: number;
+}
+
 export interface Plan {
   id: number;
   name: string;
+  plan_key: string | null;
+  tier: "management" | "intelligence" | null;
+  player_min: number | null;
+  player_max: number | null;
   max_requests_per_day: number;
   max_members: number;
   price: string;
+  features: string[] | null;
+  prices: PlanPrice[];
 }
 
 export function listPublicPlans(): Promise<Plan[]> {
   return apiFetch<Plan[]>("/public/plans");
 }
 
-export function simulateCheckout(email: string, planId: number): Promise<void> {
-  return apiFetch<void>("/public/checkout", { method: "POST", body: { email, planId } });
+export function startCheckout(email: string, planPriceId: number): Promise<{ checkoutUrl: string }> {
+  return apiFetch<{ checkoutUrl: string }>("/public/checkout", {
+    method: "POST",
+    body: { email, planPriceId },
+  });
 }
