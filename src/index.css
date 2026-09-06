@@ -1,34 +1,5 @@
 @import "tailwindcss";
-
-:root {
-  --bg: #111716;
-  --surface: #19211f;
-  --surface-raised: #202a27;
-  --text: #eef3f1;
-  --muted: #92a29e;
-  --line: #2b3935;
-  --accent: #d5f04f;
-  --accent-dim: #9cb82e;
-  --danger: #f27d72;
-  font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-}
-
-button,
-input {
-  font: inherit;
-}
+:root { --bg: #131315; --surface: #1F1F21; --surface-raised: #2a2a2c; --text: #eef3f1; --muted: #92a29e; --line: #2b3935; --accent: #D6FA38; --accent-dim: #9cb82e; --accent-purple: #8D59FD; --accent-gold: #FFB800; --danger: #FC3A3A; font-family: 'Inter', 'Segoe UI', sans-serif; color: var(--text); background: var(--bg); font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); }
+button, input { font: inherit; }

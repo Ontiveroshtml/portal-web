@@ -34,7 +34,9 @@ export function CheckoutModal({ plan, price, onClose }: CheckoutModalProps) {
         className="w-full max-w-[400px] rounded-[10px] border border-[var(--line)] bg-[var(--surface)] p-[28px]"
         onClick={(event) => event.stopPropagation()}
       >
-        <h2 className="mb-1 font-serif text-xl font-normal">Suscribirse a {plan.name}</h2>
+        <h2 className="mb-1 [font-family:'Montserrat',sans-serif] text-xl font-black italic tracking-[-.01em]">
+          Suscribirse a {plan.name}
+        </h2>
         <p className="mb-5 text-xs text-[var(--muted)]">
           Te llevaremos a Stripe (modo de prueba) para pagar con tarjeta. Usa 4242 4242 4242 4242, cualquier
           fecha futura y cualquier CVC — no se realiza ningún cobro real.
@@ -52,7 +54,7 @@ export function CheckoutModal({ plan, price, onClose }: CheckoutModalProps) {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full rounded-[6px] bg-[var(--accent)] px-4 py-2.5 text-sm font-bold text-[#111] transition hover:brightness-95 disabled:opacity-60"
+            className="w-full rounded-full bg-[var(--accent)] px-4 py-3 [font-family:'Montserrat',sans-serif] text-sm font-extrabold italic uppercase tracking-[.04em] text-[#17201e] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_28px_-6px_rgba(214,250,56,.5)] disabled:cursor-wait disabled:opacity-55 disabled:shadow-none disabled:hover:translate-y-0"
           >
             {submitting
               ? "Redirigiendo a Stripe…"
