@@ -18,7 +18,7 @@ function ScreenHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
     <div className="mb-6">
       <div
         aria-hidden="true"
-        className="mb-2.5 h-[10px] max-w-[300px] [background:repeating-linear-gradient(45deg,var(--accent)_0_12px,var(--bg)_12px_24px)]"
+        className="gc-cinta-viva mb-2.5 h-[10px] max-w-[300px] [background:repeating-linear-gradient(45deg,var(--accent)_0_12px,var(--bg)_12px_24px)]"
       />
       <span className={`${MONO} text-[10px] font-semibold uppercase tracking-[.17em] text-[var(--muted)]`}>
         {eyebrow}
@@ -204,7 +204,7 @@ export function HaciendaScreen() {
       <div className="mb-5 mt-3">
         <div
           aria-hidden="true"
-          className="mb-2.5 h-[10px] max-w-[340px] [background:repeating-linear-gradient(45deg,var(--accent)_0_12px,var(--bg)_12px_24px)]"
+          className="gc-cinta-viva mb-2.5 h-[10px] max-w-[340px] [background:repeating-linear-gradient(45deg,var(--accent)_0_12px,var(--bg)_12px_24px)]"
         />
         <h3 className={`${DISP} text-lg tracking-[-.02em] sm:text-xl`}>
           27 ago 2026, 0:21 — 9 sept 2026, 1:29
@@ -311,7 +311,7 @@ export function HaciendaScreen() {
       </TableShell>
 
       <p className="mt-3 text-[11px] leading-relaxed text-[var(--muted)]">
-        Top 5 de 87 donantes del corte. Cada fila se marca como pagada cuando entregás el oro, y el total
+        Top 5 de 87 donantes del corte. Cada fila se marca como pagada cuando entregas el oro, y el total
         se copia de un clic para pegarlo en el chat del clan.
       </p>
     </div>
@@ -402,7 +402,7 @@ export function WarRoomScreen() {
         <div>
           <div
             aria-hidden="true"
-            className="mb-2.5 h-[10px] max-w-[300px] [background:repeating-linear-gradient(45deg,var(--accent)_0_12px,var(--bg)_12px_24px)]"
+            className="gc-cinta-viva mb-2.5 h-[10px] max-w-[300px] [background:repeating-linear-gradient(45deg,var(--accent)_0_12px,var(--bg)_12px_24px)]"
           />
           <h3 className={`${DISP} text-xl tracking-[-.02em] sm:text-2xl`}>Estadísticas de guerra</h3>
           <img
@@ -536,7 +536,7 @@ export function WarRoomScreen() {
       </TableShell>
 
       <p className="mt-3 text-[11px] leading-relaxed text-[var(--muted)]">
-        La tabla completa tiene 16 columnas: con “Mostrar columnas” elegís cuáles ver y la app se acuerda
+        La tabla completa tiene 16 columnas: con “Mostrar columnas” eliges cuáles ver y la app se acuerda
         de tu elección.
       </p>
     </div>
@@ -691,7 +691,7 @@ export function RankingScreen() {
         <div>
           <div
             aria-hidden="true"
-            className="mb-2.5 h-[10px] max-w-[300px] [background:repeating-linear-gradient(45deg,var(--accent)_0_12px,var(--bg)_12px_24px)]"
+            className="gc-cinta-viva mb-2.5 h-[10px] max-w-[300px] [background:repeating-linear-gradient(45deg,var(--accent)_0_12px,var(--bg)_12px_24px)]"
           />
           <h3 className={`${DISP} text-xl tracking-[-.02em] sm:text-2xl`}>
             CLAN DEMO <span className="text-[var(--accent)]">[GC]</span>
@@ -937,7 +937,7 @@ export function RankingScreen() {
       )}
 
       <p className="mt-3 text-[11px] leading-relaxed text-[var(--muted)]">
-        Probá los botones: el podio y la tabla se reordenan por puntos, kills o bajas, y se pueden filtrar
+        Prueba los botones: el podio y la tabla se reordenan por puntos, kills o bajas, y se pueden filtrar
         por clase. Esta vista se comparte con un link público, así tu clan la mira sin crear cuenta.
       </p>
     </div>

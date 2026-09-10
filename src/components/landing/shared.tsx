@@ -33,7 +33,7 @@ export function SectionHeading({ eyebrow, title, align = "center", className = "
       </h2>
       <div
         aria-hidden="true"
-        className={`mt-3 h-[6px] w-[130px] [background:repeating-linear-gradient(45deg,var(--accent)_0_10px,var(--bg)_10px_20px)] ${align === "center" ? "mx-auto" : ""}`}
+        className={`gc-cinta-viva mt-3 h-[6px] w-[130px] [background:repeating-linear-gradient(45deg,var(--accent)_0_10px,var(--bg)_10px_20px)] ${align === "center" ? "mx-auto" : ""}`}
       />
     </div>
   );

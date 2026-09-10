@@ -8,7 +8,7 @@ const DEMO_URL: string = "";
 
 const INCLUYE = [
   "Hacienda, Roster, WarRoom y Ranking navegables de verdad, no una maqueta",
-  "Cargás vos los datos — tus jugadores, una captura, un corte de prueba",
+  "Cargas tú los datos — tus jugadores, una captura, un corte de prueba",
   "Con algunos límites de uso, pero sin tocar tu clan real",
 ];
 
@@ -20,20 +20,20 @@ export function DemoDestacada() {
     >
       <div className="mx-auto grid w-[min(1200px,calc(100%-40px))] grid-cols-1 items-center gap-10 py-[80px] lg:grid-cols-[1.15fr_.85fr]">
         <div className="flex flex-col items-start gap-5">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/45 bg-[var(--accent)]/8 px-3.5 py-1.5 [font-family:'JetBrains_Mono',monospace] text-[10px] font-bold uppercase tracking-[.18em] text-[var(--accent)]">
-            <span className="size-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+          <span className="gc-respira-lima-borde inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/45 bg-[var(--accent)]/8 px-3.5 py-1.5 [font-family:'JetBrains_Mono',monospace] text-[10px] font-bold uppercase tracking-[.18em] text-[var(--accent)]">
+            <span className="gc-punto size-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
             Demo · Próximamente
           </span>
 
           <h2 className="max-w-[560px] [font-family:'Montserrat',sans-serif] text-[clamp(24px,4vw,36px)] font-black italic leading-[1.12] tracking-[-.02em]">
-            Vas a poder entrar y probarlo vos mismo,{" "}
+            Vas a poder entrar y probarlo tú mismo,{" "}
             <span className="text-[var(--accent)]">antes de mover un solo dato de tu clan.</span>
           </h2>
 
           <p className="max-w-[520px] text-sm leading-relaxed text-[var(--muted)]">
-            Estamos preparando un modo demo con acceso limitado: entrás, cargás tus propios datos —
+            Estamos preparando un modo demo con acceso limitado: entras, cargas tus propios datos —
             jugadores, una captura, un corte de prueba— y ves cómo responde cada pantalla en tiempo real.
-            Nada armado de antemano: lo probás con lo tuyo y decidís vos.
+            Nada armado de antemano: lo pruebas con lo tuyo y decides tú.
           </p>
 
           <ul className="flex flex-col gap-2.5">
@@ -51,7 +51,7 @@ export function DemoDestacada() {
             {DEMO_LISTA ? (
               <a
                 href={DEMO_URL}
-                className="rounded-full bg-[var(--accent)] px-6 py-3 [font-family:'Montserrat',sans-serif] text-sm font-black italic uppercase tracking-[.04em] text-[#17201e] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_34px_-6px_rgba(214,250,56,.5)]"
+                className="gc-boton gc-boton-primario rounded-full bg-[var(--accent)] px-6 py-3 [font-family:'Montserrat',sans-serif] text-sm font-black italic uppercase tracking-[.04em] text-[#17201e] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_34px_-6px_rgba(214,250,56,.5)]"
               >
                 Entrar a la demo
               </a>
@@ -80,9 +80,9 @@ export function DemoDestacada() {
               href={`${APP_URL}/login`}
               className="text-[var(--accent)] underline underline-offset-4 transition duration-150 hover:text-[var(--text)]"
             >
-              entrá con tu cuenta
+              entra con tu cuenta
             </a>{" "}
-            o mirá{" "}
+            o mira{" "}
             <a
               href="#showcase"
               className="text-[var(--accent)] underline underline-offset-4 transition duration-150 hover:text-[var(--text)]"

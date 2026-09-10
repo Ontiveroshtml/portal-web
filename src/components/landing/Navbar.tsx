@@ -42,7 +42,7 @@ export function Navbar() {
           </a>
           <a
             href="#demo"
-            className="rounded-full bg-[var(--accent)] px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11px] font-extrabold italic uppercase tracking-[.04em] text-[#17201e] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_28px_-6px_rgba(214,250,56,.5)]"
+            className="gc-boton gc-boton-primario rounded-full bg-[var(--accent)] px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11px] font-extrabold italic uppercase tracking-[.04em] text-[#17201e] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_28px_-6px_rgba(214,250,56,.5)]"
           >
             Ver demo
           </a>

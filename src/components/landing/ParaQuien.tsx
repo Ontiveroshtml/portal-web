@@ -11,42 +11,42 @@ const LIDERES: Capacidad[] = [
   {
     icon: "/icons/svg/icon-coins.svg",
     titulo: "Hacienda y cortes",
-    detalle: "Donaciones, cashback y reserva, calculados solos.",
+    detalle: "Nadie vuelve a preguntarte cuánto le toca.",
   },
   {
     icon: "/icons/svg/icon-chart.svg",
     titulo: "Reparto configurable",
-    detalle: "Partes iguales o por rendimiento, con tus pesos.",
+    detalle: "Una regla escrita antes de repartir, igual para todos.",
   },
   {
     icon: "/icons/svg/icon-badge.svg",
     titulo: "Lectura de capturas",
-    detalle: "Los datos del evento entran sin tipear nada.",
+    detalle: "Se terminó copiar números de una imagen.",
   },
   {
     icon: "/icons/svg/icon-shield.svg",
     titulo: "Verificación y auditoría",
-    detalle: "Quién cambió cada dato, cuándo y desde dónde.",
+    detalle: "Si alguien discute un número, tienes el historial.",
   },
   {
     icon: "/icons/svg/icon-sword.svg",
     titulo: "WarRoom",
-    detalle: "Las 16 columnas del Valle, filtrables a tu gusto.",
+    detalle: "El evento entero, con las columnas que a ti te sirven.",
   },
   {
     icon: "/icons/svg/icon-users.svg",
     titulo: "Roster y rangos",
-    detalle: "Cada jugador cruzado por su ID de juego.",
+    detalle: "Cada jugador cruzado por su ID, sin confundir nombres.",
   },
   {
     icon: "/icons/svg/icon-trophy.svg",
     titulo: "Rankings y links públicos",
-    detalle: "Ranking y cortes de hacienda, compartidos con un link.",
+    detalle: "Envías un link y dejan de escribirte por privado.",
   },
   {
     icon: "/icons/svg/icon-book.svg",
     titulo: "Historial completo",
-    detalle: "Corte a corte y evento a evento, sin perder nada.",
+    detalle: "Comparar un mes con otro deja de ser un trabajo.",
   },
 ];
 
@@ -69,7 +69,7 @@ const JUGADORES: Capacidad[] = [
   {
     icon: "/icons/svg/icon-users.svg",
     titulo: "Tu peso en el clan",
-    detalle: "Qué porcentaje del total aportaste vos.",
+    detalle: "Qué porcentaje del total aportaste tú.",
   },
 ];
 
@@ -122,7 +122,7 @@ function Tarjeta({
     <div
       className={`${cutClass} relative flex flex-col overflow-hidden border ${borde} ${fondo} p-7 [background-image:radial-gradient(rgba(255,255,255,.045)_1px,transparent_1px)] [background-size:6px_6px]`}
     >
-      <span aria-hidden="true" className={`absolute inset-x-0 top-0 h-1.5 opacity-80 ${cinta}`} />
+      <span aria-hidden="true" className={`gc-cinta-viva absolute inset-x-0 top-0 h-1.5 opacity-80 ${cinta}`} />
       <span
         className={`mt-1.5 [font-family:'JetBrains_Mono',monospace] text-[10px] font-semibold uppercase tracking-[.15em] ${color}`}
       >
@@ -144,7 +144,7 @@ export function ParaQuien() {
       <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-2">
         <Tarjeta eyebrow="Líderes y administradores" titulo="Control total del clan." tono="accent">
           <p className="mt-2 max-w-[46ch] text-[13px] leading-relaxed text-[var(--muted)]">
-            Todo lo que hoy manejás entre planillas, capturas y mensajes, integrado en una sola pantalla.
+            Todo el clan en una sola pantalla, y cada decisión respaldada por un dato que puedes mostrar.
           </p>
 
           <div className="mt-6 grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
@@ -161,7 +161,7 @@ export function ParaQuien() {
               className="size-5 shrink-0"
             />
             <p className="[font-family:'Montserrat',sans-serif] text-base font-black italic tracking-[-.01em] text-[var(--accent)]">
-              Tomá decisiones con datos, no con suposiciones.
+              Toma decisiones con datos, no con suposiciones.
             </p>
           </div>
         </Tarjeta>
@@ -179,12 +179,13 @@ export function ParaQuien() {
           </div>
 
           <div className="mt-6 border-t border-[var(--line)] pt-5">
-            <span className="[font-family:'JetBrains_Mono',monospace] text-[10px] font-bold uppercase tracking-[.15em] text-[var(--accent-gold)]">
+            <span className="gc-proximamente inline-flex items-center gap-1.5 rounded-full border border-[var(--accent-gold)]/45 bg-[var(--accent-gold)]/10 px-2.5 py-1 [font-family:'JetBrains_Mono',monospace] text-[10px] font-bold uppercase tracking-[.15em] text-[var(--accent-gold)]">
+              <span className="gc-punto size-1.5 rounded-full bg-[var(--accent-gold)]" aria-hidden="true" />
               Próximamente
             </span>
             <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">
-              Planes con herramientas propias del jugador, donde vas a poder simular cómo progresa tu
-              cuenta y probar una implementación antes de gastar recursos en el juego.
+              Herramientas propias del jugador, para simular una implementación antes de gastar recursos
+              en el juego.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {JUGADORES_PROXIMAMENTE.map((item) => (

@@ -2,12 +2,13 @@ const APP_URL = import.meta.env.VITE_APP_URL as string;
 
 // Cuando tengas la invitación del servidor, pegala acá y el link se activa solo.
 // Vacío = se muestra como "próximamente" en vez de quedar como link roto.
-const DISCORD_URL = "";
+const DISCORD_URL: string = "";
 
-// Términos y privacidad todavía no existen. Antes que un link muerto, se
-// muestran apagados con la aclaración; cuando estén, se completan las URLs.
-const TERMINOS_URL = "";
-const PRIVACIDAD_URL = "";
+// Términos y privacidad todavía no existen. En vez de mostrarlos apagados con
+// un cartel de "Pronto" —que suma a la sensación de producto sin terminar— la
+// columna Legal directamente no se arma hasta que haya URLs reales.
+const TERMINOS_URL: string = "";
+const PRIVACIDAD_URL: string = "";
 
 interface Enlace {
   label: string;
@@ -33,13 +34,17 @@ const COLUMNAS: { title: string; links: Enlace[] }[] = [
       { label: "Soporte", href: "#faq" },
     ],
   },
-  {
-    title: "Legal",
-    links: [
-      { label: "Términos", href: TERMINOS_URL },
-      { label: "Privacidad", href: PRIVACIDAD_URL },
-    ],
-  },
+  ...(TERMINOS_URL || PRIVACIDAD_URL
+    ? [
+        {
+          title: "Legal",
+          links: [
+            { label: "Términos", href: TERMINOS_URL },
+            { label: "Privacidad", href: PRIVACIDAD_URL },
+          ],
+        },
+      ]
+    : []),
 ];
 
 function EnlaceFooter({ enlace }: { enlace: Enlace }) {

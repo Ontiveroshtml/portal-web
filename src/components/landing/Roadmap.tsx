@@ -1,3 +1,4 @@
+import { useContador, useEnPantalla, Reveal } from "./animaciones";
 import { cutClass, featuredClass, SectionHeading } from "./shared";
 
 interface RoadmapGroup {
@@ -107,37 +108,137 @@ const LISTAS = GROUPS.reduce(
 const PENDIENTES = TOTAL - LISTAS;
 const PORCENTAJE = Math.round((LISTAS / TOTAL) * 100);
 
+/** Tarjeta de un grupo: anima su barra y sus ítems cuando entra en pantalla. */
+function TarjetaGrupo({ group, orden }: { group: RoadmapGroup; orden: number }) {
+  const style = STATUS_STYLE[group.status];
+  const hechas = group.items.filter((item) => item.done).length;
+  const avance = Math.round((hechas / group.items.length) * 100);
+  const { ref, visible } = useEnPantalla<HTMLDivElement>();
+
+  return (
+    <div
+      ref={ref}
+      className={`${cutClass} gc-reveal ${visible ? "gc-reveal-on" : ""} relative overflow-hidden border ${style.border} bg-[var(--surface)]/85 p-6 [background-image:radial-gradient(rgba(255,255,255,.04)_1px,transparent_1px)] [background-size:6px_6px] ${
+        group.wide ? "md:col-span-2" : ""
+      }`}
+      style={{ animationDelay: `${orden * 90}ms` }}
+    >
+      <span
+        aria-hidden="true"
+        className={`gc-cinta-viva absolute inset-x-0 top-0 h-1.5 opacity-80 ${style.tape}`}
+      />
+
+      <div className="mt-2 flex items-start gap-3">
+        <span className={`grid size-10 shrink-0 place-items-center rounded-[7px] ${style.placa}`}>
+          <img src={group.icon} alt="" aria-hidden="true" className="size-4" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <span className={`size-2 rounded-full ${style.dot}`} aria-hidden="true" />
+            <span
+              className={`[font-family:'JetBrains_Mono',monospace] text-[10px] font-semibold uppercase tracking-[.15em] ${style.text}`}
+            >
+              {style.label}
+            </span>
+          </div>
+          <h3 className="mt-1 [font-family:'Montserrat',sans-serif] text-lg font-black italic tracking-[-.01em]">
+            {group.label}
+          </h3>
+        </div>
+        <span className="[font-family:'JetBrains_Mono',monospace] shrink-0 text-[11px] tabular-nums text-[var(--muted)]">
+          {hechas}/{group.items.length}
+        </span>
+      </div>
+
+      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-[var(--surface-raised)]">
+        <div
+          className={`gc-barra h-full rounded-full ${style.bar}`}
+          style={{
+            width: visible ? `${avance}%` : "0%",
+            transitionDelay: `${orden * 90 + 200}ms`,
+          }}
+        />
+      </div>
+
+      <ul
+        className={`mt-4 gap-2 ${
+          group.wide ? "grid grid-cols-1 gap-x-8 sm:grid-cols-2" : "flex flex-col"
+        }`}
+      >
+        {group.items.map((item, i) => (
+          <li
+            key={item.text}
+            className={`gc-reveal ${visible ? "gc-reveal-on" : ""} flex items-start gap-2.5 text-[13px] leading-relaxed ${
+              item.done ? "text-[var(--text)]" : "text-[var(--muted)]"
+            }`}
+            style={{ animationDelay: `${orden * 90 + 260 + i * 55}ms` }}
+          >
+            {/* Solo lo terminado lleva tilde: un ✓ en algo que todavía
+                no existe se lee como si ya estuviera disponible. */}
+            <span
+              className={`mt-0.5 shrink-0 ${item.done ? "text-[var(--accent)]" : "text-[var(--accent-gold)]"}`}
+              aria-hidden="true"
+            >
+              {item.done ? "✓" : "○"}
+            </span>
+            {item.text}
+          </li>
+        ))}
+      </ul>
+
+      {group.note && (
+        <p className="mt-4 border-t border-[var(--line)] pt-3 text-[12px] leading-relaxed text-[var(--muted)]">
+          {group.note}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export function Roadmap() {
+  // El resumen dispara los contadores y la barra grande cuando se lo ve.
+  const { ref, visible } = useEnPantalla<HTMLDivElement>();
+  const porcentaje = useContador(PORCENTAJE, visible, 1500);
+  const listas = useContador(LISTAS, visible, 1200);
+  const pendientes = useContador(PENDIENTES, visible, 1200);
+
   return (
     <section id="roadmap" className="mx-auto w-[min(1200px,calc(100%-40px))] py-[70px]">
-      <SectionHeading eyebrow="Roadmap" title="Lo que ya está y lo que viene." />
+      <Reveal>
+        <SectionHeading eyebrow="Roadmap" title="Lo que ya está y lo que viene." />
+      </Reveal>
 
-      {/* Resumen: cuánto del roadmap ya está en la app */}
+      {/* Resumen: cuánto del roadmap ya está en la app. Es el momento fuerte
+          de la sección — el número sube, la barra viaja y un barrido de luz
+          cruza la tarjeta una sola vez. */}
       <div
-        className={`${featuredClass} relative mx-auto mt-10 max-w-[720px] overflow-hidden border border-[var(--accent)]/40 bg-[var(--surface)]/80 p-6 [background-image:radial-gradient(rgba(255,255,255,.045)_1px,transparent_1px)] [background-size:6px_6px]`}
+        ref={ref}
+        className={`${featuredClass} gc-reveal ${visible ? "gc-reveal-on" : ""} relative mx-auto mt-10 max-w-[720px] overflow-hidden border border-[var(--accent)]/40 bg-[var(--surface)]/80 p-6 [background-image:radial-gradient(rgba(255,255,255,.045)_1px,transparent_1px)] [background-size:6px_6px]`}
       >
         <span
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-1.5 opacity-85 [background:repeating-linear-gradient(45deg,var(--accent)_0_10px,var(--bg)_10px_20px)]"
+          className="gc-cinta-viva absolute inset-x-0 top-0 h-1.5 opacity-85 [background:repeating-linear-gradient(45deg,var(--accent)_0_10px,var(--bg)_10px_20px)]"
         />
+        {visible && <span aria-hidden="true" className="gc-barrido" />}
+
         <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
           <div>
             <span className="[font-family:'JetBrains_Mono',monospace] text-[10px] font-semibold uppercase tracking-[.16em] text-[var(--muted)]">
               Avance del roadmap
             </span>
-            <div className="mt-1 flex items-baseline gap-2">
-              <span className="[font-family:'JetBrains_Mono',monospace] text-4xl font-bold tabular-nums text-[var(--accent)]">
-                {PORCENTAJE}%
+            <div className="mt-1 flex flex-wrap items-baseline gap-3">
+              <span className="gc-latido [font-family:'JetBrains_Mono',monospace] text-[clamp(44px,7vw,72px)] font-bold leading-none tabular-nums text-[var(--accent)]">
+                {porcentaje}%
               </span>
               <span className="text-[13px] text-[var(--muted)]">
-                {LISTAS} de {TOTAL} funciones ya están en la app
+                {listas} de {TOTAL} funciones ya están en la app
               </span>
             </div>
           </div>
           <div className="flex gap-5">
             <div>
               <div className="[font-family:'JetBrains_Mono',monospace] text-2xl font-bold tabular-nums text-[var(--accent)]">
-                {LISTAS}
+                {listas}
               </div>
               <div className="[font-family:'JetBrains_Mono',monospace] text-[10px] uppercase tracking-[.14em] text-[var(--muted)]">
                 Listas
@@ -145,7 +246,7 @@ export function Roadmap() {
             </div>
             <div>
               <div className="[font-family:'JetBrains_Mono',monospace] text-2xl font-bold tabular-nums text-[var(--accent-gold)]">
-                {PENDIENTES}
+                {pendientes}
               </div>
               <div className="[font-family:'JetBrains_Mono',monospace] text-[10px] uppercase tracking-[.14em] text-[var(--muted)]">
                 En camino
@@ -156,92 +257,24 @@ export function Roadmap() {
 
         <div className="mt-4 h-2 overflow-hidden rounded-full bg-[var(--surface-raised)]">
           <div
-            className="h-full rounded-full bg-[var(--accent)] shadow-[0_0_14px_-2px_var(--accent)]"
-            style={{ width: `${PORCENTAJE}%` }}
+            className="gc-barra h-full rounded-full bg-[var(--accent)] shadow-[0_0_14px_-2px_var(--accent)]"
+            style={{ width: visible ? `${PORCENTAJE}%` : "0%", transitionDelay: "260ms" }}
           />
         </div>
       </div>
 
       <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
-        {GROUPS.map((group) => {
-          const style = STATUS_STYLE[group.status];
-          const hechas = group.items.filter((item) => item.done).length;
-          const avance = Math.round((hechas / group.items.length) * 100);
-
-          return (
-            <div
-              key={group.label}
-              className={`${cutClass} relative overflow-hidden border ${style.border} bg-[var(--surface)]/85 p-6 [background-image:radial-gradient(rgba(255,255,255,.04)_1px,transparent_1px)] [background-size:6px_6px] ${
-                group.wide ? "md:col-span-2" : ""
-              }`}
-            >
-              <span aria-hidden="true" className={`absolute inset-x-0 top-0 h-1.5 opacity-80 ${style.tape}`} />
-
-              <div className="mt-2 flex items-start gap-3">
-                <span className={`grid size-10 shrink-0 place-items-center rounded-[7px] ${style.placa}`}>
-                  <img src={group.icon} alt="" aria-hidden="true" className="size-4" />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className={`size-2 rounded-full ${style.dot}`} aria-hidden="true" />
-                    <span
-                      className={`[font-family:'JetBrains_Mono',monospace] text-[10px] font-semibold uppercase tracking-[.15em] ${style.text}`}
-                    >
-                      {style.label}
-                    </span>
-                  </div>
-                  <h3 className="mt-1 [font-family:'Montserrat',sans-serif] text-lg font-black italic tracking-[-.01em]">
-                    {group.label}
-                  </h3>
-                </div>
-                <span className="[font-family:'JetBrains_Mono',monospace] shrink-0 text-[11px] tabular-nums text-[var(--muted)]">
-                  {hechas}/{group.items.length}
-                </span>
-              </div>
-
-              <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-[var(--surface-raised)]">
-                <div className={`h-full rounded-full ${style.bar}`} style={{ width: `${avance}%` }} />
-              </div>
-
-              <ul
-                className={`mt-4 gap-2 ${
-                  group.wide ? "grid grid-cols-1 gap-x-8 sm:grid-cols-2" : "flex flex-col"
-                }`}
-              >
-                {group.items.map((item) => (
-                  <li
-                    key={item.text}
-                    className={`flex items-start gap-2.5 text-[13px] leading-relaxed ${
-                      item.done ? "text-[var(--text)]" : "text-[var(--muted)]"
-                    }`}
-                  >
-                    {/* Solo lo terminado lleva tilde: un ✓ en algo que todavía
-                        no existe se lee como si ya estuviera disponible. */}
-                    <span
-                      className={`mt-0.5 shrink-0 ${item.done ? "text-[var(--accent)]" : "text-[var(--accent-gold)]"}`}
-                      aria-hidden="true"
-                    >
-                      {item.done ? "✓" : "○"}
-                    </span>
-                    {item.text}
-                  </li>
-                ))}
-              </ul>
-
-              {group.note && (
-                <p className="mt-4 border-t border-[var(--line)] pt-3 text-[12px] leading-relaxed text-[var(--muted)]">
-                  {group.note}
-                </p>
-              )}
-            </div>
-          );
-        })}
+        {GROUPS.map((group, i) => (
+          <TarjetaGrupo key={group.label} group={group} orden={i} />
+        ))}
       </div>
 
-      <p className="mx-auto mt-10 max-w-[560px] text-center text-[13px] leading-relaxed text-[var(--muted)]">
-        Todo lo marcado como listo ya está funcionando en la app hoy. Lo que está en camino sale sin
-        costo extra dentro del plan que tengas.
-      </p>
+      <Reveal>
+        <p className="mx-auto mt-10 max-w-[560px] text-center text-[13px] leading-relaxed text-[var(--muted)]">
+          Todo lo marcado como listo ya está funcionando en la app hoy. Lo que está en camino sale sin
+          costo extra dentro del plan que tengas.
+        </p>
+      </Reveal>
     </section>
   );
 }

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { EstilosAnimacion, Reveal } from "./components/landing/animaciones";
 import { AppPreview } from "./components/landing/AppPreview";
 import { CTAFinal } from "./components/landing/CTAFinal";
+import { CTAMovil } from "./components/landing/CTAMovil";
 import { DemoDestacada } from "./components/landing/DemoDestacada";
 import { FAQ } from "./components/landing/FAQ";
 import { Footer } from "./components/landing/Footer";
@@ -23,7 +25,10 @@ export default function App() {
   }, [checkoutResult]);
 
   return (
-    <div className="min-h-screen bg-[var(--bg)]">
+    // pb-[76px] en mobile: deja lugar para la barra fija de CTAMovil, que si no
+    // tapa el final del footer.
+    <div className="min-h-screen bg-[var(--bg)] pb-[76px] lg:pb-0">
+      <EstilosAnimacion />
       <Navbar />
 
       {checkoutResult && (
@@ -45,17 +50,21 @@ export default function App() {
         </div>
       )}
 
+      {/* Cada sección aparece al entrar en pantalla. El Hero no va envuelto:
+          está arriba de todo y se anima solo al cargar, desde su propio
+          componente. */}
       <Hero />
-      <Problema />
-      <Funciones />
-      <AppPreview />
-      <DemoDestacada />
-      <ParaQuien />
-      <Planes />
+      <Reveal><Problema /></Reveal>
+      <Reveal><Funciones /></Reveal>
+      <Reveal><AppPreview /></Reveal>
+      <Reveal><DemoDestacada /></Reveal>
+      <Reveal><ParaQuien /></Reveal>
+      <Reveal><Planes /></Reveal>
       <Roadmap />
-      <FAQ />
-      <CTAFinal />
+      <Reveal><FAQ /></Reveal>
+      <Reveal><CTAFinal /></Reveal>
       <Footer />
+      <CTAMovil />
     </div>
   );
 }

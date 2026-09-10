@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { cutClass, featuredClass, SectionHeading } from "./shared";
+import { featuredClass, SectionHeading } from "./shared";
 import { HaciendaScreen, JugadoresScreen, RankingScreen, WarRoomScreen } from "./previewScreens";
 
 // Reemplaza al viejo bloque de capturas: en vez de screenshots que hay que
@@ -12,7 +12,7 @@ const TABS = [
   {
     key: "hacienda",
     label: "Hacienda",
-    blurb: "El oro del clan, quién aportó y cuánto se repartió — sin planilla aparte.",
+    blurb: "El oro del clan, quién aportó y cuánto le tocó a cada uno del reparto.",
     Screen: HaciendaScreen,
   },
   {
@@ -65,7 +65,7 @@ export function AppPreview() {
               aria-selected={selected}
               aria-controls={`preview-panel-${tab.key}`}
               onClick={() => setActive(tab.key)}
-              className={`rounded-full px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11px] font-extrabold italic uppercase tracking-[.06em] transition duration-200 ${
+              className={`gc-boton rounded-full px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11px] font-extrabold italic uppercase tracking-[.06em] transition duration-200 ${
                 selected
                   ? "bg-[var(--accent)] text-[#17201e] shadow-[0_0_28px_-8px_rgba(214,250,56,.55)]"
                   : "border border-[var(--line)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
@@ -89,9 +89,22 @@ export function AppPreview() {
       >
         {/* Cromo de ventana — igual que el bloque anterior, para que se lea como app */}
         <div className="flex items-center gap-1.5 border-b border-[var(--line)] bg-[var(--surface-raised)] px-4 py-2.5">
-          <span className="size-2 rounded-full bg-[var(--danger)]/70" aria-hidden="true" />
-          <span className="size-2 rounded-full bg-[var(--accent-gold)]/70" aria-hidden="true" />
-          <span className="size-2 rounded-full bg-[var(--accent)]/70" aria-hidden="true" />
+          {/* Las tres luces laten en cadena, como un semáforo de ventana vivo. */}
+          <span
+            className="gc-punto size-2 rounded-full bg-[var(--danger)] shadow-[0_0_8px_-1px_var(--danger)]"
+            style={{ animationDelay: "0ms" }}
+            aria-hidden="true"
+          />
+          <span
+            className="gc-punto size-2 rounded-full bg-[var(--accent-gold)] shadow-[0_0_8px_-1px_var(--accent-gold)]"
+            style={{ animationDelay: "260ms" }}
+            aria-hidden="true"
+          />
+          <span
+            className="gc-punto size-2 rounded-full bg-[var(--accent)] shadow-[0_0_8px_-1px_var(--accent)]"
+            style={{ animationDelay: "520ms" }}
+            aria-hidden="true"
+          />
           <span className="ml-3 [font-family:'JetBrains_Mono',monospace] text-[10px] uppercase tracking-[.14em] text-[var(--muted)]">
             guildcore.app / {current.key}
           </span>
@@ -106,21 +119,8 @@ export function AppPreview() {
         </div>
       </div>
 
-      <div
-        className={`${cutClass} mt-6 flex flex-col items-start gap-4 border border-[var(--line)] bg-[var(--surface)]/70 p-6 sm:flex-row sm:items-center sm:justify-between`}
-      >
-        <p className="max-w-[560px] text-[13px] leading-relaxed text-[var(--muted)]">
-          Esto es una vista estática. Muy pronto vas a poder entrar a probarlo vos mismo y moverte por
-          estas mismas pantallas con tus propios datos.
-        </p>
-        <a
-          href="#demo"
-          className="shrink-0 rounded-full border border-[var(--accent)] px-5 py-2.5 [font-family:'Montserrat',sans-serif] text-[11px] font-extrabold italic uppercase tracking-[.04em] text-[var(--accent)] transition duration-200 hover:bg-[var(--accent)]/10"
-        >
-          Ver la demo →
-        </a>
-      </div>
-
+      {/* La barra que anunciaba la demo vivía acá y repetía, tres párrafos
+          antes, lo que dice la sección #demo que viene justo abajo. */}
       <p className="mx-auto mt-12 max-w-[620px] text-center [font-family:'Montserrat',sans-serif] text-[clamp(20px,2.6vw,28px)] font-black italic leading-[1.15] tracking-[-.01em]">
         Todo tu clan. Todos tus datos. <span className="text-[var(--accent)]">Un solo lugar.</span>
       </p>

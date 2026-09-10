@@ -54,7 +54,7 @@ const TIER_COPY = {
   },
   intelligence: {
     title: "Intelligence",
-    hook: "Todo lo de Management, más los eventos: las capturas se leen solas, las revisás en pantalla y con eso salen el WarRoom, los rankings y el reparto por rendimiento.",
+    hook: "Todo lo de Management, más los eventos: las capturas se leen solas, las revisas en pantalla y con eso salen el WarRoom, los rankings y el reparto por rendimiento.",
   },
 } as const;
 
@@ -193,7 +193,7 @@ function PlanCard({
           type="button"
           disabled={!price}
           onClick={() => price && onChoose(plan, price)}
-          className={`w-full cursor-pointer rounded-full px-5 py-3.5 [font-family:'Montserrat',sans-serif] text-[12.5px] font-extrabold italic uppercase tracking-[.04em] transition duration-150 active:scale-[.97] disabled:cursor-not-allowed disabled:opacity-55 ${
+          className={`gc-boton w-full cursor-pointer rounded-full px-5 py-3.5 [font-family:'Montserrat',sans-serif] text-[12.5px] font-extrabold italic uppercase tracking-[.04em] transition duration-150 active:scale-[.97] disabled:cursor-not-allowed disabled:opacity-55 ${
             destacado
               ? "bg-[var(--accent)] text-[#1c2200] hover:brightness-110"
               : `bg-transparent ${style.cta}`
@@ -243,7 +243,7 @@ export function Planes() {
         </span>
       </div>
       <h2 className="[font-family:'Montserrat',sans-serif] text-[clamp(30px,4.4vw,48px)] font-black italic leading-[1.05] tracking-[-.02em]">
-        Elegí el nivel de gestión que necesita tu clan.
+        Elige el nivel de gestión que necesita tu clan.
       </h2>
 
       {plansLoading ? (
@@ -269,6 +269,8 @@ export function Planes() {
                     role="tab"
                     aria-pressed={active}
                     onClick={() => setCycleMonths(cycle.months)}
+                    // Sin gc-boton a propósito: esa clase lleva overflow:hidden y acá el
+                    // badge "Mejor valor" vive adentro del botón con -top-3.
                     className={`relative cursor-pointer whitespace-nowrap rounded-full px-5 py-2.5 [font-family:'Montserrat',sans-serif] text-xs font-extrabold italic uppercase tracking-[.04em] transition duration-200 active:scale-[.97] ${
                       active
                         ? "bg-[var(--accent)] text-[#1c2200] shadow-[0_0_24px_-6px_rgba(214,250,56,.65)]"
@@ -352,7 +354,7 @@ export function Planes() {
       >
         <span
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-1.5 opacity-85 [background:repeating-linear-gradient(45deg,var(--accent)_0_10px,var(--bg)_10px_20px)]"
+          className="gc-cinta-viva absolute inset-x-0 top-0 h-1.5 opacity-85 [background:repeating-linear-gradient(45deg,var(--accent)_0_10px,var(--bg)_10px_20px)]"
         />
         <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
@@ -377,7 +379,7 @@ export function Planes() {
 
       {MOSTRAR_NOTA_STRIPE && (
       <p className="mx-auto mt-8 max-w-[560px] text-center text-[12px] text-[var(--muted)]">
-        Demo con Stripe en modo de prueba — usá la tarjeta 4242 4242 4242 4242, cualquier fecha futura y
+        Demo con Stripe en modo de prueba — usa la tarjeta 4242 4242 4242 4242, cualquier fecha futura y
         cualquier CVC. No se realiza ningún cobro real, pero sí recibirás un correo real para activar tu
         cuenta.
       </p>

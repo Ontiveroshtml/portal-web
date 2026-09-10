@@ -14,14 +14,14 @@ const CON_GUILD_CORE = [
   "Las capturas se leen solas, no se copia un número a mano",
   "El reparto sigue reglas escritas, iguales para todos",
   "Cada uno abre su link y ve lo suyo — no hay nada que discutir",
-  "Llega una captura tarde, la sumás y el corte se recalcula solo",
+  "Llega una captura tarde, la sumas y el corte se recalcula solo",
   "El líder vuelve a jugar",
 ];
 
 export function Problema() {
   return (
     <section className="mx-auto w-[min(1200px,calc(100%-40px))] py-[70px]">
-      <SectionHeading align="left" title="Dejá de administrar tu clan a mano." />
+      <SectionHeading align="left" title="Deja de administrar tu clan a mano." />
 
       <p className="mt-6 max-w-[680px] text-sm leading-relaxed text-[var(--muted)]">
         Hoy la información de tu clan hace este recorrido antes de servirte para algo:
@@ -32,7 +32,7 @@ export function Problema() {
       </p>
       <p className="mt-4 max-w-[680px] text-sm leading-relaxed text-[var(--muted)]">
         Y no es solo el tiempo. Es la captura que llega tarde y te obliga a rehacer todo. Es el reparto
-        que salió a ojo y ahora tenés que explicar por qué a uno le tocó más. Es el reclamo en el chat a
+        que salió a ojo y ahora tienes que explicar por qué a uno le tocó más. Es el reclamo en el chat a
         las dos de la mañana. Administrar un clan termina sintiéndose como un segundo trabajo — uno que
         nadie te paga y que encima te saca del juego.
       </p>
@@ -45,7 +45,7 @@ export function Problema() {
         <div className="relative overflow-hidden rounded-[10px] border border-[var(--line)] bg-[var(--surface)]/70 p-6">
           <span
             aria-hidden="true"
-            className="absolute inset-y-0 left-0 w-[3px] bg-[var(--danger)]/60"
+            className="gc-linea-roja absolute inset-y-0 left-0 w-[3px]"
           />
           <span className="[font-family:'JetBrains_Mono',monospace] text-[11px] font-bold uppercase tracking-[.15em] text-[var(--danger)]">
             A mano
@@ -68,7 +68,7 @@ export function Problema() {
         <div className="relative overflow-hidden rounded-[10px] border border-[var(--accent)]/40 bg-[var(--accent)]/6 p-6">
           <span
             aria-hidden="true"
-            className="absolute inset-y-0 left-0 w-[3px] bg-[var(--accent)] shadow-[0_0_14px_-2px_var(--accent)]"
+            className="gc-linea-lima absolute inset-y-0 left-0 w-[3px]"
           />
           <span className="[font-family:'JetBrains_Mono',monospace] text-[11px] font-bold uppercase tracking-[.15em] text-[var(--accent)]">
             Con Guild Core
