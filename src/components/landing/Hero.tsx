@@ -1,13 +1,18 @@
 const APP_URL = import.meta.env.VITE_APP_URL as string;
 
+// Lo que ya funciona hoy en la app web.
 const DASHBOARD_PREVIEW = [
-  "Hacienda / Tesorería",
-  "Sistema de rangos R1–R5",
+  "Hacienda y cortes",
+  "Cashback y repartos",
+  "Lectura automática de capturas",
   "WarRoom",
-  "Estadísticas",
-  "Progreso del clan",
-  "Integración con Discord",
+  "Links públicos de ranking y hacienda",
+  "Dashboard administrativo",
+  "Historial del clan",
 ];
+
+// Lo que todavía no está. Se muestra aparte para no mezclarlo con lo anterior.
+const PROXIMAMENTE = ["Integración con Discord", "Inteligencia del Valle", "Clan Pool"];
 
 export function Hero() {
   return (
@@ -27,14 +32,15 @@ export function Hero() {
           </h1>
 
           <p className="max-w-[540px] text-base font-semibold text-[var(--text)]">
-            Tesorería, rangos, rankings y reportes militares de tu clan, sin planillas ni cálculos
-            manuales — validados automáticamente, no a mano.
+            Tesorería, repartos, rankings y reportes de evento de tu clan, sin planillas ni cálculos
+            manuales.
           </p>
 
           <p className="max-w-[540px] text-sm leading-relaxed text-[var(--muted)]">
-            Guild Core centraliza la información de tu clan, verifica cada dato de evento con OCR antes
-            de guardarlo, organiza rangos y donaciones, y transforma tus capturas de pantalla en reportes
-            listos para usar — todo desde una app web conectada con Discord.
+            Subís las capturas de pantalla del juego y Guild Core lee los números solos: nombre, poder,
+            puntos, kills y bajas. Después los revisás en pantalla, corregís lo que haga falta y recién
+            ahí se guardan. Las horas que hoy se te van en planillas y cuentas vuelven a donde tienen que
+            estar: jugando y haciendo crecer tu cuenta.
           </p>
 
           <div className="flex flex-wrap gap-3">
@@ -42,7 +48,13 @@ export function Hero() {
               href={`${APP_URL}/login`}
               className="rounded-full bg-[var(--accent)] px-6 py-3 [font-family:'Montserrat',sans-serif] text-sm font-black italic uppercase tracking-[.04em] text-[#17201e] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_34px_-6px_rgba(214,250,56,.5)]"
             >
-              Probar demo gratis
+              Empezar gratis
+            </a>
+            <a
+              href="#showcase"
+              className="rounded-full border border-[var(--line)] px-6 py-3 [font-family:'Montserrat',sans-serif] text-sm font-black italic uppercase tracking-[.04em] text-[var(--text)] transition duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              Ver por dentro
             </a>
             <a
               href="#planes"
@@ -62,6 +74,13 @@ export function Hero() {
               </span>
             ))}
           </div>
+
+          <p className="flex flex-wrap items-center gap-2 text-[11px] text-[var(--muted)]">
+            <span className="[font-family:'JetBrains_Mono',monospace] font-semibold uppercase tracking-[.14em] text-[var(--accent-gold)]">
+              Próximamente
+            </span>
+            {PROXIMAMENTE.join(" · ")}
+          </p>
         </div>
 
         <div className="relative mx-auto w-full max-w-[420px]">
@@ -78,9 +97,27 @@ export function Hero() {
         </div>
       </div>
 
-      <p className="mx-auto w-[min(1200px,calc(100%-40px))] pb-[60px] text-center [font-family:'Montserrat',sans-serif] text-lg font-black italic tracking-[-.01em] text-[var(--text)]">
-        Todo tu clan. Todos tus datos. <span className="text-[var(--accent)]">Un solo lugar.</span>
-      </p>
+      <div className="relative mx-auto w-[min(1200px,calc(100%-40px))] pb-[70px] text-center">
+        <span
+          aria-hidden="true"
+          className="absolute left-1/2 top-1/2 -z-10 h-[220px] w-[min(900px,90%)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent)]/16 blur-[110px]"
+        />
+        <span
+          aria-hidden="true"
+          className="mx-auto mb-4 block h-[3px] w-[120px] opacity-80 [background:repeating-linear-gradient(90deg,var(--accent)_0_10px,transparent_10px_20px)]"
+        />
+        <p className="mx-auto max-w-[900px] [font-family:'Montserrat',sans-serif] text-[clamp(28px,5.5vw,56px)] font-black italic uppercase leading-[1.05] tracking-[-.02em] text-[var(--text)]">
+          Menos horas administrando.
+          <br />
+          <span className="text-[var(--accent)] drop-shadow-[0_0_38px_rgba(214,250,56,.55)]">
+            Más horas jugando.
+          </span>
+        </p>
+        <span
+          aria-hidden="true"
+          className="mx-auto mt-4 block h-[3px] w-[120px] opacity-80 [background:repeating-linear-gradient(90deg,var(--accent)_0_10px,transparent_10px_20px)]"
+        />
+      </div>
     </section>
   );
 }

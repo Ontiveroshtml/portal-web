@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { AppPreview } from "./components/landing/AppPreview";
 import { CTAFinal } from "./components/landing/CTAFinal";
+import { DemoDestacada } from "./components/landing/DemoDestacada";
 import { FAQ } from "./components/landing/FAQ";
 import { Footer } from "./components/landing/Footer";
 import { Funciones } from "./components/landing/Funciones";
@@ -9,7 +11,6 @@ import { ParaQuien } from "./components/landing/ParaQuien";
 import { Planes } from "./components/landing/Planes";
 import { Problema } from "./components/landing/Problema";
 import { Roadmap } from "./components/landing/Roadmap";
-import { Showcase } from "./components/landing/Showcase";
 
 export default function App() {
   const [checkoutResult] = useState<"success" | "cancel" | null>(() => {
@@ -47,7 +48,8 @@ export default function App() {
       <Hero />
       <Problema />
       <Funciones />
-      <Showcase />
+      <AppPreview />
+      <DemoDestacada />
       <ParaQuien />
       <Planes />
       <Roadmap />

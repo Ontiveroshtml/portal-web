@@ -9,15 +9,22 @@ export function CTAFinal() {
           <br />
           <span className="text-[var(--accent)]">Dejá que Guild Core los ordene y los verifique.</span>
         </h2>
-        <p className="max-w-[480px] text-sm text-[var(--muted)]">
-          Dejá de leer capturas a ojo y de armar rankings a mano.
+        <p className="max-w-[520px] text-sm text-[var(--muted)]">
+          Dejá de leer capturas a ojo y de armar rankings a mano. Ese tiempo rinde mucho más en tu cuenta
+          que en una planilla.
         </p>
         <div className="mt-2 flex flex-wrap justify-center gap-3">
           <a
             href={`${APP_URL}/login`}
             className="rounded-full bg-[var(--accent)] px-6 py-3 [font-family:'Montserrat',sans-serif] text-sm font-black italic uppercase tracking-[.04em] text-[#17201e] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_34px_-6px_rgba(214,250,56,.5)]"
           >
-            Probar demo gratis
+            Empezar gratis
+          </a>
+          <a
+            href="#demo"
+            className="rounded-full border border-[var(--line)] px-6 py-3 [font-family:'Montserrat',sans-serif] text-sm font-black italic uppercase tracking-[.04em] text-[var(--text)] transition duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            Ver la demo
           </a>
           <a
             href="#planes"
