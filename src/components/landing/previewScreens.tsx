@@ -98,7 +98,8 @@ function TableShell({ head, children }: { head: ReactNode; children: ReactNode }
   );
 }
 
-function Th({ children, align = "left" }: { children: ReactNode; align?: "left" | "right" }) {
+// children es opcional: la columna del chevron lleva una cabecera vacía.
+function Th({ children, align = "left" }: { children?: ReactNode; align?: "left" | "right" }) {
   return (
     <th
       scope="col"
