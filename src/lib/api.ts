@@ -12,7 +12,8 @@ export class ApiError extends Error {
 async function apiFetch<T>(path: string, options: { method?: string; body?: unknown } = {}): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${path}`, {
     method: options.method ?? "GET",
-    headers: options.body !== undefined ? { "Content-Type": "application/json" } : undefined,
+    // El portal está en español: los errores del backend también.
+    headers: { "X-App-Language": "es", ...(options.body !== undefined ? { "Content-Type": "application/json" } : {}) },
     body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
   });
 
