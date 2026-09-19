@@ -747,7 +747,7 @@ export function RankingScreen() {
       {/* Filtros — acá sí funcionan: cambian la métrica y filtran por clase. */}
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <span className="min-w-[150px] flex-1 rounded-[6px] border border-[var(--line)] bg-[var(--surface)]/92 px-3 py-2 text-[12px] text-[var(--muted)]">
-          Buscar operativo o ID en juego…
+          Buscar jugador o ID en juego…
         </span>
         {METRICAS.map((entry) => (
           <button
@@ -873,7 +873,7 @@ export function RankingScreen() {
               head={
                 <tr>
                   <Th>#</Th>
-                  <Th>Operativo</Th>
+                  <Th>Jugador</Th>
                   <Th>Clase</Th>
                   <Th>Tropa</Th>
                   <Th align="right">{metricaLabel}</Th>
