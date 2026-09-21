@@ -160,6 +160,11 @@ export const messages: Messages = {
       verify: "Verify",
       distribute: "Distribute",
     },
+    stepsHint: {
+      read: "Upload the screenshot",
+      verify: "Review and correct",
+      distribute: "Gold reaches whoever earned it",
+    },
     viewDetail: "View detail",
     hideDetail: "Hide detail",
     cards: {
@@ -548,6 +553,5 @@ export const messages: Messages = {
     privacidad: "Privacy",
     comunidad: "Community",
     legal: "Legal",
-    pronto: "Coming soon",
   },
 };

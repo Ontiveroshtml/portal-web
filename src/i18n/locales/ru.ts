@@ -160,6 +160,11 @@ export const messages: Messages = {
       verify: "Проверка",
       distribute: "Раздел",
     },
+    stepsHint: {
+      read: "Загружаете скриншот",
+      verify: "Проверяете и исправляете",
+      distribute: "Золото получает тот, кто его заработал",
+    },
     viewDetail: "Подробнее",
     hideDetail: "Скрыть",
     cards: {
@@ -548,6 +553,5 @@ export const messages: Messages = {
     privacidad: "Конфиденциальность",
     comunidad: "Сообщество",
     legal: "Правовое",
-    pronto: "Скоро",
   },
 };

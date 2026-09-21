@@ -7,10 +7,14 @@ export const cutClass =
 export const featuredClass =
   "[clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)] shadow-[0_0_34px_-6px_rgba(214,250,56,.45)]";
 
+/** Etiqueta de sección: cuadrado lima + texto lima, igual en todas las secciones. */
 export function SectionEyebrow({ children }: PropsWithChildren) {
   return (
-    <span className="[font-family:'JetBrains_Mono',monospace] text-[10px] font-semibold uppercase tracking-[.2em] text-[var(--muted)]">
-      {children}
+    <span className="inline-flex items-center gap-2">
+      <span aria-hidden="true" className="size-2 bg-[var(--accent)] shadow-[0_0_10px_var(--accent)]" />
+      <span className="[font-family:'JetBrains_Mono',monospace] text-xs font-semibold uppercase tracking-[.16em] text-[var(--accent)]">
+        {children}
+      </span>
     </span>
   );
 }

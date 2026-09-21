@@ -273,7 +273,7 @@ export function Planes() {
             aria-hidden="true"
             className="size-2 bg-[var(--accent)] shadow-[0_0_10px_var(--accent)]"
           />
-          <span className="[font-family:'JetBrains_Mono',monospace] text-xs font-semibold uppercase tracking-[.12em] text-[var(--muted)]">
+          <span className="[font-family:'JetBrains_Mono',monospace] text-xs font-semibold uppercase tracking-[.16em] text-[var(--accent)]">
             {t("planes.eyebrow")}
           </span>
         </div>

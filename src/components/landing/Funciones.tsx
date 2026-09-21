@@ -50,7 +50,11 @@ const FEATURES: Feature[] = [
   { number: "04", id: "rankings", tono: "accent", icon: "/icons/svg/icon-trophy.svg" },
 ];
 
-const PASOS = ["read", "verify", "distribute"] as const;
+const PASOS = [
+  { key: "read", icon: "/icons/svg/icon-badge.svg" },
+  { key: "verify", icon: "/icons/svg/icon-shield.svg" },
+  { key: "distribute", icon: "/icons/svg/icon-coins.svg" },
+] as const;
 
 /** Tarjeta con el beneficio a la vista y el detalle técnico en un desplegable. */
 function Tarjeta({ feature, orden, visible }: { feature: Feature; orden: number; visible: boolean }) {
@@ -134,23 +138,38 @@ export function Funciones() {
     <section id="funciones" className="mx-auto w-[min(1200px,calc(100%-40px))] py-[52px]">
       <SectionHeading eyebrow={t("funciones.eyebrow")} title={t("funciones.title")} />
 
-      {/* Las tres cosas que hace, en el orden en que pasan. */}
-      <ol className="mx-auto mt-6 flex items-center justify-center gap-x-2 sm:gap-x-3">
-        {PASOS.map((paso, i) => (
-          <li key={paso} className="flex items-center gap-2 sm:gap-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)]/70 px-2.5 py-1.5 [font-family:'Montserrat',sans-serif] text-[12px] sm:gap-2 sm:px-3.5 sm:text-[13px] font-black italic uppercase tracking-[.03em] text-[var(--text)]">
-              <span className="[font-family:'JetBrains_Mono',monospace] text-[10px] font-bold not-italic text-[var(--accent)]">
-                {i + 1}
-              </span>
-              {t(`funciones.steps.${paso}`)}
-            </span>
-            {i < PASOS.length - 1 && (
-              <span aria-hidden="true" className="text-[var(--accent)]">
-                →
-              </span>
-            )}
-          </li>
-        ))}
+      {/* Las tres cosas que hace, en el orden en que pasan. Sin números: las
+          tarjetas de abajo ya van de 01 a 04 y dos numeraciones confunden. */}
+      <ol className="mx-auto mt-7 flex max-w-[860px] flex-col items-center gap-1 sm:flex-row sm:items-start sm:justify-center sm:gap-0">
+        {PASOS.map((paso, i) => {
+          const ultimo = i === PASOS.length - 1;
+          return (
+            <li key={paso.key} className="flex flex-col items-center gap-1 sm:flex-row sm:items-start sm:gap-0">
+              <div className="flex w-[230px] flex-col items-center text-center">
+                <span
+                  className={`inline-flex items-center gap-2.5 rounded-full border px-4 py-2 [font-family:'Montserrat',sans-serif] text-sm font-black italic uppercase tracking-[.03em] text-[var(--text)] ${
+                    ultimo
+                      ? "border-[var(--accent)]/60 bg-[var(--accent)]/10 shadow-[0_0_22px_-8px_rgba(214,250,56,.7)]"
+                      : "border-[var(--line)] bg-[var(--surface)]/80"
+                  }`}
+                >
+                  <img src={paso.icon} alt="" aria-hidden="true" className="size-4" />
+                  {t(`funciones.steps.${paso.key}`)}
+                </span>
+                <span className="mt-2 text-[13px] leading-snug text-[var(--muted)]">
+                  {t(`funciones.stepsHint.${paso.key}`)}
+                </span>
+              </div>
+              {!ultimo && (
+                <>
+                  {/* Conector: horizontal en escritorio, vertical corto en móvil. */}
+                  <span aria-hidden="true" className="hidden h-px w-10 self-start bg-[var(--accent)]/50 sm:mt-[19px] sm:block" />
+                  <span aria-hidden="true" className="block h-4 w-px bg-[var(--accent)]/50 sm:hidden" />
+                </>
+              )}
+            </li>
+          );
+        })}
       </ol>
 
       <div ref={ref} className="mt-10 grid grid-cols-1 items-start gap-4 md:grid-cols-2">

@@ -160,6 +160,11 @@ export const messages: Messages = {
       verify: "確認",
       distribute: "分配",
     },
+    stepsHint: {
+      read: "スクリーンショットをアップロード",
+      verify: "確認して修正",
+      distribute: "金は稼いだ人に届く",
+    },
     viewDetail: "詳細を見る",
     hideDetail: "詳細を閉じる",
     cards: {
@@ -548,6 +553,5 @@ export const messages: Messages = {
     privacidad: "Privacy",
     comunidad: "Community",
     legal: "Legal",
-    pronto: "近日公開",
   },
 };

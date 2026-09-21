@@ -9,19 +9,33 @@ const PILARES = [
   { key: "pillar3", icon: "/icons/svg/icon-coins.svg", tono: "gold" },
 ] as const;
 
+const AUDIENCIAS = [
+  { tipo: "nuevo", icon: "/icons/svg/icon-gem.svg", tono: "accent" },
+  { tipo: "veterano", icon: "/icons/svg/icon-trophy.svg", tono: "purple" },
+] as const;
+
 const TONO = {
   accent: {
-    borde: "border-[var(--accent)]/35",
+    borde: "border-[var(--accent)]/40",
+    fondo: "bg-[var(--accent)]/[.05]",
+    glow: "shadow-[0_12px_40px_-22px_rgba(214,250,56,.55)] hover:shadow-[0_14px_44px_-16px_rgba(214,250,56,.6)]",
+    etiqueta: "border-[var(--accent)]/50 bg-[var(--accent)]/10 text-[var(--accent)]",
     placa: "bg-[var(--accent)]/10 shadow-[0_0_18px_-8px_rgba(214,250,56,.6)]",
     cinta: "[background:repeating-linear-gradient(45deg,var(--accent)_0_10px,var(--bg)_10px_20px)]",
   },
   purple: {
-    borde: "border-[var(--accent-purple)]/35",
+    borde: "border-[var(--accent-purple)]/40",
+    fondo: "bg-[var(--accent-purple)]/[.06]",
+    glow: "shadow-[0_12px_40px_-22px_rgba(141,89,253,.6)] hover:shadow-[0_14px_44px_-16px_rgba(141,89,253,.65)]",
+    etiqueta: "border-[var(--accent-purple)]/50 bg-[var(--accent-purple)]/12 text-[var(--accent-purple)]",
     placa: "bg-[var(--accent-purple)]/12 shadow-[0_0_18px_-8px_rgba(141,89,253,.6)]",
     cinta: "[background:repeating-linear-gradient(45deg,var(--accent-purple)_0_10px,var(--bg)_10px_20px)]",
   },
   gold: {
     borde: "border-[var(--accent-gold)]/35",
+    fondo: "",
+    glow: "",
+    etiqueta: "",
     placa: "bg-[var(--accent-gold)]/10 shadow-[0_0_18px_-8px_rgba(255,184,0,.6)]",
     cinta: "[background:repeating-linear-gradient(45deg,var(--accent-gold)_0_10px,var(--bg)_10px_20px)]",
   },
@@ -39,31 +53,34 @@ export function Problema() {
       </p>
 
       {/* Para quién en una línea: clanes que arrancan y clanes con años. */}
-      <div className="mx-auto mt-8 grid max-w-[900px] grid-cols-1 gap-4 sm:grid-cols-2">
-        {(["nuevo", "veterano"] as const).map((tipo) => (
-          <div
-            key={tipo}
-            className={`rounded-[10px] border p-5 ${
-              tipo === "nuevo"
-                ? "border-[var(--accent)]/40 bg-[var(--accent)]/6"
-                : "border-[var(--accent-purple)]/40 bg-[var(--accent-purple)]/8"
-            }`}
-          >
-            <span
-              className={`[font-family:'JetBrains_Mono',monospace] text-[10px] font-bold uppercase tracking-[.15em] ${
-                tipo === "nuevo" ? "text-[var(--accent)]" : "text-[var(--accent-purple)]"
-              }`}
+      <div className="mx-auto mt-8 grid max-w-[980px] grid-cols-1 gap-5 sm:grid-cols-2">
+        {AUDIENCIAS.map(({ tipo, icon, tono }) => {
+          const estilo = TONO[tono];
+          return (
+            <div
+              key={tipo}
+              className={`${cutClass} gc-tarjeta relative flex items-start gap-5 overflow-hidden border ${estilo.borde} ${estilo.fondo} ${estilo.glow} p-6 [background-image:radial-gradient(rgba(255,255,255,.045)_1px,transparent_1px)] [background-size:6px_6px]`}
             >
-              {t(`problema.audience.${tipo}.label`)}
-            </span>
-            <p className="mt-1.5 [font-family:'Montserrat',sans-serif] text-lg font-black italic tracking-[-.01em]">
-              {t(`problema.audience.${tipo}.title`)}
-            </p>
-            <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">
-              {t(`problema.audience.${tipo}.body`)}
-            </p>
-          </div>
-        ))}
+              <span aria-hidden="true" className={`gc-cinta-viva absolute inset-x-0 top-0 h-1.5 opacity-80 ${estilo.cinta}`} />
+              <span className={`mt-1 grid size-16 shrink-0 place-items-center rounded-[12px] ${estilo.placa}`}>
+                <img src={icon} alt="" aria-hidden="true" className="size-8" />
+              </span>
+              <div className="min-w-0">
+                <span
+                  className={`inline-block rounded-full border px-2.5 py-0.5 [font-family:'JetBrains_Mono',monospace] text-[10px] font-bold uppercase tracking-[.15em] ${estilo.etiqueta}`}
+                >
+                  {t(`problema.audience.${tipo}.label`)}
+                </span>
+                <p className="mt-2 [font-family:'Montserrat',sans-serif] text-2xl font-black italic leading-tight tracking-[-.01em]">
+                  {t(`problema.audience.${tipo}.title`)}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+                  {t(`problema.audience.${tipo}.body`)}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-3">

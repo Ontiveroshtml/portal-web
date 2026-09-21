@@ -160,6 +160,11 @@ export const messages: Messages = {
       verify: "Verificar",
       distribute: "Repartir",
     },
+    stepsHint: {
+      read: "Subes la captura",
+      verify: "Revisas y corriges",
+      distribute: "El oro llega a quien lo ganó",
+    },
     viewDetail: "Ver detalle",
     hideDetail: "Ocultar detalle",
     cards: {
@@ -548,6 +553,5 @@ export const messages: Messages = {
     privacidad: "Privacidad",
     comunidad: "Comunidad",
     legal: "Legal",
-    pronto: "Próximamente",
   },
 };
