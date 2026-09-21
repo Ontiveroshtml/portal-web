@@ -439,6 +439,8 @@ export const messages: Messages = {
       globalNote: "Accumulated from {{count}} finished Valleys.",
       trophyTitle: "Trophy hall",
       trophyDesc: "Medals for finishing in the top 3 of each closed Valley. They add up across all events.",
+      trophyAccent: "hall",
+      trophyValleys: "{{count}} Valleys",
       streak: "{{count}} in a row at #{{place}}",
       gold: "Gold",
       silver: "Silver",

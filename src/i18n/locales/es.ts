@@ -439,6 +439,8 @@ export const messages: Messages = {
       globalNote: "Acumulado de {{count}} Valles finalizados.",
       trophyTitle: "Salón de trofeos",
       trophyDesc: "Medallas por terminar en el top 3 de cada Valle cerrado. Se acumulan de todos los eventos.",
+      trophyAccent: "trofeos",
+      trophyValleys: "{{count}} Valles",
       streak: "{{count}} seguidas en #{{place}}",
       gold: "Oro",
       silver: "Plata",

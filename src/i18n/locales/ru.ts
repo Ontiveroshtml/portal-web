@@ -439,6 +439,8 @@ export const messages: Messages = {
       globalNote: "Накоплено за {{count}} завершённых Долин.",
       trophyTitle: "Зал трофеев",
       trophyDesc: "Медали за попадание в топ-3 каждой закрытой Долины. Суммируются по всем событиям.",
+      trophyAccent: "трофеев",
+      trophyValleys: "{{count}} долин",
       streak: "{{count}} подряд на #{{place}}",
       gold: "Золото",
       silver: "Серебро",

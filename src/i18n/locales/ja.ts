@@ -439,6 +439,8 @@ export const messages: Messages = {
       globalNote: "終了した{{count}}回のバレーの累計。",
       trophyTitle: "トロフィーホール",
       trophyDesc: "終了した各バレーでトップ3に入ったメダル。すべてのイベントで累積されます。",
+      trophyAccent: "ホール",
+      trophyValleys: "{{count}} イベント",
       streak: "#{{place}}を{{count}}連続",
       gold: "金",
       silver: "銀",

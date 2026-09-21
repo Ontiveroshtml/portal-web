@@ -870,26 +870,19 @@ export function WarRoomScreen() {
 
 /* -------------------------------- Ranking ------------------------------- */
 
-/** Avatar del ranking: el emote del jugador dentro de su marco por puesto. */
-function Avatar({ frame, emote, size = 44 }: { frame: string; emote: string; size?: number }) {
+/** Avatar del ranking: la ilustración del héroe, igual que en la app. */
+function Avatar({ hero, size = 44 }: { hero: string; size?: number }) {
   return (
-    <span
-      className="relative inline-grid shrink-0 place-items-center"
+    <img
+      src={`/ranking/heroes/${hero}.avif`}
+      alt=""
+      aria-hidden="true"
+      draggable={false}
+      width={size}
+      height={size}
+      className="shrink-0 object-contain"
       style={{ width: size, height: size }}
-    >
-      <img
-        src={`/emotes/${emote}.png`}
-        alt=""
-        aria-hidden="true"
-        className="absolute size-[58%] rounded-full object-cover"
-      />
-      <img
-        src={`/ranking/avatar-frame-${frame}.svg`}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 size-full"
-      />
-    </span>
+    />
   );
 }
 
@@ -919,7 +912,7 @@ interface JugadorDemo {
   id: string;
   clase: Clase | null;
   tropa: string;
-  emote: string;
+  hero: string;
   poder: number;
   puntos: number;
   /** Acumulado histórico — es lo que va en la columna KILLS de la tabla. */
@@ -948,22 +941,33 @@ const CAMPO_METRICA: Record<Metrica, keyof Pick<JugadorDemo, "puntos" | "killsEv
 // Poder, puntos, kills y bajas salen de las capturas de las tres métricas;
 // solo se cambiaron nombres e IDs.
 const JUGADORES: JugadorDemo[] = [
-  { nombre: "OMEN", id: "9000000101", clase: "berserker", tropa: "T6", emote: "emote-gaming", poder: 352155344, puntos: 1247624584, kills: 388204117, bajas: 11284903, killsEvento: 52289423, bajasEvento: 811008, valles: 12 },
-  { nombre: "DRAKKEN", id: "9000000102", clase: "arquero", tropa: "T6", emote: "emote-cool", poder: 310714417, puntos: 634795951, kills: 492426094, bajas: 14860843, killsEvento: 26682688, bajasEvento: 689482, valles: 12 },
-  { nombre: "SEIRA", id: "9000000103", clase: null, tropa: "T6", emote: "emote-fangs", poder: 294581643, puntos: 479544771, kills: 352510254, bajas: 6902551, killsEvento: 20196599, bajasEvento: 677735, valles: 11 },
-  { nombre: "ORBYT", id: "9000000104", clase: "caballeria", tropa: "T6", emote: "emote-grin", poder: 232465313, puntos: 424786478, kills: 372005501, bajas: 9755631, killsEvento: 18513931, bajasEvento: 657637, valles: 12 },
-  { nombre: "MURO_77", id: "9000000105", clase: "caballeria", tropa: "T6", emote: "emote-hood-03", poder: 305424501, puntos: 412445023, kills: 245416743, bajas: 8846404, killsEvento: 17135266, bajasEvento: 647345, valles: 9 },
-  { nombre: "KAI", id: "9000000106", clase: "arquero", tropa: "T6", emote: "emote-happy", poder: 323844672, puntos: 406952920, kills: 442881940, bajas: 15112315, killsEvento: 16796395, bajasEvento: 788380, valles: 10 },
-  { nombre: "LYRA", id: "9000000107", clase: "berserker", tropa: "T6", emote: "emote-wink", poder: 321074981, puntos: 381588389, kills: 574578982, bajas: 8920507, killsEvento: 15514687, bajasEvento: 638204, valles: 8 },
-  { nombre: "TOSHI", id: "9000000108", clase: "berserker", tropa: "T6", emote: "emote-thinking", poder: 336946065, puntos: 352117640, kills: 222161839, bajas: 5210338, killsEvento: 11939297, bajasEvento: 792321, valles: 12 },
-  { nombre: "VEX", id: "9000000109", clase: "berserker", tropa: "T6", emote: "emote-laugh", poder: 311774318, puntos: 331904882, kills: 158051384, bajas: 6444689, killsEvento: 10842115, bajasEvento: 714537, valles: 7 },
-  { nombre: "NOX", id: "9000000110", clase: null, tropa: "T6", emote: "emote-shock", poder: 257434204, puntos: 318220155, kills: 141410946, bajas: 5952960, killsEvento: 9617430, bajasEvento: 702333, valles: 12 },
+  { nombre: "OMEN", id: "9000000101", clase: "berserker", tropa: "T6", hero: "Sigrid", poder: 352155344, puntos: 1247624584, kills: 388204117, bajas: 11284903, killsEvento: 52289423, bajasEvento: 811008, valles: 12 },
+  { nombre: "DRAKKEN", id: "9000000102", clase: "arquero", tropa: "T6", hero: "Aska", poder: 310714417, puntos: 634795951, kills: 492426094, bajas: 14860843, killsEvento: 26682688, bajasEvento: 689482, valles: 12 },
+  { nombre: "SEIRA", id: "9000000103", clase: null, tropa: "T6", hero: "Elena", poder: 294581643, puntos: 479544771, kills: 352510254, bajas: 6902551, killsEvento: 20196599, bajasEvento: 677735, valles: 11 },
+  { nombre: "ORBYT", id: "9000000104", clase: "caballeria", tropa: "T6", hero: "Kaira", poder: 232465313, puntos: 424786478, kills: 372005501, bajas: 9755631, killsEvento: 18513931, bajasEvento: 657637, valles: 12 },
+  { nombre: "MURO_77", id: "9000000105", clase: "caballeria", tropa: "T6", hero: "Rex", poder: 305424501, puntos: 412445023, kills: 245416743, bajas: 8846404, killsEvento: 17135266, bajasEvento: 647345, valles: 9 },
+  { nombre: "KAI", id: "9000000106", clase: "arquero", tropa: "T6", hero: "Karl", poder: 323844672, puntos: 406952920, kills: 442881940, bajas: 15112315, killsEvento: 16796395, bajasEvento: 788380, valles: 10 },
+  { nombre: "LYRA", id: "9000000107", clase: "berserker", tropa: "T6", hero: "Selena", poder: 321074981, puntos: 381588389, kills: 574578982, bajas: 8920507, killsEvento: 15514687, bajasEvento: 638204, valles: 8 },
+  { nombre: "TOSHI", id: "9000000108", clase: "berserker", tropa: "T6", hero: "Odiseo", poder: 336946065, puntos: 352117640, kills: 222161839, bajas: 5210338, killsEvento: 11939297, bajasEvento: 792321, valles: 12 },
+  { nombre: "VEX", id: "9000000109", clase: "berserker", tropa: "T6", hero: "Reid", poder: 311774318, puntos: 331904882, kills: 158051384, bajas: 6444689, killsEvento: 10842115, bajasEvento: 714537, valles: 7 },
+  { nombre: "NOX", id: "9000000110", clase: null, tropa: "T6", hero: "Petra", poder: 257434204, puntos: 318220155, kills: 141410946, bajas: 5952960, killsEvento: 9617430, bajasEvento: 702333, valles: 12 },
 ];
 
+// Columna, elevación y color de cada puesto sobre la ilustración del podio.
 const PODIO_ESTILO = [
-  { frame: "top1", borde: "border-[var(--accent)]", cifra: "text-[var(--accent)]" },
-  { frame: "top2", borde: "border-[var(--accent-purple)]", cifra: "text-[var(--accent-purple)]" },
-  { frame: "top3", borde: "border-[var(--accent-gold)]", cifra: "text-[var(--accent-gold)]" },
+  {
+    cifra: "text-[var(--accent)] [text-shadow:0_0_18px_rgba(214,250,56,.45)]",
+    tarjeta:
+      "col-start-3 mb-[10.2%] border-[var(--accent)] shadow-[0_0_34px_-6px_rgba(214,250,56,.45)]",
+  },
+  {
+    cifra: "text-[#d1bcff]",
+    tarjeta: "col-start-1 mb-[7.3%] border-[var(--accent-purple)] shadow-[0_0_24px_-8px_rgba(141,89,253,.45)]",
+  },
+  {
+    cifra: "text-[var(--accent-gold)]",
+    tarjeta: "col-start-5 mb-[5.6%] border-[var(--accent-gold)] shadow-[0_0_24px_-8px_rgba(255,184,0,.4)]",
+  },
 ];
 
 /* Salón de trofeos: medallas por terminar en el top 3 de cada Valle cerrado. */
@@ -982,7 +986,7 @@ const MEDAL_NAME: Record<Puesto, string> = { 1: "gold", 2: "silver", 3: "bronze"
 function Medal({ place, size = 16 }: { place: Puesto; size?: number }) {
   const { fill, shade } = MEDAL_COLORS[place];
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" className="shrink-0 [filter:drop-shadow(0_1px_2px_rgba(0,0,0,.5))]">
       <path d="M7 2h4l2 6H9z" fill={shade} />
       <path d="M13 2h4l-2 6h-4z" fill={fill} opacity=".85" />
       <circle cx="12" cy="15" r="7" fill={fill} stroke={shade} strokeWidth="1.5" />
@@ -993,86 +997,172 @@ function Medal({ place, size = 16 }: { place: Puesto; size?: number }) {
   );
 }
 
-interface FilaTrofeo {
-  nombre: string;
-  medallas: [number, number, number];
-  /** Racha vigente en el mismo puesto; solo se muestra si son 2 o más. */
-  racha?: { count: number; place: Puesto };
-}
+type FilaMedallas = [string, [number, number, number], { count: number; place: Puesto }?];
 
-const SALON: { key: string; labelKey: string; tone: Tone; rows: FilaTrofeo[] }[] = [
+// Mismas tres columnas que el salón de la app: puntos en dorado, kills en lima
+// y bajas en violeta, con hasta 5 jugadores cada una.
+const SALON: { key: string; labelKey: string; icon: string; color: string; rows: FilaMedallas[] }[] = [
   {
     key: "points",
     labelKey: "screens.common.points",
-    tone: "accent",
+    icon: "/icons/svg/icon-trophy.svg",
+    color: "var(--accent-gold)",
     rows: [
-      { nombre: "OMEN", medallas: [6, 2, 1], racha: { count: 3, place: 1 } },
-      { nombre: "DRAKKEN", medallas: [3, 4, 2] },
-      { nombre: "SEIRA", medallas: [1, 2, 3] },
+      ["OMEN", [6, 2, 1], { count: 3, place: 1 }],
+      ["DRAKKEN", [3, 4, 2]],
+      ["SEIRA", [1, 2, 3]],
+      ["ORBYT", [1, 1, 2]],
+      ["KAI", [0, 2, 1]],
     ],
   },
   {
     key: "kills",
     labelKey: "screens.common.kills",
-    tone: "gold",
+    icon: "/icons/svg/icon-sword.svg",
+    color: "var(--accent)",
     rows: [
-      { nombre: "LYRA", medallas: [5, 1, 2], racha: { count: 2, place: 1 } },
-      { nombre: "DRAKKEN", medallas: [4, 3, 1] },
-      { nombre: "KAI", medallas: [2, 2, 2] },
+      ["LYRA", [5, 1, 2], { count: 2, place: 1 }],
+      ["DRAKKEN", [4, 3, 1]],
+      ["KAI", [2, 2, 2]],
+      ["OMEN", [1, 3, 0]],
+      ["TOSHI", [0, 1, 2]],
     ],
   },
   {
     key: "deaths",
     labelKey: "screens.common.casualties",
-    tone: "purple",
+    icon: "/icons/svg/icon-skull.svg",
+    color: "var(--accent-purple)",
     rows: [
-      { nombre: "KAI", medallas: [4, 3, 0] },
-      { nombre: "DRAKKEN", medallas: [3, 2, 2], racha: { count: 2, place: 2 } },
-      { nombre: "OMEN", medallas: [2, 1, 3] },
+      ["KAI", [4, 3, 0]],
+      ["DRAKKEN", [3, 2, 2], { count: 2, place: 2 }],
+      ["OMEN", [2, 1, 3]],
+      ["SEIRA", [1, 2, 1]],
+      ["MURO_77", [1, 0, 2]],
     ],
   },
 ];
 
+const RACHA_ESTILO: Record<Puesto, string> = {
+  1: "border-[#ffb800] bg-[#ffb800]/10 text-[#ffb800]",
+  2: "border-[#d5dae2] bg-[#d5dae2]/[.08] text-[#d5dae2]",
+  3: "border-[#d98a45] bg-[#d98a45]/10 text-[#d98a45]",
+};
+
+function heroDe(nombre: string): string {
+  return JUGADORES.find((jugador) => jugador.nombre === nombre)?.hero ?? "Sigrid";
+}
+
+/** Salón de trofeos: mismo bloque que en la página de rankings. */
 function TrophyHall() {
   const { t } = useI18n();
+  const title = t("screens.ranking.trophyTitle");
+  const accent = t("screens.ranking.trophyAccent");
+  const conAcento = title.endsWith(accent);
+  const prefix = conAcento ? title.slice(0, -accent.length) : title;
   return (
-    <div className="mt-8">
-      <h4 className={`${DISP} text-lg tracking-[-.01em]`}>{t("screens.ranking.trophyTitle")}</h4>
-      <p className="mt-1 text-[12px] text-[var(--muted)]">{t("screens.ranking.trophyDesc")}</p>
-      <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
+    <section
+      aria-label={title}
+      className={`${cutClass} mt-10 border border-[var(--line)] bg-[var(--surface)] p-6 [background-image:radial-gradient(rgba(255,255,255,.035)_1px,transparent_1px)] [background-size:6px_6px]`}
+    >
+      <div className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row">
+        <div>
+          <h4 className={`${DISP} text-[26px] leading-none`}>
+            {prefix}
+            {conAcento && <span className="text-[var(--accent-gold)]">{accent}</span>}
+          </h4>
+          <p className="mt-1.5 max-w-[560px] text-[12px] text-[var(--muted)]">{t("screens.ranking.trophyDesc")}</p>
+        </div>
+        <span
+          className={`${DISP} inline-flex items-center whitespace-nowrap rounded-full px-3.5 py-[7px] text-[10px] uppercase leading-none tracking-[.05em] text-[var(--muted)]`}
+        >
+          {t("screens.ranking.trophyValleys", { count: 12 })}
+        </span>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {SALON.map((categoria) => (
-          <div key={categoria.key} className={`${cutClass} border border-[var(--line)] bg-[var(--surface)]/92 p-4`}>
-            <div className={`${MONO} text-[10px] font-semibold uppercase tracking-[.15em] ${TONE_CLASS[categoria.tone]}`}>
-              {t(categoria.labelKey)}
-            </div>
-            <ul className="mt-3 flex flex-col gap-3">
-              {categoria.rows.map((fila) => (
-                <li key={fila.nombre}>
-                  <div className={`${DISP} text-[13px] tracking-[-.01em]`}>{fila.nombre}</div>
-                  <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+          <section
+            key={categoria.key}
+            className="min-w-0 border border-t-2 border-[var(--line)] bg-[#1c1c1f] p-3"
+            style={{ borderTopColor: categoria.color }}
+          >
+            <header className="mb-2.5 flex items-center gap-2 text-[15px] text-[var(--text)]">
+              <span
+                aria-hidden="true"
+                className="inline-block size-4 shrink-0"
+                style={{
+                  backgroundColor: categoria.color,
+                  maskImage: `url(${categoria.icon})`,
+                  WebkitMaskImage: `url(${categoria.icon})`,
+                  maskSize: "contain",
+                  WebkitMaskSize: "contain",
+                  maskRepeat: "no-repeat",
+                  WebkitMaskRepeat: "no-repeat",
+                }}
+              />
+              <span className={DISP}>{t(categoria.labelKey)}</span>
+            </header>
+            <ol className="m-0 grid list-none gap-1 p-0">
+              {categoria.rows.map(([nombre, medallas, racha], index) => (
+                <li
+                  key={nombre}
+                  className={`grid grid-cols-[18px_32px_minmax(0,1fr)_auto] items-center gap-2 border px-2 py-1.5 ${
+                    index === 0
+                      ? "border-[#ffb800]/35 [background:linear-gradient(90deg,rgba(255,184,0,.09),transparent_70%)]"
+                      : "border-transparent"
+                  }`}
+                >
+                  <span className={`${MONO} text-center text-[11px] font-bold text-[var(--muted)]`}>{index + 1}</span>
+                  <img
+                    src={`/ranking/heroes/${heroDe(nombre)}.avif`}
+                    alt=""
+                    aria-hidden="true"
+                    draggable={false}
+                    className="size-8 object-contain"
+                  />
+                  <span className="flex min-w-0 flex-col items-start gap-[3px]">
+                    <span className="max-w-full truncate text-[13px] font-bold text-[var(--text)]">{nombre}</span>
+                    {racha && racha.count >= 2 && (
+                      <span
+                        className={`${MONO} inline-flex items-center gap-1 whitespace-nowrap rounded-full border px-[7px] py-0.5 text-[9px] font-bold uppercase leading-[1.2] tracking-[.04em] ${RACHA_ESTILO[racha.place]}`}
+                      >
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.4"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+                        </svg>
+                        {t("screens.ranking.streak", { count: racha.count, place: racha.place })}
+                      </span>
+                    )}
+                  </span>
+                  <span className="inline-flex items-center gap-2">
                     {([1, 2, 3] as const).map((place) => (
                       <span
                         key={place}
-                        title={t(`screens.ranking.${MEDAL_NAME[place]}`)}
-                        className={`inline-flex items-center gap-1 ${fila.medallas[place - 1] === 0 ? "opacity-35" : ""}`}
+                        title={`${t(`screens.ranking.${MEDAL_NAME[place]}`)}: ${medallas[place - 1]}`}
+                        className={`inline-flex items-center gap-[3px] text-[12px] text-[var(--text)] ${medallas[place - 1] === 0 ? "opacity-[.28]" : ""}`}
                       >
-                        <Medal place={place} />
-                        <b className={`${MONO} text-[12px] tabular-nums`}>{fila.medallas[place - 1]}</b>
+                        <Medal place={place} size={15} />
+                        <b className={`${MONO} tabular-nums`}>{medallas[place - 1]}</b>
                       </span>
                     ))}
-                    {fila.racha && fila.racha.count >= 2 && (
-                      <span className="inline-flex items-center gap-1 rounded-full border border-[var(--accent-gold)]/50 px-2 py-0.5 text-[10px] font-bold text-[var(--accent-gold)]">
-                        🔥 {t("screens.ranking.streak", { count: fila.racha.count, place: fila.racha.place })}
-                      </span>
-                    )}
-                  </div>
+                  </span>
                 </li>
               ))}
-            </ul>
-          </div>
+            </ol>
+          </section>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -1268,7 +1358,7 @@ export function RankingScreen() {
                 </Td>
                 <Td>
                   <span className="flex items-center gap-2.5">
-                    <Avatar frame={index < 3 ? PODIO_ESTILO[index].frame : "default"} emote={entry.emote} size={30} />
+                    <Avatar hero={entry.hero} size={40} />
                     <span className="flex flex-col">
                       <span className={`${DISP} text-[13px] tracking-[-.01em]`}>{entry.nombre}</span>
                       <span className={`${MONO} text-[10px] tabular-nums text-[var(--muted)]`}>ID {entry.id}</span>
@@ -1287,65 +1377,83 @@ export function RankingScreen() {
         </>
       ) : (
         <>
-          {/* Podio 02 · 01 · 03, con el primero elevado */}
-          <div className="mt-6 grid grid-cols-3 items-end gap-3">
-            {podio.map((entry) => {
-              const puesto = ordenados.indexOf(entry) + 1;
-              const estilo = PODIO_ESTILO[puesto - 1] ?? PODIO_ESTILO[2];
-              const first = puesto === 1;
-              return (
-                <div
-                  key={entry.id}
-                  className={`relative flex flex-col items-center border bg-[var(--surface)]/92 px-3 pb-4 text-center ${estilo.borde} ${
-                    first ? `${featuredClass} pt-7` : `${cutClass} pt-5`
-                  }`}
-                >
-                  {first && (
-                    <img
-                      src="/ranking/ranking-crown.svg"
-                      alt=""
-                      aria-hidden="true"
-                      className="absolute -top-3.5 size-7"
-                    />
-                  )}
-                  <span className={`${DISP} absolute left-3 top-2 text-sm text-[var(--muted)]`}>
-                    0{puesto}
-                  </span>
-                  <Avatar frame={estilo.frame} emote={entry.emote} size={first ? 62 : 50} />
-                  <h4 className={`${DISP} mt-2 text-sm tracking-[-.01em] sm:text-base`}>{entry.nombre}</h4>
-                  <div className={`${MONO} text-[10px] tabular-nums text-[var(--muted)]`}>ID {entry.id}</div>
-                  <div className="mt-2 flex flex-wrap justify-center gap-1">
-                    {entry.clase && (
-                      <span
-                        className={`${MONO} inline-flex items-center gap-1 rounded-full border border-[var(--line)] px-2 py-0.5 text-[9px] uppercase tracking-[.1em] text-[var(--muted)]`}
-                      >
-                        <img
-                          src={CLASE_META[entry.clase].icon}
-                          alt=""
-                          aria-hidden="true"
-                          className="size-2.5"
-                        />
-                        {t(CLASE_META[entry.clase].labelKey)}
-                      </span>
+          {/* Podio 02 · 01 · 03 sobre la ilustración del podio, como en la página de rankings */}
+          <div className="relative mx-auto mt-10 max-w-[1000px] pb-[3.6%] max-[900px]:pb-0">
+            <img
+              src="/ranking/ranking-podium.svg"
+              alt=""
+              aria-hidden="true"
+              draggable={false}
+              className="pointer-events-none absolute bottom-0 left-0 w-full max-[900px]:hidden"
+            />
+            <div className="relative grid grid-cols-[31.25%_3.125%_31.25%_3.125%_31.25%] items-end max-[900px]:grid-cols-1 max-[900px]:gap-4">
+              {podio.map((entry) => {
+                const puesto = ordenados.indexOf(entry) + 1;
+                const estilo = PODIO_ESTILO[puesto - 1] ?? PODIO_ESTILO[2];
+                const first = puesto === 1;
+                return (
+                  <article
+                    key={entry.id}
+                    className={`relative border-2 px-4 pb-4 text-center [background-color:#1c1c1f] [background-image:radial-gradient(rgba(255,255,255,.045)_1px,transparent_1px),linear-gradient(150deg,rgba(255,255,255,.05)_0%,rgba(255,255,255,0)_42%),linear-gradient(180deg,#232326,#17171a)] [background-size:6px_6px,100%_100%,100%_100%] [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)] max-[900px]:col-start-1 max-[900px]:mb-0 ${estilo.tarjeta} ${
+                      first ? "pt-10 max-[900px]:order-1 max-[900px]:pt-6" : puesto === 2 ? "pt-6 max-[900px]:order-2" : "pt-6 max-[900px]:order-3"
+                    }`}
+                  >
+                    {first && (
+                      <img
+                        src="/ranking/ranking-crown.svg"
+                        alt=""
+                        aria-hidden="true"
+                        className="absolute -top-7 left-1/2 w-[60px] -translate-x-1/2 [filter:drop-shadow(0_0_12px_rgba(214,250,56,.5))]"
+                      />
                     )}
                     <span
-                      className={`${MONO} rounded-full border border-[var(--line)] px-2 py-0.5 text-[9px] uppercase tracking-[.1em] text-[var(--muted)]`}
+                      className={`${DISP} absolute left-2.5 top-2 leading-none ${first ? "text-4xl text-[var(--accent)]/15" : "text-[28px] text-white/10"}`}
                     >
-                      {t("screens.ranking.troop")} {entry.tropa}
+                      0{puesto}
                     </span>
-                  </div>
-                  <div className={`${MONO} mt-3 text-[9px] uppercase tracking-[.16em] text-[var(--muted)]`}>
-                    {metricaLabel}
-                  </div>
-                  <div className={`${MONO} text-base font-bold tabular-nums sm:text-lg ${estilo.cifra}`}>
-                    {n(entry[campo])}
-                  </div>
-                  <div className={`${MONO} mt-1 text-[10px] uppercase tabular-nums text-[var(--muted)]`}>
-                    {t("screens.common.power")} {n(entry.poder)}
-                  </div>
-                </div>
-              );
-            })}
+                    <div className={`relative mx-auto aspect-square ${first ? "w-[88%]" : "w-[71%]"}`}>
+                      <img
+                        src={`/ranking/heroes/${entry.hero}.avif`}
+                        alt=""
+                        aria-hidden="true"
+                        draggable={false}
+                        className="absolute inset-0 size-full object-contain"
+                      />
+                    </div>
+                    <h4 className={`${DISP} mt-3 uppercase leading-[1.1] ${first ? "text-[21px]" : "text-[17px]"}`}>
+                      {entry.nombre}
+                    </h4>
+                    <div className={`${MONO} mt-0.5 text-[10px] font-semibold tracking-[.1em] text-[var(--muted)]`}>
+                      ID {entry.id}
+                    </div>
+                    <div className="mt-2.5 flex flex-wrap justify-center gap-2">
+                      {entry.clase && (
+                        <span
+                          className={`${MONO} inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] py-[5px] pl-2 pr-[11px] text-[10px] font-semibold uppercase leading-none tracking-[.08em] text-[#c9cdb3]`}
+                        >
+                          <img src={CLASE_META[entry.clase].icon} alt="" aria-hidden="true" className="size-3.5" />
+                          {t(CLASE_META[entry.clase].labelKey)}
+                        </span>
+                      )}
+                      <span
+                        className={`${MONO} inline-flex items-center rounded-full border border-[var(--line)] px-[11px] py-[5px] text-[10px] font-bold uppercase leading-none tracking-[.1em] text-[#c9cdb3]`}
+                      >
+                        {t("screens.ranking.troop")} {entry.tropa}
+                      </span>
+                    </div>
+                    <div className={`${MONO} mt-3 font-bold tabular-nums ${first ? "text-[28px]" : "text-[22px]"} ${estilo.cifra}`}>
+                      <small className="mb-1 block text-[9px] font-semibold uppercase leading-none tracking-[.14em] text-[var(--muted)] [text-shadow:none]">
+                        {metricaLabel}
+                      </small>
+                      {n(entry[campo])}
+                    </div>
+                    <div className={`${MONO} mt-2 text-[10px] font-semibold uppercase leading-none text-[var(--muted)]`}>
+                      {t("screens.common.power")} <b className="text-[#c9cdb3]">{n(entry.poder)}</b>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </div>
 
           {resto.length > 0 && (
@@ -1370,7 +1478,7 @@ export function RankingScreen() {
                   </Td>
                   <Td>
                     <span className="flex items-center gap-2.5">
-                      <Avatar frame="default" emote={entry.emote} size={30} />
+                      <Avatar hero={entry.hero} size={40} />
                       <span className="flex flex-col">
                         <span className={`${DISP} text-[13px] tracking-[-.01em]`}>{entry.nombre}</span>
                         <span className={`${MONO} text-[10px] tabular-nums text-[var(--muted)]`}>ID {entry.id}</span>
