@@ -6,6 +6,8 @@ interface Capacidad {
   icon: string;
   /** Prefijo de las claves paraQuien.<grupo>.<clave> y <clave>Detalle. */
   clave: string;
+  /** Solo se incluye en el plan Intelligence: se marca con una etiqueta. */
+  intelligence?: boolean;
 }
 
 const LIDERES: Capacidad[] = [
@@ -13,16 +15,18 @@ const LIDERES: Capacidad[] = [
   { icon: "/icons/svg/icon-chart.svg", clave: "reparto" },
   { icon: "/icons/svg/icon-badge.svg", clave: "lectura" },
   { icon: "/icons/svg/icon-shield.svg", clave: "verificacion" },
-  { icon: "/icons/svg/icon-sword.svg", clave: "warroom" },
-  { icon: "/icons/svg/icon-users.svg", clave: "roster" },
+  { icon: "/icons/svg/icon-sword.svg", clave: "valle", intelligence: true },
   { icon: "/icons/svg/icon-trophy.svg", clave: "ranking" },
   { icon: "/icons/svg/icon-book.svg", clave: "historial" },
+  { icon: "/icons/svg/icon-users.svg", clave: "roster" },
+  { icon: "/icons/svg/icon-gem.svg", clave: "rivales", intelligence: true },
+  { icon: "/icons/svg/icon-mail.svg", clave: "discord", intelligence: true },
 ];
 
 const JUGADORES: Capacidad[] = [
   { icon: "/icons/svg/icon-chart.svg", clave: "progreso" },
-  { icon: "/icons/svg/icon-trophy.svg", clave: "ranking" },
   { icon: "/icons/svg/icon-gem.svg", clave: "corte" },
+  { icon: "/icons/svg/icon-trophy.svg", clave: "ranking" },
   { icon: "/icons/svg/icon-users.svg", clave: "peso" },
 ];
 
@@ -49,7 +53,14 @@ function CapacidadItem({
         <img src={item.icon} alt="" aria-hidden="true" className="size-4" />
       </span>
       <div>
-        <div className="text-[13px] font-bold text-[var(--text)]">{t(`paraQuien.${grupo}.${item.clave}`)}</div>
+        <div className="flex flex-wrap items-center gap-2 text-[13px] font-bold text-[var(--text)]">
+          {t(`paraQuien.${grupo}.${item.clave}`)}
+          {item.intelligence && (
+            <span className="rounded-full border border-[var(--accent-purple)]/50 bg-[var(--accent-purple)]/12 px-2 py-0.5 [font-family:'JetBrains_Mono',monospace] text-[9px] font-bold uppercase tracking-[.12em] text-[var(--accent-purple)]">
+              Intelligence
+            </span>
+          )}
+        </div>
         <div className="mt-0.5 text-[12px] leading-relaxed text-[var(--muted)]">{t(`paraQuien.${grupo}.${item.clave}Detalle`)}</div>
       </div>
     </div>
@@ -126,33 +137,28 @@ export function ParaQuien() {
         </Tarjeta>
 
         <Tarjeta eyebrow={t("paraQuien.jugadores.eyebrow")} titulo={t("paraQuien.jugadores.titulo")} tono="purple">
-          <p className="mt-2 max-w-[46ch] text-[13px] leading-relaxed text-[var(--muted)]">
+          {/* Todo el bloque es el modo individual: una persona o un grupo
+              pequeño de amigos, sin depender de que el clan contrate un plan. */}
+          <span className="gc-proximamente mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-[var(--accent-gold)]/45 bg-[var(--accent-gold)]/10 px-2.5 py-1 [font-family:'JetBrains_Mono',monospace] text-[10px] font-bold uppercase tracking-[.15em] text-[var(--accent-gold)]">
+            <span className="gc-punto size-1.5 rounded-full bg-[var(--accent-gold)]" aria-hidden="true" />
+            {t("paraQuien.jugadores.proximamente")}
+          </span>
+
+          <p className="mt-3 max-w-[50ch] text-[13px] leading-relaxed text-[var(--text)]/80">
             {t("paraQuien.jugadores.descripcion")}
           </p>
 
-          <div className="mt-6 grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
+          <p className="mt-5 [font-family:'JetBrains_Mono',monospace] text-[10px] font-semibold uppercase tracking-[.15em] text-[var(--accent-purple)]">
+            {t("paraQuien.jugadores.conPodras")}
+          </p>
+          <div className="mt-3 grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
             {JUGADORES.map((item) => (
               <CapacidadItem key={item.clave} item={item} grupo="jugadores" tono="purple" />
             ))}
           </div>
 
           <div className="mt-6 border-t border-[var(--line)] pt-5">
-            <span className="gc-proximamente inline-flex items-center gap-1.5 rounded-full border border-[var(--accent-gold)]/45 bg-[var(--accent-gold)]/10 px-2.5 py-1 [font-family:'JetBrains_Mono',monospace] text-[10px] font-bold uppercase tracking-[.15em] text-[var(--accent-gold)]">
-              <span className="gc-punto size-1.5 rounded-full bg-[var(--accent-gold)]" aria-hidden="true" />
-              {t("paraQuien.jugadores.proximamente")}
-            </span>
-
-            {/* Plan mini: para quien su clan no quiere pagar un plan completo. */}
-            <div className="mt-3 rounded-[8px] border border-[var(--accent-purple)]/35 bg-[var(--accent-purple)]/8 p-4">
-              <p className="[font-family:'Montserrat',sans-serif] text-[15px] font-black italic tracking-[-.01em] text-[var(--text)]">
-                {t("paraQuien.jugadores.miniTitulo")}
-              </p>
-              <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--text)]/80">
-                {t("paraQuien.jugadores.miniDescripcion")}
-              </p>
-            </div>
-
-            <p className="mt-4 text-[13px] leading-relaxed text-[var(--muted)]">
+            <p className="text-[13px] leading-relaxed text-[var(--muted)]">
               {t("paraQuien.jugadores.descripcionProximamente")}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -168,12 +174,7 @@ export function ParaQuien() {
           </div>
 
           <div className="mt-6 flex items-center gap-3 border-t border-[var(--line)] pt-5">
-            <img
-              src="/icons/svg/icon-gem.svg"
-              alt=""
-              aria-hidden="true"
-              className="size-5 shrink-0"
-            />
+            <img src="/icons/svg/icon-gem.svg" alt="" aria-hidden="true" className="size-5 shrink-0" />
             <p className="[font-family:'Montserrat',sans-serif] text-base font-black italic tracking-[-.01em] text-[var(--accent-purple)]">
               {t("paraQuien.jugadores.conclusion")}
             </p>

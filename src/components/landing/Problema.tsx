@@ -38,7 +38,35 @@ export function Problema() {
         {t("problema.lede")}
       </p>
 
-      <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
+      {/* Para quién en una línea: clanes que arrancan y clanes con años. */}
+      <div className="mx-auto mt-8 grid max-w-[900px] grid-cols-1 gap-4 sm:grid-cols-2">
+        {(["nuevo", "veterano"] as const).map((tipo) => (
+          <div
+            key={tipo}
+            className={`rounded-[10px] border p-5 ${
+              tipo === "nuevo"
+                ? "border-[var(--accent)]/40 bg-[var(--accent)]/6"
+                : "border-[var(--accent-purple)]/40 bg-[var(--accent-purple)]/8"
+            }`}
+          >
+            <span
+              className={`[font-family:'JetBrains_Mono',monospace] text-[10px] font-bold uppercase tracking-[.15em] ${
+                tipo === "nuevo" ? "text-[var(--accent)]" : "text-[var(--accent-purple)]"
+              }`}
+            >
+              {t(`problema.audience.${tipo}.label`)}
+            </span>
+            <p className="mt-1.5 [font-family:'Montserrat',sans-serif] text-lg font-black italic tracking-[-.01em]">
+              {t(`problema.audience.${tipo}.title`)}
+            </p>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">
+              {t(`problema.audience.${tipo}.body`)}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-3">
         {PILARES.map(({ key, icon, tono }) => {
           const estilo = TONO[tono];
           return (

@@ -21,10 +21,6 @@ const CYCLES = [
   { months: 12, labelKey: "planes.cycles.twelve", badgeKey: "planes.cycles.bestValue" },
 ] as const;
 
-// La nota de Stripe en modo de prueba solo tiene sentido mientras la demo de
-// pago esté abierta. Ponelo en false antes de abrir a público real.
-const MOSTRAR_NOTA_STRIPE = true;
-
 // Plan con corona destacada. null = ninguno lleva corona.
 // Para activarla: { tier: "intelligence", playerMin: 1 }.
 const DESTACADO: { tier: "management" | "intelligence"; playerMin: number } | null = null;
@@ -464,11 +460,6 @@ export function Planes() {
         </>
       )}
 
-      {MOSTRAR_NOTA_STRIPE && (
-        <p className="mx-auto mt-8 max-w-[560px] text-center text-[12px] text-[var(--muted)]">
-          {t("planes.stripeNote")}
-        </p>
-      )}
 
       {checkout && (
         <CheckoutModal plan={checkout.plan} price={checkout.price} onClose={() => setCheckout(null)} />

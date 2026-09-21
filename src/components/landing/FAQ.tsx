@@ -6,7 +6,7 @@ import { SectionHeading } from "./shared";
 // si funciona de verdad, qué pasa si falla, dónde quedan mis datos, cuánto
 // cuesta) y recién al final lo que todavía no existe. Los textos y el icono de
 // cada pregunta viven en faq.item1 … faq.itemN de los locales.
-const FAQ_COUNT = 14;
+const FAQ_COUNT = 7;
 const FAQ_KEYS = Array.from({ length: FAQ_COUNT }, (_, i) => `faq.item${i + 1}`);
 
 function FaqItem({ q, a, icono }: { q: string; a: string; icono: string }) {
