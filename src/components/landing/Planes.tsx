@@ -326,7 +326,7 @@ export function Planes() {
           <div className="relative mx-auto mb-10 flex w-fit max-w-full justify-center">
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute -left-[26px] top-1/2 h-11 w-24 -translate-y-1/2 -rotate-[8deg] bg-[url('/decorations/decoration-tail-swoosh.png')] bg-contain bg-no-repeat opacity-35 mix-blend-screen"
+              className="pointer-events-none absolute -left-[26px] top-1/2 h-11 w-24 -translate-y-1/2 -rotate-[8deg] bg-[url('/decorations/decal-claw-yellow.png')] bg-contain bg-no-repeat opacity-35 mix-blend-screen"
             />
             <div
               role="tablist"

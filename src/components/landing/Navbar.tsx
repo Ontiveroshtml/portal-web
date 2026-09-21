@@ -20,7 +20,7 @@ export function Navbar() {
     <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--bg)]/90 backdrop-blur">
       <div className="mx-auto flex w-[min(1200px,calc(100%-40px))] items-center justify-between gap-4 py-4 lg:gap-6">
         <a href="#top" className="flex shrink-0 items-center gap-2.5" onClick={() => setAbierto(false)}>
-          <img src="/brand/brand-logo-gc.png" alt={t("navbar.brandAlt")} className="h-8 w-auto" />
+          <img src="/brand/brand-logo-gc.avif" alt={t("navbar.brandAlt")} className="h-8 w-auto" />
         </a>
 
         <nav className="hidden items-center gap-6 lg:flex">

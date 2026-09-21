@@ -546,7 +546,6 @@ export const messages: Messages = {
     rightsReserved: "All rights reserved.",
     terminos: "Terms",
     privacidad: "Privacy",
-    producto: "Product",
     comunidad: "Community",
     legal: "Legal",
     pronto: "Coming soon",
