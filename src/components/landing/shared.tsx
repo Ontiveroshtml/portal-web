@@ -39,6 +39,48 @@ export function SectionHeading({ eyebrow, title, align = "center", className = "
   );
 }
 
+/** Pinta `word` con `className` dentro de `text` (si aparece), sin romper el resto de la frase. */
+export function Highlight({ text, word, className }: { text: string; word: string; className: string }) {
+  const index = text.indexOf(word);
+  if (index < 0) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, index)}
+      <span className={className}>{word}</span>
+      {text.slice(index + word.length)}
+    </>
+  );
+}
+
+/**
+ * Texto con marcas mínimas: **negrita** y `mono` (cifras/fórmulas). Permite
+ * traducir frases con énfasis sin meter HTML en los archivos de idioma.
+ */
+export function RichText({ text }: { text: string }) {
+  const parts = text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g);
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (part.startsWith("**")) {
+          return (
+            <b key={i} className="font-semibold text-[var(--text)]">
+              {part.slice(2, -2)}
+            </b>
+          );
+        }
+        if (part.startsWith("`")) {
+          return (
+            <span key={i} className="[font-family:'JetBrains_Mono',monospace] text-[var(--text)]">
+              {part.slice(1, -1)}
+            </span>
+          );
+        }
+        return part;
+      })}
+    </>
+  );
+}
+
 export function Pill({ children, className = "" }: PropsWithChildren<{ className?: string }>) {
   return (
     <span

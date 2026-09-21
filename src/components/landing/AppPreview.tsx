@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useI18n } from "../../i18n/useI18n";
 import { featuredClass, SectionHeading } from "./shared";
 import { HaciendaScreen, JugadoresScreen, RankingScreen, WarRoomScreen } from "./previewScreens";
 
@@ -9,49 +10,29 @@ import { HaciendaScreen, JugadoresScreen, RankingScreen, WarRoomScreen } from ".
 // OCR, acá se cambia igual y no queda una imagen vieja mintiendo.
 
 const TABS = [
-  {
-    key: "hacienda",
-    label: "Hacienda",
-    blurb: "El oro del clan, quién aportó y cuánto le tocó a cada uno del reparto.",
-    Screen: HaciendaScreen,
-  },
-  {
-    key: "jugadores",
-    label: "Jugadores",
-    blurb: "El roster completo, con el rango de cada jugador y el ID que lo cruza con todo lo demás.",
-    Screen: JugadoresScreen,
-  },
-  {
-    key: "warroom",
-    label: "WarRoom",
-    blurb: "Cada evento con poder, puntos, kills y bajas — leídos de la captura, no tipeados a mano.",
-    Screen: WarRoomScreen,
-  },
-  {
-    key: "ranking",
-    label: "Ranking",
-    blurb: "El podio y la tabla que tu clan puede ver desde un link público.",
-    Screen: RankingScreen,
-  },
+  { key: "hacienda", Screen: HaciendaScreen },
+  { key: "jugadores", Screen: JugadoresScreen },
+  { key: "warroom", Screen: WarRoomScreen },
+  { key: "ranking", Screen: RankingScreen },
 ] as const;
 
 export function AppPreview() {
+  const { t } = useI18n();
   const [active, setActive] = useState<(typeof TABS)[number]["key"]>("hacienda");
   const current = TABS.find((tab) => tab.key === active) ?? TABS[0];
   const Screen = current.Screen;
 
   return (
-    <section id="showcase" className="mx-auto w-[min(1200px,calc(100%-40px))] py-[70px]">
-      <SectionHeading eyebrow="Por dentro" title="Así se ve Guild Core en uso real." />
+    <section id="showcase" className="mx-auto w-[min(1200px,calc(100%-40px))] py-[52px]">
+      <SectionHeading eyebrow={t("nav.showcase")} title={t("showcase.title")} />
 
       <p className="mx-auto mt-6 max-w-[620px] text-center text-sm leading-relaxed text-[var(--muted)]">
-        No son maquetas genéricas: cada pestaña es la pantalla real de la app, con sus mismas tarjetas,
-        tablas y colores. Los datos de ejemplo son ficticios.
+        {t("showcase.appPreview.description")}
       </p>
 
       <div
         role="tablist"
-        aria-label="Secciones de Guild Core"
+        aria-label={t("showcase.appPreview.tablistLabel")}
         className="mt-10 flex flex-wrap justify-center gap-2"
       >
         {TABS.map((tab) => {
@@ -71,14 +52,14 @@ export function AppPreview() {
                   : "border border-[var(--line)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
               }`}
             >
-              {tab.label}
+              {t(`showcase.appPreview.${tab.key}.label`)}
             </button>
           );
         })}
       </div>
 
       <p className="mx-auto mt-5 max-w-[520px] text-center text-[13px] leading-relaxed text-[var(--text)]">
-        {current.blurb}
+        {t(`showcase.appPreview.${current.key}.blurb`)}
       </p>
 
       <div
@@ -122,7 +103,8 @@ export function AppPreview() {
       {/* La barra que anunciaba la demo vivía acá y repetía, tres párrafos
           antes, lo que dice la sección #demo que viene justo abajo. */}
       <p className="mx-auto mt-12 max-w-[620px] text-center [font-family:'Montserrat',sans-serif] text-[clamp(20px,2.6vw,28px)] font-black italic leading-[1.15] tracking-[-.01em]">
-        Todo tu clan. Todos tus datos. <span className="text-[var(--accent)]">Un solo lugar.</span>
+        {t("showcase.appPreview.footer.before")}
+        <span className="text-[var(--accent)]">{t("showcase.appPreview.footer.accent")}</span>
       </p>
     </section>
   );

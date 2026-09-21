@@ -13,8 +13,10 @@ import { ParaQuien } from "./components/landing/ParaQuien";
 import { Planes } from "./components/landing/Planes";
 import { Problema } from "./components/landing/Problema";
 import { Roadmap } from "./components/landing/Roadmap";
+import { useI18n } from "./i18n/useI18n";
 
 export default function App() {
+  const { t } = useI18n();
   const [checkoutResult] = useState<"success" | "cancel" | null>(() => {
     const result = new URLSearchParams(window.location.search).get("checkout");
     return result === "success" || result === "cancel" ? result : null;
@@ -33,6 +35,7 @@ export default function App() {
 
       {checkoutResult && (
         <div
+          role="status"
           className={`mx-auto mt-4 w-[min(1200px,calc(100%-40px))] rounded-[8px] border p-4 text-sm ${
             checkoutResult === "success"
               ? "border-[var(--accent)] bg-[var(--accent)]/8 text-[var(--text)]"
@@ -41,11 +44,11 @@ export default function App() {
         >
           {checkoutResult === "success" ? (
             <>
-              <strong className="text-[var(--accent)]">¡Pago de prueba confirmado!</strong> Revisa tu
-              correo — te enviamos un enlace real para activar tu cuenta.
+              <strong className="text-[var(--accent)]">{t("app.checkoutSuccessStrong")}</strong>{" "}
+              {t("app.checkoutSuccessBody")}
             </>
           ) : (
-            "El pago se canceló. Puedes intentarlo de nuevo cuando quieras."
+            t("app.checkoutCancel")
           )}
         </div>
       )}

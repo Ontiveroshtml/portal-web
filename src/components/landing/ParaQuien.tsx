@@ -1,87 +1,44 @@
 import type { ReactNode } from "react";
+import { useI18n } from "../../i18n/useI18n";
 import { cutClass, SectionHeading } from "./shared";
 
 interface Capacidad {
   icon: string;
-  titulo: string;
-  detalle: string;
+  /** Prefijo de las claves paraQuien.<grupo>.<clave> y <clave>Detalle. */
+  clave: string;
 }
 
 const LIDERES: Capacidad[] = [
-  {
-    icon: "/icons/svg/icon-coins.svg",
-    titulo: "Hacienda y cortes",
-    detalle: "Nadie vuelve a preguntarte cuánto le toca.",
-  },
-  {
-    icon: "/icons/svg/icon-chart.svg",
-    titulo: "Reparto configurable",
-    detalle: "Una regla escrita antes de repartir, igual para todos.",
-  },
-  {
-    icon: "/icons/svg/icon-badge.svg",
-    titulo: "Lectura de capturas",
-    detalle: "Se terminó copiar números de una imagen.",
-  },
-  {
-    icon: "/icons/svg/icon-shield.svg",
-    titulo: "Verificación y auditoría",
-    detalle: "Si alguien discute un número, tienes el historial.",
-  },
-  {
-    icon: "/icons/svg/icon-sword.svg",
-    titulo: "WarRoom",
-    detalle: "El evento entero, con las columnas que a ti te sirven.",
-  },
-  {
-    icon: "/icons/svg/icon-users.svg",
-    titulo: "Roster y rangos",
-    detalle: "Cada jugador cruzado por su ID, sin confundir nombres.",
-  },
-  {
-    icon: "/icons/svg/icon-trophy.svg",
-    titulo: "Rankings y links públicos",
-    detalle: "Envías un link y dejan de escribirte por privado.",
-  },
-  {
-    icon: "/icons/svg/icon-book.svg",
-    titulo: "Historial completo",
-    detalle: "Comparar un mes con otro deja de ser un trabajo.",
-  },
+  { icon: "/icons/svg/icon-coins.svg", clave: "hacienda" },
+  { icon: "/icons/svg/icon-chart.svg", clave: "reparto" },
+  { icon: "/icons/svg/icon-badge.svg", clave: "lectura" },
+  { icon: "/icons/svg/icon-shield.svg", clave: "verificacion" },
+  { icon: "/icons/svg/icon-sword.svg", clave: "warroom" },
+  { icon: "/icons/svg/icon-users.svg", clave: "roster" },
+  { icon: "/icons/svg/icon-trophy.svg", clave: "ranking" },
+  { icon: "/icons/svg/icon-book.svg", clave: "historial" },
 ];
 
 const JUGADORES: Capacidad[] = [
-  {
-    icon: "/icons/svg/icon-chart.svg",
-    titulo: "Tu progreso",
-    detalle: "Poder, kills y bajas, evento tras evento.",
-  },
-  {
-    icon: "/icons/svg/icon-trophy.svg",
-    titulo: "Tu puesto en el ranking",
-    detalle: "Podio y tabla, por puntos, kills o bajas.",
-  },
-  {
-    icon: "/icons/svg/icon-gem.svg",
-    titulo: "Lo que te toca del corte",
-    detalle: "Cuánto donaste y cuánto te vuelve.",
-  },
-  {
-    icon: "/icons/svg/icon-users.svg",
-    titulo: "Tu peso en el clan",
-    detalle: "Qué porcentaje del total aportaste tú.",
-  },
+  { icon: "/icons/svg/icon-chart.svg", clave: "progreso" },
+  { icon: "/icons/svg/icon-trophy.svg", clave: "ranking" },
+  { icon: "/icons/svg/icon-gem.svg", clave: "corte" },
+  { icon: "/icons/svg/icon-users.svg", clave: "peso" },
 ];
 
-const JUGADORES_PROXIMAMENTE = [
-  "Líder Supremo",
-  "Runas",
-  "Banda de guerra",
-  "Simulaciones de progresión",
-];
+const JUGADORES_PROXIMAMENTE = ["liderSupremo", "runas", "bandaDeGuerra", "simulaciones"] as const;
 
 /** Fila de capacidad: icono en su placa de color + título y detalle. */
-function CapacidadItem({ item, tono }: { item: Capacidad; tono: "accent" | "purple" }) {
+function CapacidadItem({
+  item,
+  grupo,
+  tono,
+}: {
+  item: Capacidad;
+  grupo: "lideres" | "jugadores";
+  tono: "accent" | "purple";
+}) {
+  const { t } = useI18n();
   const placa =
     tono === "accent"
       ? "bg-[var(--accent)]/10 shadow-[0_0_18px_-8px_rgba(214,250,56,.6)]"
@@ -92,8 +49,8 @@ function CapacidadItem({ item, tono }: { item: Capacidad; tono: "accent" | "purp
         <img src={item.icon} alt="" aria-hidden="true" className="size-4" />
       </span>
       <div>
-        <div className="text-[13px] font-bold text-[var(--text)]">{item.titulo}</div>
-        <div className="mt-0.5 text-[12px] leading-relaxed text-[var(--muted)]">{item.detalle}</div>
+        <div className="text-[13px] font-bold text-[var(--text)]">{t(`paraQuien.${grupo}.${item.clave}`)}</div>
+        <div className="mt-0.5 text-[12px] leading-relaxed text-[var(--muted)]">{t(`paraQuien.${grupo}.${item.clave}Detalle`)}</div>
       </div>
     </div>
   );
@@ -137,19 +94,21 @@ function Tarjeta({
 }
 
 export function ParaQuien() {
+  const { t } = useI18n();
+
   return (
-    <section className="mx-auto w-[min(1200px,calc(100%-40px))] py-[70px]">
-      <SectionHeading eyebrow="Para quién es" title="Hecho para líderes y para jugadores." />
+    <section className="mx-auto w-[min(1200px,calc(100%-40px))] py-[52px]">
+      <SectionHeading eyebrow={t("paraQuien.eyebrow")} title={t("paraQuien.title")} />
 
       <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-2">
-        <Tarjeta eyebrow="Líderes y administradores" titulo="Control total del clan." tono="accent">
+        <Tarjeta eyebrow={t("paraQuien.lideres.eyebrow")} titulo={t("paraQuien.lideres.titulo")} tono="accent">
           <p className="mt-2 max-w-[46ch] text-[13px] leading-relaxed text-[var(--muted)]">
-            Todo el clan en una sola pantalla, y cada decisión respaldada por un dato que puedes mostrar.
+            {t("paraQuien.lideres.descripcion")}
           </p>
 
           <div className="mt-6 grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
             {LIDERES.map((item) => (
-              <CapacidadItem key={item.titulo} item={item} tono="accent" />
+              <CapacidadItem key={item.clave} item={item} grupo="lideres" tono="accent" />
             ))}
           </div>
 
@@ -161,31 +120,29 @@ export function ParaQuien() {
               className="size-5 shrink-0"
             />
             <p className="[font-family:'Montserrat',sans-serif] text-base font-black italic tracking-[-.01em] text-[var(--accent)]">
-              Toma decisiones con datos, no con suposiciones.
+              {t("paraQuien.lideres.conclusion")}
             </p>
           </div>
         </Tarjeta>
 
-        <Tarjeta eyebrow="Jugadores" titulo="Tu progreso también importa." tono="purple">
+        <Tarjeta eyebrow={t("paraQuien.jugadores.eyebrow")} titulo={t("paraQuien.jugadores.titulo")} tono="purple">
           <p className="mt-2 max-w-[46ch] text-[13px] leading-relaxed text-[var(--muted)]">
-            No solo sirve para administrar el clan: cada miembro puede ver dónde está parado y cuánto
-            está aportando.
+            {t("paraQuien.jugadores.descripcion")}
           </p>
 
           <div className="mt-6 grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
             {JUGADORES.map((item) => (
-              <CapacidadItem key={item.titulo} item={item} tono="purple" />
+              <CapacidadItem key={item.clave} item={item} grupo="jugadores" tono="purple" />
             ))}
           </div>
 
           <div className="mt-6 border-t border-[var(--line)] pt-5">
             <span className="gc-proximamente inline-flex items-center gap-1.5 rounded-full border border-[var(--accent-gold)]/45 bg-[var(--accent-gold)]/10 px-2.5 py-1 [font-family:'JetBrains_Mono',monospace] text-[10px] font-bold uppercase tracking-[.15em] text-[var(--accent-gold)]">
               <span className="gc-punto size-1.5 rounded-full bg-[var(--accent-gold)]" aria-hidden="true" />
-              Próximamente
+              {t("paraQuien.jugadores.proximamente")}
             </span>
             <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">
-              Herramientas propias del jugador, para simular una implementación antes de gastar recursos
-              en el juego.
+              {t("paraQuien.jugadores.descripcionProximamente")}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {JUGADORES_PROXIMAMENTE.map((item) => (
@@ -193,7 +150,7 @@ export function ParaQuien() {
                   key={item}
                   className="rounded-full border border-[var(--accent-gold)]/40 bg-[var(--accent-gold)]/8 px-3 py-1.5 text-[12px] text-[var(--accent-gold)]"
                 >
-                  {item}
+                  {t(`paraQuien.jugadores.${item}`)}
                 </span>
               ))}
             </div>
@@ -207,7 +164,7 @@ export function ParaQuien() {
               className="size-5 shrink-0"
             />
             <p className="[font-family:'Montserrat',sans-serif] text-base font-black italic tracking-[-.01em] text-[var(--accent-purple)]">
-              No solo administramos clanes. También ayudamos a los jugadores a mejorar.
+              {t("paraQuien.jugadores.conclusion")}
             </p>
           </div>
         </Tarjeta>

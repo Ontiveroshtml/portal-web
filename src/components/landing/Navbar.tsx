@@ -1,24 +1,26 @@
 import { useState } from "react";
-
-const APP_URL = import.meta.env.VITE_APP_URL as string;
+import { LOGIN_URL } from "../../lib/config";
+import { useI18n } from "../../i18n/useI18n";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const NAV_LINKS = [
-  { href: "#funciones", label: "Funciones" },
-  { href: "#showcase", label: "Por dentro" },
-  { href: "#demo", label: "Demo" },
-  { href: "#planes", label: "Planes" },
-  { href: "#roadmap", label: "Roadmap" },
-  { href: "#faq", label: "FAQ" },
+  { href: "#funciones", key: "nav.funciones" },
+  { href: "#showcase", key: "nav.showcase" },
+  { href: "#demo", key: "nav.demo" },
+  { href: "#planes", key: "nav.planes" },
+  { href: "#roadmap", key: "nav.roadmap" },
+  { href: "#faq", key: "nav.faq" },
 ];
 
 export function Navbar() {
+  const { t } = useI18n();
   const [abierto, setAbierto] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--bg)]/90 backdrop-blur">
-      <div className="mx-auto flex w-[min(1200px,calc(100%-40px))] items-center justify-between gap-6 py-4">
-        <a href="#top" className="flex items-center gap-2.5" onClick={() => setAbierto(false)}>
-          <img src="/brand/brand-logo-gc.png" alt="Guild Core" className="h-8 w-auto" />
+      <div className="mx-auto flex w-[min(1200px,calc(100%-40px))] items-center justify-between gap-4 py-4 lg:gap-6">
+        <a href="#top" className="flex shrink-0 items-center gap-2.5" onClick={() => setAbierto(false)}>
+          <img src="/brand/brand-logo-gc.png" alt={t("navbar.brandAlt")} className="h-8 w-auto" />
         </a>
 
         <nav className="hidden items-center gap-6 lg:flex">
@@ -28,23 +30,24 @@ export function Navbar() {
               href={link.href}
               className="[font-family:'JetBrains_Mono',monospace] text-[11px] font-semibold uppercase tracking-[.12em] text-[var(--muted)] transition duration-150 hover:text-[var(--text)]"
             >
-              {link.label}
+              {t(link.key)}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <a
-            href={`${APP_URL}/login`}
-            className="hidden text-[11px] font-semibold uppercase tracking-[.1em] text-[var(--muted)] transition duration-150 hover:text-[var(--text)] sm:inline"
+            href={LOGIN_URL}
+            className="hidden text-[11px] font-semibold uppercase tracking-[.1em] text-[var(--muted)] transition duration-150 hover:text-[var(--text)] xl:inline"
           >
-            Iniciar sesión
+            {t("nav.login")}
           </a>
+          <LanguageSwitcher />
           <a
             href="#demo"
-            className="gc-boton gc-boton-primario rounded-full bg-[var(--accent)] px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11px] font-extrabold italic uppercase tracking-[.04em] text-[#17201e] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_28px_-6px_rgba(214,250,56,.5)]"
+            className="gc-boton gc-boton-primario hidden whitespace-nowrap rounded-full bg-[var(--accent)] px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11px] font-extrabold italic uppercase tracking-[.04em] text-[#17201e] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_28px_-6px_rgba(214,250,56,.5)] sm:inline-block"
           >
-            Ver demo
+            {t("nav.viewDemo")}
           </a>
 
           {/* Menú de mano: abajo de lg la navegación no entra en la barra */}
@@ -53,7 +56,7 @@ export function Navbar() {
             onClick={() => setAbierto((v) => !v)}
             aria-expanded={abierto}
             aria-controls="menu-movil"
-            aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
+            aria-label={abierto ? t("navbar.closeMenu") : t("navbar.openMenu")}
             className="grid size-9 shrink-0 cursor-pointer place-items-center rounded-[7px] border border-[var(--line)] text-[var(--text)] transition duration-150 hover:border-[var(--accent)] hover:text-[var(--accent)] lg:hidden"
           >
             <svg viewBox="0 0 16 16" className="size-4" aria-hidden="true">
@@ -80,27 +83,24 @@ export function Navbar() {
       </div>
 
       {abierto && (
-        <nav
-          id="menu-movil"
-          className="border-t border-[var(--line)] bg-[var(--bg)] lg:hidden"
-        >
+        <nav id="menu-movil" className="border-t border-[var(--line)] bg-[var(--bg)] lg:hidden">
           <div className="mx-auto flex w-[min(1200px,calc(100%-40px))] flex-col py-2">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setAbierto(false)}
-                className="border-b border-[var(--line)] py-3 [font-family:'JetBrains_Mono',monospace] text-[11px] font-semibold uppercase tracking-[.12em] text-[var(--muted)] transition duration-150 last:border-b-0 hover:text-[var(--accent)]"
+                className="border-b border-[var(--line)] py-3 [font-family:'JetBrains_Mono',monospace] text-[11px] font-semibold uppercase tracking-[.12em] text-[var(--muted)] transition duration-150 hover:text-[var(--accent)]"
               >
-                {link.label}
+                {t(link.key)}
               </a>
             ))}
             <a
-              href={`${APP_URL}/login`}
+              href={LOGIN_URL}
               onClick={() => setAbierto(false)}
-              className="py-3 [font-family:'JetBrains_Mono',monospace] text-[11px] font-semibold uppercase tracking-[.12em] text-[var(--accent)] sm:hidden"
+              className="py-3 [font-family:'JetBrains_Mono',monospace] text-[11px] font-semibold uppercase tracking-[.12em] text-[var(--accent)]"
             >
-              Iniciar sesión
+              {t("nav.login")}
             </a>
           </div>
         </nav>

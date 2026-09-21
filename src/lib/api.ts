@@ -1,5 +1,12 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
+// Idioma en el que el backend devuelve sus mensajes de error. Lo actualiza el
+// I18nProvider cada vez que el visitante cambia de idioma.
+let apiLanguage = "es";
+export function setApiLanguage(lang: string) {
+  apiLanguage = lang;
+}
+
 export class ApiError extends Error {
   status: number;
   constructor(status: number, message: string) {
@@ -12,8 +19,7 @@ export class ApiError extends Error {
 async function apiFetch<T>(path: string, options: { method?: string; body?: unknown } = {}): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${path}`, {
     method: options.method ?? "GET",
-    // El portal está en español: los errores del backend también.
-    headers: { "X-App-Language": "es", ...(options.body !== undefined ? { "Content-Type": "application/json" } : {}) },
+    headers: { "X-App-Language": apiLanguage, ...(options.body !== undefined ? { "Content-Type": "application/json" } : {}) },
     body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
   });
 
