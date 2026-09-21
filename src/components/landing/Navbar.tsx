@@ -6,8 +6,8 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 const NAV_LINKS = [
   { href: "#funciones", key: "nav.funciones" },
   { href: "#showcase", key: "nav.showcase" },
-  { href: "#demo", key: "nav.demo" },
   { href: "#planes", key: "nav.planes" },
+  { href: "#demo", key: "nav.demo" },
   { href: "#roadmap", key: "nav.roadmap" },
   { href: "#faq", key: "nav.faq" },
 ];
@@ -36,13 +36,14 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2.5 sm:gap-3">
+          <LanguageSwitcher />
+          {/* El acceso siempre visible: es lo primero que busca quien ya tiene cuenta. */}
           <a
             href={LOGIN_URL}
-            className="hidden text-[11px] font-semibold uppercase tracking-[.1em] text-[var(--muted)] transition duration-150 hover:text-[var(--text)] xl:inline"
+            className="whitespace-nowrap rounded-full border border-[var(--line)] px-3.5 py-2 [font-family:'Montserrat',sans-serif] text-[11px] font-extrabold italic uppercase tracking-[.04em] text-[var(--text)] transition duration-150 hover:border-[var(--accent)] hover:text-[var(--accent)] sm:px-4"
           >
             {t("nav.login")}
           </a>
-          <LanguageSwitcher />
           <a
             href="#demo"
             className="gc-boton gc-boton-primario hidden whitespace-nowrap rounded-full bg-[var(--accent)] px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11px] font-extrabold italic uppercase tracking-[.04em] text-[#17201e] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_28px_-6px_rgba(214,250,56,.5)] sm:inline-block"

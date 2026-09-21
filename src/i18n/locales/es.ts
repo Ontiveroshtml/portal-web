@@ -38,7 +38,7 @@ export const messages: Messages = {
     roadmap: "Roadmap",
     faq: "FAQ",
     login: "Iniciar sesión",
-    cta: "Probar gratis",
+    cta: "Empezar",
     discord: "Discord",
   },
   hero: {
@@ -48,7 +48,7 @@ export const messages: Messages = {
     brandStrong: "Guild Core",
     turnsInto: "Guild Core lo hace justo, valle tras valle.",
     subhead: "Cashback, reparto y bonos con reglas claras y un link público para que cada jugador vea su parte. Sin discusiones y sin regalar oro a quien no aporta.",
-    ctaPrimary: "Empezar gratis",
+    ctaPrimary: "Empezar ahora",
     ctaSecondary: "Ver por dentro",
     chips: {
       treasury: "Hacienda y cortes",
@@ -124,8 +124,8 @@ export const messages: Messages = {
   ctaFinal: {
     title: "El próximo corte lo puedes cerrar",
     titleAccent: "en diez minutos.",
-    body: "Creas tu clan, subes la primera captura y ya tienes el reparto calculado. No hace falta migrar nada ni avisarle a nadie para probarlo.",
-    ctaPrimary: "Empezar gratis",
+    body: "Creas tu clan, subes la primera captura y ya tienes el reparto calculado. No hace falta migrar nada ni avisarle a nadie para empezar.",
+    ctaPrimary: "Empezar ahora",
     ctaSecondary: "Ver la demo",
     ctaTertiary: "Ver planes",
   },
@@ -179,7 +179,7 @@ export const messages: Messages = {
         title: "Hacienda y repartos automáticos",
         text: "El oro y los premios se reparten con tus reglas. Cada clan reparte distinto: aquí se configura, no se impone.",
         stat: "Cortes semanales, quincenales o a tu ritmo",
-        detail: "Cada corte sigue tu configuración: cada cuánto se cierra, quién recibe cashback y desde qué monto, cuánto oro se queda en la alianza y cuánto extra entra por fuera de las capturas. Ves jugador por jugador cuánto donó y cuánto le toca, y puedes corregir cualquier monto a mano: lo que le das de más a uno se descuenta de los demás, así el total no cambia. Si alguien salió de la alianza y lo quitas en un clic, su oro pasa al sobrante. Primero se paga el cashback y se aparta la tesorería; lo que sobra se reparte en partes iguales o por rendimiento, con el peso que elijas para puntos, bajas y kills. Las bajas se ajustan por la tropa principal del jugador, porque perder T5 no cuesta lo mismo que perder T6, y puedes repartir solo entre los mejores N por puntos. También puedes armar bonos fijos (por ejemplo, 3 jugadores con 200 de oro y otros 3 con 100) que se pagan antes del reparto. Con la lista negra decides quién no cobra nada o solo su cashback. Cada corte queda en el historial y se comparte con un link.",
+        detail: "Cada corte sigue tu configuración: cuándo cierra, quién recibe cashback y desde qué monto, y cuánto oro se queda en la alianza. Ves qué le toca a cada jugador y puedes ajustar cualquier monto a mano; el total no cambia. Lo que sobra se reparte en partes iguales o por rendimiento (puntos, bajas y kills con el peso que elijas; las bajas se ajustan por tropa). También puedes usar bonos fijos y una lista negra para quien no debe cobrar. Cada corte queda en el historial y se comparte con un link.",
       },
       rankings: {
         title: "Rankings y evento en una sola tabla",
@@ -550,28 +550,5 @@ export const messages: Messages = {
     comunidad: "Comunidad",
     legal: "Legal",
     pronto: "Próximamente",
-  },
-  testimonios: {
-    eyebrow: "Testimonios",
-    title: "Lo que dicen nuestros clanes",
-    item1: {
-      nombre: "Alexandra R.",
-      rol: "Líder de clan",
-      clan: "Northern Dragons",
-      resultado: "Reduje 10 horas semanales de administración a solo 15 minutos. Ahora puedo enfocarme en estrategia y juego.",
-    },
-    item2: {
-      nombre: "Marco T.",
-      rol: "Consejero de clan",
-      clan: "Reborn Phoenix",
-      resultado: "El reparto automático eliminó todos los reclamos. La transparencia total cambió la dinámica de nuestro clan para mejor.",
-    },
-    item3: {
-      nombre: "Sofia L.",
-      rol: "Miembro activo",
-      clan: "Steel Wolves",
-      resultado: "Por fin puedo ver claramente mi aporte y progreso. El sistema es justo y preciso, lo que motiva a todos a mejorar.",
-    },
-    verified: "Experiencia verificada",
   },
 };

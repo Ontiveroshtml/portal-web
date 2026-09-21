@@ -38,7 +38,7 @@ export const messages: Messages = {
     roadmap: "Roadmap",
     faq: "FAQ",
     login: "Sign in",
-    cta: "Try it free",
+    cta: "Get started",
     discord: "Discord",
   },
   hero: {
@@ -48,7 +48,7 @@ export const messages: Messages = {
     brandStrong: "Guild Core",
     turnsInto: "Guild Core makes it fair, Valley after Valley.",
     subhead: "Cashback, payouts and bonuses with clear rules and a public link so every player sees their share. No arguments, and no gold handed to those who don't contribute.",
-    ctaPrimary: "Start for free",
+    ctaPrimary: "Get started",
     ctaSecondary: "See inside",
     chips: {
       treasury: "Treasury & cuts",
@@ -124,8 +124,8 @@ export const messages: Messages = {
   ctaFinal: {
     title: "Your next cut closes",
     titleAccent: "in ten minutes.",
-    body: "Create your clan, upload the first screenshot and your payout is already calculated. No migration, no need to tell anyone — just try it.",
-    ctaPrimary: "Start for free",
+    body: "Create your clan, upload the first screenshot and your payout is already calculated. No migration, no need to tell anyone — just get started.",
+    ctaPrimary: "Get started",
     ctaSecondary: "See the demo",
     ctaTertiary: "See pricing",
   },
@@ -179,7 +179,7 @@ export const messages: Messages = {
         title: "Automatic treasury and payouts",
         text: "Gold and rewards are split by your rules. Every clan splits differently: here you configure it, it's not imposed.",
         stat: "Weekly, biweekly or at-your-pace cuts",
-        detail: "Every cut follows your settings: how often it closes, who gets cashback and from what amount, how much gold stays in the alliance and how much extra comes in from outside the screenshots. You see, player by player, what they donated and what they get, and you can fix any amount by hand: whatever you give one player extra is taken from the others, so the total doesn't change. If someone left the alliance and you remove them in one click, their gold goes to the remainder. Cashback is paid first and the treasury is set aside; what's left is split equally or by performance, with the weight you choose for points, deaths and kills. Deaths are adjusted by the player's main troop, because losing T5 doesn't cost the same as losing T6, and you can share only among the top N by points. You can also set fixed bonuses (for example, 3 players with 200 gold and another 3 with 100) paid before the split. With the blacklist you decide who gets nothing or only their cashback. Every cut is kept in the history and shared with a link.",
+        detail: "Every cut follows your settings: when it closes, who gets cashback and from what amount, and how much gold stays in the alliance. You see what each player gets and can adjust any amount by hand; the total never changes. What's left is split equally or by performance (points, deaths and kills with the weights you choose; deaths are adjusted by troop tier). You can also use fixed bonuses and a blacklist for anyone who shouldn't get paid. Every cut is kept in the history and shared with a link.",
       },
       rankings: {
         title: "Rankings and Event in a single table",
@@ -550,28 +550,5 @@ export const messages: Messages = {
     comunidad: "Community",
     legal: "Legal",
     pronto: "Coming soon",
-  },
-  testimonios: {
-    eyebrow: "Testimonies",
-    title: "What our clans say",
-    item1: {
-      nombre: "Alexandra R.",
-      rol: "Clan Leader",
-      clan: "Northern Dragons",
-      resultado: "I reduced 10 hours of weekly administration to just 15 minutes. Now I can focus on strategy and gameplay.",
-    },
-    item2: {
-      nombre: "Marco T.",
-      rol: "Clan Advisor",
-      clan: "Reborn Phoenix",
-      resultado: "Automatic distribution eliminated all complaints. Total transparency changed our clan dynamics for the better.",
-    },
-    item3: {
-      nombre: "Sofia L.",
-      rol: "Active Member",
-      clan: "Steel Wolves",
-      resultado: "Finally I can clearly see my contribution and progress. The system is fair and precise, which motivates everyone to improve.",
-    },
-    verified: "Verified experience",
   },
 };

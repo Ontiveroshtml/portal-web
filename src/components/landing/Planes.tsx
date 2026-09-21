@@ -376,7 +376,7 @@ export function Planes() {
             />
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-8 -right-5 z-0 hidden size-[150px] rotate-6 bg-[url('/vfx/vfx-lightning-purple.png')] bg-contain bg-no-repeat opacity-[.16] mix-blend-screen lg:block"
+              className="pointer-events-none absolute -bottom-8 right-0 z-0 hidden size-[150px] rotate-6 bg-[url('/vfx/vfx-lightning-purple.png')] bg-contain bg-no-repeat opacity-[.16] mix-blend-screen lg:block"
             />
 
             <div className="relative z-[1]">
