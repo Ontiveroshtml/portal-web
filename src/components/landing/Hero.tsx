@@ -2,20 +2,9 @@ import { LOGIN_URL } from "../../lib/config";
 import { useI18n } from "../../i18n/useI18n";
 import { Highlight } from "./shared";
 
-// Lo que ya funciona hoy en la app web (claves de hero.chips).
-const DASHBOARD_PREVIEW = [
-  "treasury",
-  "cashback",
-  "performance",
-  "ocr",
-  "review",
-  "warroom",
-  "roster",
-  "rankings",
-  "public",
-  "dashboard",
-  "history",
-] as const;
+// Cuatro ejemplos de lo que ya funciona hoy (claves de hero.chips); el resto
+// se cuenta más abajo, en Funciones y Por dentro.
+const DASHBOARD_PREVIEW = ["treasury", "ocr", "warroom", "rankings"] as const;
 
 export function Hero() {
   const { t } = useI18n();
@@ -25,8 +14,8 @@ export function Hero() {
       id="top"
       className="relative overflow-hidden [background-image:radial-gradient(rgba(255,255,255,.05)_1px,transparent_1px)] [background-size:6px_6px]"
     >
-      <div className="mx-auto grid w-[min(1200px,calc(100%-40px))] grid-cols-1 items-center gap-10 py-[70px] lg:grid-cols-[1.1fr_.9fr] lg:py-[100px]">
-        <div className="flex flex-col items-start gap-6 text-left">
+      <div className="mx-auto grid w-[min(1200px,calc(100%-40px))] grid-cols-1 items-center gap-8 py-[48px] lg:grid-cols-[1.4fr_.6fr] lg:py-[64px]">
+        <div className="flex flex-col items-start gap-5 text-left">
           <span
             className="gc-entrada [font-family:'JetBrains_Mono',monospace] text-[10px] font-semibold uppercase tracking-[.2em] text-[var(--muted)]"
             style={{ animationDelay: "40ms" }}
@@ -49,13 +38,6 @@ export function Hero() {
             {t("hero.subhead")}
           </p>
 
-          <p
-            className="gc-entrada max-w-[540px] text-sm leading-relaxed text-[var(--muted)]"
-            style={{ animationDelay: "290ms" }}
-          >
-            {t("hero.description")}
-          </p>
-
           <div className="gc-entrada flex flex-wrap gap-3" style={{ animationDelay: "370ms" }}>
             <a
               href={LOGIN_URL}
@@ -73,7 +55,7 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="gc-entrada mt-4 flex flex-wrap gap-2" style={{ animationDelay: "450ms" }}>
+          <div className="gc-entrada mt-2 flex flex-wrap gap-2" style={{ animationDelay: "450ms" }}>
             {DASHBOARD_PREVIEW.map((item, i) => (
               <span
                 key={item}
@@ -85,18 +67,9 @@ export function Hero() {
             ))}
           </div>
 
-          <p
-            className="gc-entrada flex flex-wrap items-center gap-2 text-[11px] text-[var(--muted)]"
-            style={{ animationDelay: "530ms" }}
-          >
-            <span className="[font-family:'JetBrains_Mono',monospace] font-semibold uppercase tracking-[.14em] text-[var(--accent-gold)]">
-              {t("hero.comingSoon")}
-            </span>
-            {t("hero.comingSoonItems")}
-          </p>
         </div>
 
-        <div className="gc-entrada relative mx-auto w-full max-w-[420px]" style={{ animationDelay: "300ms" }}>
+        <div className="gc-entrada relative mx-auto w-full max-w-[290px]" style={{ animationDelay: "300ms" }}>
           <div
             aria-hidden="true"
             className="absolute inset-0 -z-10 rounded-full bg-[var(--accent)]/12 blur-[90px]"
@@ -109,28 +82,6 @@ export function Hero() {
             className="w-full drop-shadow-[0_30px_60px_rgba(0,0,0,.55)]"
           />
         </div>
-      </div>
-
-      <div className="relative mx-auto w-[min(1200px,calc(100%-40px))] pb-[70px] text-center">
-        <span
-          aria-hidden="true"
-          className="absolute left-1/2 top-1/2 -z-10 h-[220px] w-[min(900px,90%)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent)]/16 blur-[110px]"
-        />
-        <span
-          aria-hidden="true"
-          className="mx-auto mb-4 block h-[3px] w-[120px] opacity-80 [background:repeating-linear-gradient(90deg,var(--accent)_0_10px,transparent_10px_20px)]"
-        />
-        <p className="mx-auto max-w-[900px] [font-family:'Montserrat',sans-serif] text-[clamp(28px,5.5vw,56px)] font-black italic uppercase leading-[1.05] tracking-[-.02em] text-[var(--text)]">
-          {t("hero.bottom")}
-          <br />
-          <span className="text-[var(--accent)] drop-shadow-[0_0_38px_rgba(214,250,56,.55)]">
-            {t("hero.bottomAccent")}
-          </span>
-        </p>
-        <span
-          aria-hidden="true"
-          className="mx-auto mt-4 block h-[3px] w-[120px] opacity-80 [background:repeating-linear-gradient(90deg,var(--accent)_0_10px,transparent_10px_20px)]"
-        />
       </div>
     </section>
   );

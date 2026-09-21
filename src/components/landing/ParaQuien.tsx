@@ -26,7 +26,7 @@ const JUGADORES: Capacidad[] = [
   { icon: "/icons/svg/icon-users.svg", clave: "peso" },
 ];
 
-const JUGADORES_PROXIMAMENTE = ["liderSupremo", "runas", "bandaDeGuerra", "simulaciones"] as const;
+const JUGADORES_PROXIMAMENTE = ["liderSupremo", "runas", "bandaDeGuerra", "simulaciones", "coach"] as const;
 
 /** Fila de capacidad: icono en su placa de color + título y detalle. */
 function CapacidadItem({
@@ -100,19 +100,19 @@ export function ParaQuien() {
     <section className="mx-auto w-[min(1200px,calc(100%-40px))] py-[52px]">
       <SectionHeading eyebrow={t("paraQuien.eyebrow")} title={t("paraQuien.title")} />
 
-      <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-2">
+      <div className="mt-12 grid grid-cols-1 items-start gap-5 lg:grid-cols-2">
         <Tarjeta eyebrow={t("paraQuien.lideres.eyebrow")} titulo={t("paraQuien.lideres.titulo")} tono="accent">
           <p className="mt-2 max-w-[46ch] text-[13px] leading-relaxed text-[var(--muted)]">
             {t("paraQuien.lideres.descripcion")}
           </p>
 
-          <div className="mt-6 grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
+          <div className="mt-6 mb-6 grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
             {LIDERES.map((item) => (
               <CapacidadItem key={item.clave} item={item} grupo="lideres" tono="accent" />
             ))}
           </div>
 
-          <div className="mt-6 flex items-center gap-3 border-t border-[var(--line)] pt-5">
+          <div className="flex items-center gap-3 border-t border-[var(--line)] pt-5">
             <img
               src="/icons/svg/icon-crown.svg"
               alt=""
@@ -141,7 +141,18 @@ export function ParaQuien() {
               <span className="gc-punto size-1.5 rounded-full bg-[var(--accent-gold)]" aria-hidden="true" />
               {t("paraQuien.jugadores.proximamente")}
             </span>
-            <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">
+
+            {/* Plan mini: para quien su clan no quiere pagar un plan completo. */}
+            <div className="mt-3 rounded-[8px] border border-[var(--accent-purple)]/35 bg-[var(--accent-purple)]/8 p-4">
+              <p className="[font-family:'Montserrat',sans-serif] text-[15px] font-black italic tracking-[-.01em] text-[var(--text)]">
+                {t("paraQuien.jugadores.miniTitulo")}
+              </p>
+              <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--text)]/80">
+                {t("paraQuien.jugadores.miniDescripcion")}
+              </p>
+            </div>
+
+            <p className="mt-4 text-[13px] leading-relaxed text-[var(--muted)]">
               {t("paraQuien.jugadores.descripcionProximamente")}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">

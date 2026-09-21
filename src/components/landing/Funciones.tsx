@@ -1,3 +1,4 @@
+import { useId, useState } from "react";
 import { useI18n } from "../../i18n/useI18n";
 import { useEnPantalla } from "./useAnimacion";
 import { cutClass, SectionHeading } from "./shared";
@@ -6,7 +7,7 @@ type Tono = "accent" | "purple" | "gold";
 
 interface Feature {
   number: string;
-  /** Prefijo de las claves de funciones.<id>.title / hook / body. */
+  /** Prefijo de las claves funciones.cards.<id>.{title,text,stat,detail}. */
   id: string;
   icon: string;
   tono: Tono;
@@ -15,13 +16,14 @@ interface Feature {
 // Cada tarjeta lleva su color: borde, placa del icono, número y cinta superior.
 // Se alterna lima / violeta / dorado para que la grilla no se lea como un bloque
 // gris, respetando los mismos tokens que usa la app.
-const TONO: Record<Tono, { borde: string; placa: string; texto: string; cinta: string; glow: string }> = {
+const TONO: Record<Tono, { borde: string; placa: string; texto: string; cinta: string; glow: string; chip: string }> = {
   accent: {
     borde: "border-[var(--accent)]/30 hover:border-[var(--accent)]/70",
     placa: "bg-[var(--accent)]/12 shadow-[0_0_22px_-8px_rgba(214,250,56,.7)]",
     texto: "text-[var(--accent)]",
     cinta: "[background:repeating-linear-gradient(45deg,var(--accent)_0_10px,var(--bg)_10px_20px)]",
     glow: "hover:shadow-[0_10px_34px_-14px_rgba(214,250,56,.55)]",
+    chip: "border-[var(--accent)]/40 bg-[var(--accent)]/8",
   },
   purple: {
     borde: "border-[var(--accent-purple)]/30 hover:border-[var(--accent-purple)]/70",
@@ -29,6 +31,7 @@ const TONO: Record<Tono, { borde: string; placa: string; texto: string; cinta: s
     texto: "text-[var(--accent-purple)]",
     cinta: "[background:repeating-linear-gradient(45deg,var(--accent-purple)_0_10px,var(--bg)_10px_20px)]",
     glow: "hover:shadow-[0_10px_34px_-14px_rgba(141,89,253,.55)]",
+    chip: "border-[var(--accent-purple)]/45 bg-[var(--accent-purple)]/10",
   },
   gold: {
     borde: "border-[var(--accent-gold)]/30 hover:border-[var(--accent-gold)]/70",
@@ -36,121 +39,142 @@ const TONO: Record<Tono, { borde: string; placa: string; texto: string; cinta: s
     texto: "text-[var(--accent-gold)]",
     cinta: "[background:repeating-linear-gradient(45deg,var(--accent-gold)_0_10px,var(--bg)_10px_20px)]",
     glow: "hover:shadow-[0_10px_34px_-14px_rgba(255,184,0,.55)]",
+    chip: "border-[var(--accent-gold)]/45 bg-[var(--accent-gold)]/10",
   },
 };
 
 const FEATURES: Feature[] = [
-  {
-    number: "01",
-    id: "feature1",
-    tono: "accent",
-    icon: "/icons/svg/icon-coins.svg",
-  },
-  {
-    number: "02",
-    id: "feature2",
-    tono: "purple",
-    icon: "/icons/svg/icon-chart.svg",
-  },
-  {
-    number: "03",
-    id: "feature3",
-    tono: "gold",
-    icon: "/icons/svg/icon-badge.svg",
-  },
-  {
-    number: "04",
-    id: "feature4",
-    tono: "accent",
-    icon: "/icons/svg/icon-shield.svg",
-  },
-  {
-    number: "05",
-    id: "feature5",
-    tono: "purple",
-    icon: "/icons/svg/icon-sword.svg",
-  },
-  {
-    number: "06",
-    id: "feature6",
-    tono: "gold",
-    icon: "/icons/svg/icon-trophy.svg",
-  },
+  { number: "01", id: "lectura", tono: "accent", icon: "/icons/svg/icon-badge.svg" },
+  { number: "02", id: "verificacion", tono: "purple", icon: "/icons/svg/icon-shield.svg" },
+  { number: "03", id: "hacienda", tono: "gold", icon: "/icons/svg/icon-coins.svg" },
+  { number: "04", id: "rankings", tono: "accent", icon: "/icons/svg/icon-trophy.svg" },
 ];
+
+const PASOS = ["read", "verify", "distribute"] as const;
+
+/** Tarjeta con el beneficio a la vista y el detalle técnico en un desplegable. */
+function Tarjeta({ feature, orden, visible }: { feature: Feature; orden: number; visible: boolean }) {
+  const { t } = useI18n();
+  const [abierta, setAbierta] = useState(false);
+  const panelId = useId();
+  const tono = TONO[feature.tono];
+
+  return (
+    <div
+      className={`${cutClass} gc-reveal gc-tarjeta ${visible ? "gc-reveal-on" : ""} relative flex flex-col overflow-hidden border ${tono.borde} ${tono.glow} bg-[var(--surface)]/80 p-6`}
+      style={{ animationDelay: `${orden * 75}ms` }}
+    >
+      <span aria-hidden="true" className={`gc-cinta-viva absolute inset-x-0 top-0 h-1 opacity-70 ${tono.cinta}`} />
+
+      <div className="mb-4 mt-1 flex items-center gap-3">
+        <span className={`grid size-11 place-items-center rounded-[8px] ${tono.placa}`}>
+          <img src={feature.icon} alt="" aria-hidden="true" className="size-5" />
+        </span>
+        <span className={`[font-family:'JetBrains_Mono',monospace] text-[11px] font-bold ${tono.texto}`}>
+          {feature.number}
+        </span>
+      </div>
+
+      <h3 className="[font-family:'Montserrat',sans-serif] text-lg font-black italic tracking-[-.01em]">
+        {t(`funciones.cards.${feature.id}.title`)}
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-[var(--text)]/85">{t(`funciones.cards.${feature.id}.text`)}</p>
+
+      <span
+        className={`mt-4 inline-flex w-fit max-w-full items-center rounded-full border px-3 py-1 [font-family:'JetBrains_Mono',monospace] text-[11px] font-semibold leading-snug text-[var(--text)] ${tono.chip}`}
+      >
+        {t(`funciones.cards.${feature.id}.stat`)}
+      </span>
+
+      <button
+        type="button"
+        aria-expanded={abierta}
+        aria-controls={panelId}
+        onClick={() => setAbierta((valor) => !valor)}
+        className={`mt-4 inline-flex w-fit cursor-pointer items-center gap-1.5 rounded-[4px] [font-family:'JetBrains_Mono',monospace] text-[11px] font-semibold uppercase tracking-[.12em] underline-offset-4 transition-colors duration-150 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)] ${tono.texto}`}
+      >
+        {abierta ? t("funciones.hideDetail") : t("funciones.viewDetail")}
+        <svg
+          viewBox="0 0 12 12"
+          aria-hidden="true"
+          className={`size-3 transition-transform duration-300 motion-reduce:transition-none ${abierta ? "rotate-180" : ""}`}
+        >
+          <path d="M2 4.5 6 8.5 10 4.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+
+      {/* Desplegable: la fila de la grilla pasa de 0fr a 1fr, así el alto
+          se anima sin medirlo. Cerrado, queda inerte (sin foco ni lectores). */}
+      <div
+        id={panelId}
+        role="region"
+        aria-label={t(`funciones.cards.${feature.id}.title`)}
+        inert={!abierta}
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${
+          abierta ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <p className="mt-3 border-t border-[var(--line)] pt-3 text-[13px] leading-relaxed text-[var(--text)]/75">
+            {t(`funciones.cards.${feature.id}.detail`)}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function Funciones() {
   const { t } = useI18n();
-  // Las seis tarjetas entran escalonadas: todas juntas se leen como un
-  // bloque, de a una guían la vista por la grilla.
+  // Las tarjetas entran escalonadas: todas juntas se leen como un bloque,
+  // de a una guían la vista por la grilla.
   const { ref, visible } = useEnPantalla<HTMLDivElement>();
 
   return (
     <section id="funciones" className="mx-auto w-[min(1200px,calc(100%-40px))] py-[52px]">
       <SectionHeading eyebrow={t("funciones.eyebrow")} title={t("funciones.title")} />
 
-      <p className="mx-auto mt-6 max-w-[620px] text-center text-sm leading-relaxed text-[var(--muted)]">
-        {t("funciones.intro")}
-      </p>
+      {/* Las tres cosas que hace, en el orden en que pasan. */}
+      <ol className="mx-auto mt-6 flex items-center justify-center gap-x-2 sm:gap-x-3">
+        {PASOS.map((paso, i) => (
+          <li key={paso} className="flex items-center gap-2 sm:gap-3">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)]/70 px-2.5 py-1.5 [font-family:'Montserrat',sans-serif] text-[12px] sm:gap-2 sm:px-3.5 sm:text-[13px] font-black italic uppercase tracking-[.03em] text-[var(--text)]">
+              <span className="[font-family:'JetBrains_Mono',monospace] text-[10px] font-bold not-italic text-[var(--accent)]">
+                {i + 1}
+              </span>
+              {t(`funciones.steps.${paso}`)}
+            </span>
+            {i < PASOS.length - 1 && (
+              <span aria-hidden="true" className="text-[var(--accent)]">
+                →
+              </span>
+            )}
+          </li>
+        ))}
+      </ol>
 
-      <div ref={ref} className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div ref={ref} className="mt-10 grid grid-cols-1 items-start gap-4 md:grid-cols-2">
         {FEATURES.map((feature, i) => (
-          <div
-            key={feature.number}
-            className={`${cutClass} gc-reveal gc-tarjeta ${visible ? "gc-reveal-on" : ""} relative overflow-hidden border ${TONO[feature.tono].borde} ${TONO[feature.tono].glow} bg-[var(--surface)]/80 p-6`}
-            style={{ animationDelay: `${i * 75}ms` }}
-          >
-            <span
-              aria-hidden="true"
-              className={`gc-cinta-viva absolute inset-x-0 top-0 h-1 opacity-70 ${TONO[feature.tono].cinta}`}
-            />
-            <div className="mb-4 mt-1 flex items-center gap-3">
-              <span
-                className={`grid size-11 place-items-center rounded-[8px] ${TONO[feature.tono].placa}`}
-              >
-                <img src={feature.icon} alt="" aria-hidden="true" className="size-5" />
-              </span>
-              <span
-                className={`[font-family:'JetBrains_Mono',monospace] text-[11px] font-bold ${TONO[feature.tono].texto}`}
-              >
-                {feature.number}
-              </span>
-            </div>
-            <h3 className="[font-family:'Montserrat',sans-serif] text-lg font-black italic tracking-[-.01em]">
-              {t(`funciones.${feature.id}.title`)}
-            </h3>
-            <p className="mt-2 text-sm font-semibold text-[var(--text)]">{t(`funciones.${feature.id}.hook`)}</p>
-            <p className="mt-2 text-[13px] leading-relaxed text-[var(--muted)]">{t(`funciones.${feature.id}.body`)}</p>
-          </div>
+          <Tarjeta key={feature.id} feature={feature} orden={i} visible={visible} />
         ))}
       </div>
 
-      {/* Un solo bloque de "lo que viene" en esta sección: el resto del futuro
-          vive en el Roadmap. Discord se queda porque además del roadmap trae
-          información del presente — el soporte ya se da ahí. */}
+      {/* Discord en una línea: además del roadmap trae información del
+          presente (rankings y podio ya se publican ahí). */}
       <div
-        className={`${cutClass} mt-5 flex flex-col items-start gap-4 border border-[var(--line)] bg-[var(--surface)]/60 p-6 sm:flex-row`}
+        className={`${cutClass} mt-4 flex flex-col items-start gap-3 border border-[var(--line)] bg-[var(--surface)]/60 px-5 py-4 sm:flex-row sm:items-center`}
       >
-        <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white">
-          <svg className="size-5" viewBox="0 0 20 19" aria-hidden="true">
+        <span className="grid size-9 shrink-0 place-items-center rounded-full bg-white">
+          <svg className="size-4" viewBox="0 0 20 19" aria-hidden="true">
             <use href="/icons.svg#discord-icon" />
           </svg>
         </span>
-        <div>
-          <div className="flex flex-wrap items-center gap-2.5">
-            <h3 className="[font-family:'Montserrat',sans-serif] text-lg font-black italic tracking-[-.01em]">
-              {t("funciones.discord.title")}
-            </h3>
-            <span className="gc-proximamente inline-flex items-center gap-1.5 rounded-full border border-[var(--accent-gold)]/45 bg-[var(--accent-gold)]/10 px-2.5 py-1 [font-family:'JetBrains_Mono',monospace] text-[10px] font-bold uppercase tracking-[.14em] text-[var(--accent-gold)]">
-              <span className="gc-punto size-1.5 rounded-full bg-[var(--accent-gold)]" aria-hidden="true" />
-              {t("funciones.discord.badge")}
-            </span>
-          </div>
-          <p className="mt-2 max-w-[760px] text-[13px] leading-relaxed text-[var(--muted)]">
-            {t("funciones.discord.body")}
-          </p>
-        </div>
+        <span className="gc-proximamente inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--accent-gold)]/45 bg-[var(--accent-gold)]/10 px-2.5 py-1 [font-family:'JetBrains_Mono',monospace] text-[10px] font-bold uppercase tracking-[.14em] text-[var(--accent-gold)]">
+          <span className="gc-punto size-1.5 rounded-full bg-[var(--accent-gold)]" aria-hidden="true" />
+          {t("funciones.discord.badge")}
+        </span>
+        <p className="text-[13px] leading-relaxed text-[var(--text)]/85">{t("funciones.discord.body")}</p>
       </div>
-
     </section>
   );
 }
