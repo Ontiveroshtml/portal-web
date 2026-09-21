@@ -202,10 +202,10 @@ export const messages: Messages = {
   problema: {
     eyebrow: "Por qué importa",
     title: "Un clan justo es un clan al que todos quieren unirse.",
-    lede: "Los buenos jugadores se quedan donde su esfuerzo se nota. Con Guild Core el reparto deja de depender del criterio de una persona y pasa a ser una regla escrita, aplicada igual a todos, valle tras valle.",
+    lede: "Los buenos jugadores se quedan donde su esfuerzo se nota. Con Guild Core el reparto deja de depender del criterio de una persona y pasa a ser una regla escrita por ti, aplicada igual a todos, valle tras valle.",
     pillar1: {
-      title: "Premia por aporte real",
-      body: "Puntos, bajas y kills con el peso que tú elijas. Las bajas se ajustan por tropa y puedes repartir solo entre los mejores. Quien rinde más, cobra más.",
+      title: "Reparto a tu medida",
+      body: "Tú decides qué datos del Valle cuentan (puntos, bajas, kills) y cuánto pesa cada uno, y los fusionas con el cashback y los bonos fijos. Cada clan arma su propia fórmula: quien rinde más, cobra más.",
     },
     pillar2: {
       title: "Todo a la vista",

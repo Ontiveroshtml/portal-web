@@ -202,10 +202,10 @@ export const messages: Messages = {
   problema: {
     eyebrow: "Why it matters",
     title: "A fair clan is a clan everyone wants to join.",
-    lede: "Good players stay where their effort shows. With Guild Core the payout stops depending on one person's judgment and becomes a written rule, applied the same to everyone, Valley after Valley.",
+    lede: "Good players stay where their effort shows. With Guild Core the payout stops depending on one person's judgment and becomes a rule written by you, applied the same to everyone, Valley after Valley.",
     pillar1: {
-      title: "Reward real contribution",
-      body: "Points, deaths and kills with the weights you choose. Deaths are adjusted by troop tier and you can share only among the best. Whoever performs more, earns more.",
+      title: "Payout tailored to you",
+      body: "You decide which Valley data counts (points, deaths, kills) and how much each weighs, and blend it with cashback and fixed bonuses. Every clan builds its own formula: whoever performs more, earns more.",
     },
     pillar2: {
       title: "Everything in plain sight",

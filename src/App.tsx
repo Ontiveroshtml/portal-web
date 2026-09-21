@@ -60,8 +60,8 @@ export default function App() {
       <Reveal><Problema /></Reveal>
       <Reveal><Funciones /></Reveal>
       <Reveal><AppPreview /></Reveal>
-      <Reveal><ParaQuien /></Reveal>
       <Reveal><Planes /></Reveal>
+      <Reveal><ParaQuien /></Reveal>
       <Reveal><DemoDestacada /></Reveal>
       <Roadmap />
       <Reveal><FAQ /></Reveal>
