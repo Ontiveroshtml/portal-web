@@ -4,8 +4,8 @@ import type { Messages } from "../index";
 export const messages: Messages = {
   meta: {
     title: "Guild Core — Clan management for FateWar",
-    description: "Upload your FateWar clan's screenshots and Guild Core fills in the numbers for you: donations, payouts, WarRoom and rankings. Fewer hours managing, more hours playing.",
-    ogDescription: "Your clan's screenshots read themselves. Donations, payouts, WarRoom and rankings without spreadsheets.",
+    description: "Upload your FateWar clan's screenshots and Guild Core fills in the numbers for you: donations, payouts, Events and rankings. Fewer hours managing, more hours playing.",
+    ogDescription: "Your clan's screenshots read themselves. Donations, payouts, Events and rankings without spreadsheets.",
   },
   app: {
     checkoutSuccessStrong: "Test payment confirmed!",
@@ -140,7 +140,7 @@ export const messages: Messages = {
     titleAccent: "before moving a single data point of your clan.",
     body: "We're preparing a limited-access demo: you log in, load your own data — players, a screenshot, a test cut — and see how every screen responds in real time. Nothing scripted: you test with your own stuff and decide.",
     includes: {
-      real: "Real, navigable Hacienda, Roster, WarRoom and Ranking — not a mockup",
+      real: "Real, navigable Hacienda, Roster, Events and Ranking — not a mockup",
       loadData: "You load the data — your players, a screenshot, a test cut",
       limits: "Some usage limits, but your real clan stays untouched",
     },
@@ -296,9 +296,9 @@ export const messages: Messages = {
       alt: "Players screen showing roster with ranks and player IDs",
     },
     warroom: {
-      eyebrow: "WarRoom",
+      eyebrow: "Events",
       title: "Event data, filtered to what you need to see.",
-      alt: "WarRoom screen showing Valley of Spirits event data with power, points, kills and deaths",
+      alt: "Events screen showing Valley of Spirits event data with power, points, kills and deaths",
     },
     missing: "Missing real screenshot",
     bottom: "Less time calculating.",
@@ -489,7 +489,7 @@ export const messages: Messages = {
     item6: {
       icon: "/icons/svg/icon-chart.svg",
       question: "What's the difference between Management and Intelligence?",
-      answer: "Management covers daily clan operations: treasury, donations, cuts and roster. Intelligence adds the events layer — full WarRoom, automatic battle screenshot reading with review, and the performance analysis that feeds the performance-based payout.",
+      answer: "Management covers daily clan operations: treasury, donations, cuts and roster. Intelligence adds the full Events section: automatic battle screenshot reading with review, and the performance analysis that feeds the performance-based payout.",
     },
     item7: {
       icon: "/icons/svg/icon-mail.svg",

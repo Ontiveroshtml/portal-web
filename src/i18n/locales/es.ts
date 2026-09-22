@@ -4,8 +4,8 @@ import type { Messages } from "../index";
 export const messages: Messages = {
   meta: {
     title: "Guild Core — Gestión de clanes para FateWar",
-    description: "Subes las capturas de tu clan de FateWar y Guild Core carga los números solos: donaciones, repartos, WarRoom y rankings. Menos horas administrando, más horas jugando.",
-    ogDescription: "Las capturas de tu clan se leen solas. Donaciones, repartos, WarRoom y rankings sin planillas.",
+    description: "Subes las capturas de tu clan de FateWar y Guild Core carga los números solos: donaciones, repartos, Eventos y rankings. Menos horas administrando, más horas jugando.",
+    ogDescription: "Las capturas de tu clan se leen solas. Donaciones, repartos, Eventos y rankings sin planillas.",
   },
   app: {
     checkoutSuccessStrong: "¡Pago de prueba confirmado!",
@@ -140,7 +140,7 @@ export const messages: Messages = {
     titleAccent: "antes de mover un solo dato de tu clan.",
     body: "Estamos preparando un modo demo con acceso limitado: entras, cargas tus propios datos — jugadores, una captura, un corte de prueba— y ves cómo responde cada pantalla en tiempo real. Nada armado de antemano: lo pruebas con lo tuyo y decides tú.",
     includes: {
-      real: "Hacienda, Roster, WarRoom y Ranking navegables de verdad, no una maqueta",
+      real: "Hacienda, Roster, Eventos y Ranking navegables de verdad, no una maqueta",
       loadData: "Cargas tú los datos — tus jugadores, una captura, un corte de prueba",
       limits: "Con algunos límites de uso, pero sin tocar tu clan real",
     },
@@ -296,9 +296,9 @@ export const messages: Messages = {
       alt: "Pantalla de jugadores con roster, rangos e IDs",
     },
     warroom: {
-      eyebrow: "WarRoom",
+      eyebrow: "Eventos",
       title: "Los datos de cada evento, filtrados a lo que necesitás ver.",
-      alt: "Pantalla de WarRoom con datos del Valle de los Espíritus: poder, puntos, kills y bajas",
+      alt: "Pantalla de Eventos con datos del Valle de los Espíritus: poder, puntos, kills y bajas",
     },
     missing: "Falta captura real",
     bottom: "Menos tiempo calculando.",
@@ -489,7 +489,7 @@ export const messages: Messages = {
     item6: {
       icon: "/icons/svg/icon-chart.svg",
       question: "¿Cuál es la diferencia entre Management e Intelligence?",
-      answer: "Management cubre la gestión diaria del clan: hacienda, donaciones, cortes y roster. Intelligence agrega la parte de eventos — WarRoom completo, lectura automática de las capturas de batalla con su revisión, y el análisis de rendimiento que alimenta el reparto por desempeño.",
+      answer: "Management cubre la gestión diaria del clan: hacienda, donaciones, cortes y roster. Intelligence agrega la sección de Eventos completa: lectura automática de las capturas de batalla con su revisión, y el análisis de rendimiento que alimenta el reparto por desempeño.",
     },
     item7: {
       icon: "/icons/svg/icon-mail.svg",

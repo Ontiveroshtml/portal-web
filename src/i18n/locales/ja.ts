@@ -4,8 +4,8 @@ import type { Messages } from "../index";
 export const messages: Messages = {
   meta: {
     title: "Guild Core — FateWar向けクラン管理",
-    description: "FateWarクランのスクリーンショットをアップロードすると、Guild Coreが数値を自動入力します：寄付、分配、WarRoom、ランキング。管理時間を減らして、プレイ時間を増やしましょう。",
-    ogDescription: "クランのスクリーンショットを自動で読み取り。寄付、分配、WarRoom、ランキングをスプレッドシートなしで。",
+    description: "FateWarクランのスクリーンショットをアップロードすると、Guild Coreが数値を自動入力します：寄付、分配、イベント、ランキング。管理時間を減らして、プレイ時間を増やしましょう。",
+    ogDescription: "クランのスクリーンショットを自動で読み取り。寄付、分配、イベント、ランキングをスプレッドシートなしで。",
   },
   app: {
     checkoutSuccessStrong: "テスト決済が完了しました！",
@@ -140,7 +140,7 @@ export const messages: Messages = {
     titleAccent: "クランのデータを1点も動かす前に。",
     body: "限定アクセスのデモを準備中：ログインして、ご自身のデータ — プレイヤー、スクリーンショット、テストカット — を読み込み、各画面がリアルタイムでどう反応するかをご確認いただけます。事前に用意されたものではありません：ご自身のデータでテストし、ご自身で判断してください。",
     includes: {
-      real: "本物のナビゲーション可能な財務、ロスター、WarRoom、ランキング — モックアップではありません",
+      real: "本物のナビゲーション可能な財務、ロスター、イベント、ランキング — モックアップではありません",
       loadData: "ご自身のデータを読み込み — ご自身のプレイヤー、スクリーンショット、テストカット",
       limits: "一部の使用制限がありますが、実際のクランには触れません",
     },
@@ -296,9 +296,9 @@ export const messages: Messages = {
       alt: "ロスター、ランク、プレイヤーIDを表示するPlayers画面",
     },
     warroom: {
-      eyebrow: "WarRoom",
+      eyebrow: "イベント",
       title: "イベントデータ、見たいものだけにフィルタリング。",
-      alt: "WarRoom画面：Valley of Spiritsのイベントデータ（パワー、ポイント、キル、デス）を表示",
+      alt: "イベント画面：Valley of Spiritsのイベントデータ（パワー、ポイント、キル、デス）を表示",
     },
     missing: "実スクリーンショット不足",
     bottom: "計算時間を短縮。",
@@ -489,7 +489,7 @@ export const messages: Messages = {
     item6: {
       icon: "/icons/svg/icon-chart.svg",
       question: "ManagementとIntelligenceの違いは？",
-      answer: "Managementはクランの日常運営をカバー：財務、寄付、カット、ロスター。Intelligenceはイベント層を追加 — 完全なWarRoom、バトルスクリーンショットの自動読み取り・レビュー、パフォーマンスベース分配を支えるパフォーマンス分析。",
+      answer: "Managementはクランの日常運営をカバー：財務、寄付、カット、ロスター。Intelligenceはイベントセクションを完全に追加：バトルスクリーンショットの自動読み取り・レビュー、パフォーマンスベース分配を支えるパフォーマンス分析。",
     },
     item7: {
       icon: "/icons/svg/icon-mail.svg",
