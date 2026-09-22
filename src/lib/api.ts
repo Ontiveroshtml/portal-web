@@ -59,9 +59,16 @@ export function listPublicPlans(): Promise<Plan[]> {
   return apiFetch<Plan[]>("/public/plans");
 }
 
-export function startCheckout(email: string, planPriceId: number): Promise<{ checkoutUrl: string }> {
+export type CheckoutPaymentMethod = "card" | "crypto";
+
+export function startCheckout(
+  email: string,
+  planPriceId: number,
+  paymentMethod: CheckoutPaymentMethod = "card",
+  referralCode?: string,
+): Promise<{ checkoutUrl: string }> {
   return apiFetch<{ checkoutUrl: string }>("/public/checkout", {
     method: "POST",
-    body: { email, planPriceId },
+    body: { email, planPriceId, method: paymentMethod, referralCode },
   });
 }

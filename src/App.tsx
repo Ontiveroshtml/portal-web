@@ -14,6 +14,7 @@ import { Planes } from "./components/landing/Planes";
 import { Problema } from "./components/landing/Problema";
 import { Roadmap } from "./components/landing/Roadmap";
 import { useI18n } from "./i18n/useI18n";
+import { captureReferralFromUrl } from "./lib/referral";
 
 export default function App() {
   const { t } = useI18n();
@@ -21,6 +22,10 @@ export default function App() {
     const result = new URLSearchParams(window.location.search).get("checkout");
     return result === "success" || result === "cancel" ? result : null;
   });
+
+  useEffect(() => {
+    captureReferralFromUrl();
+  }, []);
 
   useEffect(() => {
     if (checkoutResult) window.history.replaceState(null, "", window.location.pathname);
