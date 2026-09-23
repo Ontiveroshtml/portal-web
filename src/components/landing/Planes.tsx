@@ -4,7 +4,7 @@ import { listPublicPlans, type Plan, type PlanPrice } from "../../lib/api";
 import { useI18n } from "../../i18n/useI18n";
 import { FALLBACK_PLANS, isFallbackPlan, POOL_RULES } from "./planesFallback";
 import { Highlight, RichText } from "./shared";
-import { DISCORD_URL } from "../../lib/links";
+import { DISCORD_PAYMENTS_URL } from "../../lib/links";
 
 // Diseño de `guild-core-planes.html`: selector de método de pago, ciclos
 // centrados, tarjetas con corte de 16px por tramo de jugadores, cabeceras de
@@ -207,22 +207,14 @@ function PoolCard({ plan, cycleMonths }: { plan: Plan; cycleMonths: number }) {
         +{rule.surcharge}%
       </div>
       <div className="text-[11px] text-[var(--muted)]">{t("planes.pool.per")}</div>
-      {DISCORD_URL ? (
-        <a
-          href={DISCORD_URL}
-          target="_blank"
-          rel="noreferrer"
-          className={`mt-3 block w-full rounded-full px-3.5 py-2 text-center [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase tracking-[.04em] transition duration-150 hover:brightness-110 ${style.poolCta}`}
-        >
-          {t("planes.pool.cta")}
-        </a>
-      ) : (
-        <span
-          className={`mt-3 block w-full cursor-not-allowed rounded-full px-3.5 py-2 text-center [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase tracking-[.04em] opacity-50 ${style.poolCta}`}
-        >
-          {t("planes.pool.cta")}
-        </span>
-      )}
+      <a
+        href={DISCORD_PAYMENTS_URL}
+        target="_blank"
+        rel="noreferrer"
+        className={`mt-3 block w-full rounded-full px-3.5 py-2 text-center [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase tracking-[.04em] transition duration-150 hover:brightness-110 ${style.poolCta}`}
+      >
+        {t("planes.pool.cta")}
+      </a>
     </div>
   );
 }
@@ -454,20 +446,14 @@ export function Planes() {
                   <span aria-hidden="true">🤝</span>
                   {t("planes.pool.tag")}
                 </span>
-                {DISCORD_URL ? (
-                  <a
-                    href={DISCORD_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="gc-boton inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-[var(--accent)] px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase leading-none tracking-[.04em] text-[#1c2200] transition duration-150 hover:brightness-110"
-                  >
-                    {t("planes.pool.cta")}
-                  </a>
-                ) : (
-                  <span className="inline-flex cursor-not-allowed items-center gap-2 whitespace-nowrap rounded-full bg-[var(--accent)]/40 px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase leading-none tracking-[.04em] text-[#1c2200]/60">
-                    {t("planes.pool.cta")}
-                  </span>
-                )}
+                <a
+                  href={DISCORD_PAYMENTS_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="gc-boton inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-[var(--accent)] px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase leading-none tracking-[.04em] text-[#1c2200] transition duration-150 hover:brightness-110"
+                >
+                  {t("planes.pool.cta")}
+                </a>
               </div>
             </div>
 

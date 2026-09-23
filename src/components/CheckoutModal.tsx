@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ApiError, startCheckout, type CheckoutPaymentMethod, type Plan, type PlanPrice } from "../lib/api";
 import { useI18n } from "../i18n/useI18n";
 import { getStoredReferralCode } from "../lib/referral";
+import { DISCORD_PAYMENTS_URL } from "../lib/links";
 
 // Apagado a pedido ("cancelo de cripto hasta nuevo aviso") — el backend
 // también rechaza method:"crypto" mientras tanto (ver checkout.stripe.ts).
@@ -103,7 +104,14 @@ export function CheckoutModal({ plan, price, onClose }: CheckoutModalProps) {
           <button type="button" onClick={onClose} className="text-xs text-[var(--muted)] underline">
             {t("checkout.cancel")}
           </button>
-          <p className="mt-1 text-center text-[11px] text-[var(--muted)]">{t("checkout.otherMethod")}</p>
+          <a
+            href={DISCORD_PAYMENTS_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-1 block text-center text-[11px] text-[var(--muted)] underline hover:text-[var(--accent)]"
+          >
+            {t("checkout.otherMethod")}
+          </a>
         </form>
       </div>
     </div>
