@@ -72,3 +72,16 @@ export function startCheckout(
     body: { email, planPriceId, method: paymentMethod, referralCode },
   });
 }
+
+/** Ofertas a medida (ver /admin/plan-overrides en el backend): precio armado
+ * a mano para un email puntual — el link llega por fuera (Discord, etc.),
+ * nunca sale del catálogo público. */
+export function startOverrideCheckout(
+  email: string,
+  overrideToken: string,
+): Promise<{ checkoutUrl: string }> {
+  return apiFetch<{ checkoutUrl: string }>("/public/checkout", {
+    method: "POST",
+    body: { email, overrideToken, method: "card" },
+  });
+}

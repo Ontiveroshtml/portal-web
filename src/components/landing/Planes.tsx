@@ -4,6 +4,7 @@ import { listPublicPlans, type Plan, type PlanPrice } from "../../lib/api";
 import { useI18n } from "../../i18n/useI18n";
 import { FALLBACK_PLANS, isFallbackPlan, POOL_RULES } from "./planesFallback";
 import { Highlight, RichText } from "./shared";
+import { DISCORD_URL } from "../../lib/links";
 
 // Diseño de `guild-core-planes.html`: selector de método de pago, ciclos
 // centrados, tarjetas con corte de 16px por tramo de jugadores, cabeceras de
@@ -206,13 +207,22 @@ function PoolCard({ plan, cycleMonths }: { plan: Plan; cycleMonths: number }) {
         +{rule.surcharge}%
       </div>
       <div className="text-[11px] text-[var(--muted)]">{t("planes.pool.per")}</div>
-      <button
-        type="button"
-        disabled
-        className={`mt-3 w-full rounded-full px-3.5 py-2 [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase tracking-[.04em] opacity-60 ${style.poolCta}`}
-      >
-        {t("hero.comingSoon")}
-      </button>
+      {DISCORD_URL ? (
+        <a
+          href={DISCORD_URL}
+          target="_blank"
+          rel="noreferrer"
+          className={`mt-3 block w-full rounded-full px-3.5 py-2 text-center [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase tracking-[.04em] transition duration-150 hover:brightness-110 ${style.poolCta}`}
+        >
+          {t("planes.pool.cta")}
+        </a>
+      ) : (
+        <span
+          className={`mt-3 block w-full cursor-not-allowed rounded-full px-3.5 py-2 text-center [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase tracking-[.04em] opacity-50 ${style.poolCta}`}
+        >
+          {t("planes.pool.cta")}
+        </span>
+      )}
     </div>
   );
 }
@@ -416,8 +426,9 @@ export function Planes() {
             </div>
           </div>
 
-          {/* Fondo común de clan — próximamente: toda la sección se ve apagada
-              y lleva un tag fijo que explica por qué. */}
+          {/* Fondo común de clan — activo: la coordinación de quién paga
+              cuánto se hace por Discord, y el pago real llega como una
+              oferta a medida (ver /admin/plan-overrides en el backend). */}
           <div
             className={`${CUT_16} relative mt-12 overflow-hidden border border-[var(--line)] bg-[var(--surface-raised)] px-8 pb-5 pt-6`}
           >
@@ -426,7 +437,7 @@ export function Planes() {
               className="gc-cinta-viva absolute inset-x-0 top-0 h-1.5 opacity-85 [background:repeating-linear-gradient(45deg,var(--accent)_0_10px,var(--bg)_10px_20px)]"
             />
             <div className="mb-4 mt-2 flex flex-col items-start justify-between gap-6 lg:flex-row">
-              <div className="pointer-events-none opacity-45 grayscale-[.7]">
+              <div>
                 <h3 className="mb-1.5 flex items-center gap-3 [font-family:'Montserrat',sans-serif] text-[clamp(20px,2.4vw,26px)] font-black italic uppercase leading-[1.1]">
                   <img
                     src="/emotes/emote-happy.png"
@@ -438,19 +449,35 @@ export function Planes() {
                 </h3>
                 <p className="max-w-[44ch] text-[13.5px] text-[var(--muted)]">{t("planes.pool.desc")}</p>
               </div>
-              <span className="inline-flex shrink-0 items-center gap-[7px] whitespace-nowrap rounded-full border border-[var(--accent-gold)]/50 bg-[var(--accent-gold)]/14 px-4 py-[9px] [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase leading-none tracking-[.05em] text-[var(--accent-gold)]">
-                <span aria-hidden="true">⏳</span>
-                {t("planes.pool.tag")}
-              </span>
+              <div className="flex shrink-0 flex-col items-start gap-2 lg:items-end">
+                <span className="inline-flex items-center gap-[7px] whitespace-nowrap rounded-full border border-[var(--accent-gold)]/50 bg-[var(--accent-gold)]/14 px-4 py-[9px] [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase leading-none tracking-[.05em] text-[var(--accent-gold)]">
+                  <span aria-hidden="true">🤝</span>
+                  {t("planes.pool.tag")}
+                </span>
+                {DISCORD_URL ? (
+                  <a
+                    href={DISCORD_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="gc-boton inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-[var(--accent)] px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase leading-none tracking-[.04em] text-[#1c2200] transition duration-150 hover:brightness-110"
+                  >
+                    {t("planes.pool.cta")}
+                  </a>
+                ) : (
+                  <span className="inline-flex cursor-not-allowed items-center gap-2 whitespace-nowrap rounded-full bg-[var(--accent)]/40 px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase leading-none tracking-[.04em] text-[#1c2200]/60">
+                    {t("planes.pool.cta")}
+                  </span>
+                )}
+              </div>
             </div>
 
-            <div className="pointer-events-none grid grid-cols-1 gap-4 opacity-45 grayscale-[.7] sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {ordered.map((plan) => (
                 <PoolCard key={plan.id} plan={plan} cycleMonths={cycleMonths} />
               ))}
             </div>
 
-            <p className="pointer-events-none mt-4 flex gap-2.5 border-t border-[var(--line)] pt-3.5 text-[12px] leading-[1.6] text-[var(--muted)] opacity-45 grayscale-[.7]">
+            <p className="mt-4 flex gap-2.5 border-t border-[var(--line)] pt-3.5 text-[12px] leading-[1.6] text-[var(--muted)]">
               <span aria-hidden="true">ⓘ</span>
               <span>
                 <RichText text={t("planes.pool.footnote")} />

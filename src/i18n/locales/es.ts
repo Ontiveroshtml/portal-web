@@ -25,6 +25,16 @@ export const messages: Messages = {
     cancel: "Cancelar",
     error: "No se pudo iniciar el pago.",
   },
+  checkoutMedida: {
+    title: "Pago personalizado",
+    subtitle: "Este link se armó especialmente para {{email}}.",
+    pay: "Confirmar y pagar",
+    submitting: "Redirigiendo a Stripe…",
+    error: "No se pudo iniciar el pago.",
+    invalidTitle: "Link inválido",
+    invalidText: "Este link de pago no es válido, ya se usó o expiró. Contáctanos para que te generemos uno nuevo.",
+    backHome: "Volver al inicio",
+  },
   label: {
     en: "English",
     es: "Español",
@@ -119,10 +129,11 @@ export const messages: Messages = {
     pool: {
       title: "Fondo común de clan",
       desc: "Divide la cuota mensual entre varios miembros. El recargo se aplica sobre el precio ya rebajado del ciclo elegido.",
-      tag: "Próximamente — acceso para todos",
+      tag: "Coordinación manual",
+      cta: "Coordinar por Discord",
       contributors: "Hasta {{n}} contribuyentes",
       per: "por persona / mes",
-      footnote: "**Cómo se factura:** el compromiso puede ser de 3, 6 o 12 meses, pero cada contribuyente del fondo común paga siempre **mes a mes** — nunca se cobra el total del periodo de una sola vez. El monto por persona es `(cuota mensual con descuento × recargo) ÷ contribuyentes`.",
+      footnote: "**Cómo se factura:** el compromiso puede ser de 3, 6 o 12 meses, pero cada contribuyente del fondo común paga siempre **mes a mes** — nunca se cobra el total del periodo de una sola vez. El monto por persona es `(cuota mensual con descuento × recargo) ÷ contribuyentes`. Coordina con tu clan quién aporta cuánto y te armamos un link de pago a la medida.",
     },
   },
   ctaFinal: {

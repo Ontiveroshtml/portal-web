@@ -1,8 +1,5 @@
 import { useI18n } from "../../i18n/useI18n";
-
-// Cuando tengas la invitación del servidor, pegala acá y el link se activa solo.
-// Vacío = se muestra sin destino hasta que exista la invitación.
-const DISCORD_URL: string = "";
+import { DISCORD_URL } from "../../lib/links";
 
 // Sin columna de navegación: el menú de arriba ya lleva a cada sección y
 // repetirlo acá solo alargaba el pie.

@@ -25,6 +25,16 @@ export const messages: Messages = {
     cancel: "Cancel",
     error: "Could not start the payment.",
   },
+  checkoutMedida: {
+    title: "Custom payment",
+    subtitle: "This link was set up specifically for {{email}}.",
+    pay: "Confirm and pay",
+    submitting: "Redirecting to Stripe…",
+    error: "Could not start the payment.",
+    invalidTitle: "Invalid link",
+    invalidText: "This payment link isn't valid, was already used, or expired. Contact us and we'll generate a new one.",
+    backHome: "Back to home",
+  },
   label: {
     en: "English",
     es: "Español",
@@ -119,10 +129,11 @@ export const messages: Messages = {
     pool: {
       title: "Clan pool fund",
       desc: "Split the monthly fee among several members. The surcharge applies on top of the already-discounted cycle price.",
-      tag: "Coming soon — access for everyone",
+      tag: "Manual setup",
+      cta: "Coordinate on Discord",
       contributors: "Up to {{n}} contributors",
       per: "per person / month",
-      footnote: "**How billing works:** the commitment can be 3, 6 or 12 months, but each pool contributor always pays **monthly** — the full period is never charged at once. The amount per person is `(discounted monthly price × surcharge) ÷ contributors`.",
+      footnote: "**How billing works:** the commitment can be 3, 6 or 12 months, but each pool contributor always pays **monthly** — the full period is never charged at once. The amount per person is `(discounted monthly price × surcharge) ÷ contributors`. Coordinate with your clan who pays what and we'll set up a custom payment link.",
     },
   },
   ctaFinal: {
