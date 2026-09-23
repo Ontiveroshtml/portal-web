@@ -19,42 +19,42 @@ const CYCLES = [
   { months: 12, management: 15, intelligence: 12 },
 ] as const;
 
-// Payment Links de Stripe (modo de prueba) del mockup: 1 mes, 3, 6 y 12.
+// Payment Links de Stripe (modo live), creados 2026-09-23: 1 mes, 3, 6 y 12.
 const PLANS = [
   {
     id: -1, tier: "management", min: 1, max: 100, base: 59,
     links: {
-      1: "https://buy.stripe.com/test_bJebIUfg1fxY5jQdIM4wM00",
-      3: "https://buy.stripe.com/test_4gMcMYebXbhIcMi2044wM01",
-      6: "https://buy.stripe.com/test_7sY28kc3P0D427EgUY4wM02",
-      12: "https://buy.stripe.com/test_cNi8wI6JvfxYdQm6gk4wM03",
+      1: "https://buy.stripe.com/bJe5kEguh5Haf6p9Cb2cg0g",
+      3: "https://buy.stripe.com/8x200k5PD4D64rLaGf2cg0h",
+      6: "https://buy.stripe.com/dRm7sMem9glO5vP15F2cg0i",
+      12: "https://buy.stripe.com/4gM3cw91P4D64rL9Cb2cg0j",
     },
   },
   {
     id: -2, tier: "management", min: 101, max: 200, base: 79,
     links: {
-      1: "https://buy.stripe.com/test_28E8wI2tf5Xoh2y8os4wM04",
-      3: "https://buy.stripe.com/test_9B614gfg1bhIaEa7ko4wM06",
-      6: "https://buy.stripe.com/test_dRmeV64BnclMh2y7ko4wM07",
-      12: "https://buy.stripe.com/test_3cI9AMfg10D46nU9sw4wM08",
+      1: "https://buy.stripe.com/5kQ14oce15Ha8I19Cb2cg0k",
+      3: "https://buy.stripe.com/bJeeVe91PglOe2l6pZ2cg0l",
+      6: "https://buy.stripe.com/3cI9AUdi51qU5vP9Cb2cg0m",
+      12: "https://buy.stripe.com/9B64gAa5T1qU7DX9Cb2cg0n",
     },
   },
   {
     id: -3, tier: "intelligence", min: 1, max: 100, base: 109,
     links: {
-      1: "https://buy.stripe.com/test_8x2eV61pb0D43bI2044wM09",
-      3: "https://buy.stripe.com/test_7sYaEQfg14Tk6nUcEI4wM0a",
-      6: "https://buy.stripe.com/test_eVq4gsd7T85wbIebAE4wM0b",
-      12: "https://buy.stripe.com/test_3cI4gsc3P0D43bI7ko4wM0c",
+      1: "https://buy.stripe.com/bJe9AU91P0mQ7DX4hR2cg0o",
+      3: "https://buy.stripe.com/cNi4gAdi51qUf6paGf2cg0p",
+      6: "https://buy.stripe.com/eVqeVe91P7Pi7DXcOn2cg0q",
+      12: "https://buy.stripe.com/6oU4gAem9b1u5vP7u32cg0r",
     },
   },
   {
     id: -4, tier: "intelligence", min: 101, max: 200, base: 139,
     links: {
-      1: "https://buy.stripe.com/test_28EeV60l73Pg4fM48c4wM0d",
-      3: "https://buy.stripe.com/test_eVq3co6JvdpQ4fM5cg4wM0e",
-      6: "https://buy.stripe.com/test_3cIfZa1pb85w4fMfQU4wM0f",
-      12: "https://buy.stripe.com/test_7sY00c4Bn3PgdQmfQU4wM0g",
+      1: "https://buy.stripe.com/fZucN691Pd9CbUd01B2cg0s",
+      3: "https://buy.stripe.com/3cIdRa0vj0mQf6p8y72cg0t",
+      6: "https://buy.stripe.com/4gMfZi91P8Tm7DX01B2cg0u",
+      12: "https://buy.stripe.com/4gM8wQem90mQ3nH7u32cg0v",
     },
   },
 ] as const;

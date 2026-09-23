@@ -32,7 +32,7 @@ export function CheckoutModal({ plan, price, onClose }: CheckoutModalProps) {
     setError(null);
     try {
       const { checkoutUrl } = await startCheckout(email.trim(), price.id, method, referralCode.trim() || undefined);
-      // Redirect to Stripe's hosted Checkout page (test mode) — card entry
+      // Redirect to Stripe's hosted Checkout page — card entry
       // or the crypto wallet connection both happen there, never on this site.
       window.location.href = checkoutUrl;
     } catch (err) {

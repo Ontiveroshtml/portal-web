@@ -8,13 +8,13 @@ export const messages: Messages = {
     ogDescription: "クランのスクリーンショットを自動で読み取り。寄付、分配、イベント、ランキングをスプレッドシートなしで。",
   },
   app: {
-    checkoutSuccessStrong: "テスト決済が完了しました！",
+    checkoutSuccessStrong: "決済が完了しました！",
     checkoutSuccessBody: "メールをご確認ください。アカウントを有効化するための実際のリンクをお送りしました。",
     checkoutCancel: "決済はキャンセルされました。いつでもやり直せます。",
   },
   checkout: {
     title: "{{plan}}に申し込む",
-    note: "カード決済のためStripe（テストモード）に移動します。4242 4242 4242 4242、任意の将来の日付、任意のCVCを使用してください。実際の請求は発生しません。",
+    note: "カード決済のため、安全なStripeの決済ページに移動します。",
     emailPlaceholder: "you@email.com",
     referralPlaceholder: "割引コード（任意）",
     otherMethod: "ここにない決済方法をご希望ですか？サポートのDiscordチャンネルからご連絡ください。",

@@ -8,13 +8,13 @@ export const messages: Messages = {
     ogDescription: "Your clan's screenshots read themselves. Donations, payouts, Events and rankings without spreadsheets.",
   },
   app: {
-    checkoutSuccessStrong: "Test payment confirmed!",
+    checkoutSuccessStrong: "Payment confirmed!",
     checkoutSuccessBody: "Check your email — we sent you a real link to activate your account.",
     checkoutCancel: "The payment was cancelled. You can try again whenever you like.",
   },
   checkout: {
     title: "Subscribe to {{plan}}",
-    note: "We'll take you to Stripe (test mode) to pay by card. Use 4242 4242 4242 4242, any future date and any CVC — no real charge is made.",
+    note: "We'll take you to Stripe to pay securely by card.",
     emailPlaceholder: "you@email.com",
     referralPlaceholder: "Discount code (optional)",
     otherMethod: "Want to pay through a platform that isn't listed here? Contact us on Discord, in the support channel.",
