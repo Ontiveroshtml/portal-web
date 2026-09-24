@@ -15,46 +15,47 @@ export function isFallbackPlan(plan: Plan): plan is FallbackPlan {
 const CYCLES = [
   { months: 1, management: 0, intelligence: 0 },
   { months: 3, management: 5, intelligence: 5 },
-  { months: 6, management: 10, intelligence: 8 },
-  { months: 12, management: 15, intelligence: 12 },
+  { months: 6, management: 10, intelligence: 10 },
+  { months: 12, management: 17, intelligence: 17 },
 ] as const;
 
-// Payment Links de Stripe (modo live), creados 2026-09-23: 1 mes, 3, 6 y 12.
+// Payment Links de Stripe (modo live): 1 mes se cobra mensual; 3, 6 y 12 meses
+// se cobran por adelantado (un solo pago por el período completo).
 const PLANS = [
   {
     id: -1, tier: "management", min: 1, max: 100, base: 59,
     links: {
       1: "https://buy.stripe.com/bJe5kEguh5Haf6p9Cb2cg0g",
-      3: "https://buy.stripe.com/8x200k5PD4D64rLaGf2cg0h",
-      6: "https://buy.stripe.com/dRm7sMem9glO5vP15F2cg0i",
-      12: "https://buy.stripe.com/4gM3cw91P4D64rL9Cb2cg0j",
+      3: "https://buy.stripe.com/fZu6oIa5Tc5y3nH5lV2cg0w",
+      6: "https://buy.stripe.com/bJebJ26THedG1fz4hR2cg0x",
+      12: "https://buy.stripe.com/5kQfZi5PD2uYe2l8y72cg0I",
     },
   },
   {
     id: -2, tier: "management", min: 101, max: 200, base: 79,
     links: {
       1: "https://buy.stripe.com/5kQ14oce15Ha8I19Cb2cg0k",
-      3: "https://buy.stripe.com/bJeeVe91PglOe2l6pZ2cg0l",
-      6: "https://buy.stripe.com/3cI9AUdi51qU5vP9Cb2cg0m",
-      12: "https://buy.stripe.com/9B64gAa5T1qU7DX9Cb2cg0n",
+      3: "https://buy.stripe.com/6oUaEY5PDd9C8I1aGf2cg0z",
+      6: "https://buy.stripe.com/4gMeVe0vjfhK9M55lV2cg0A",
+      12: "https://buy.stripe.com/5kQ6oI5PD6Lef6p8y72cg0J",
     },
   },
   {
     id: -3, tier: "intelligence", min: 1, max: 100, base: 109,
     links: {
       1: "https://buy.stripe.com/bJe9AU91P0mQ7DX4hR2cg0o",
-      3: "https://buy.stripe.com/cNi4gAdi51qUf6paGf2cg0p",
-      6: "https://buy.stripe.com/eVqeVe91P7Pi7DXcOn2cg0q",
-      12: "https://buy.stripe.com/6oU4gAem9b1u5vP7u32cg0r",
+      3: "https://buy.stripe.com/5kQ28s0vj2uY4rLbKj2cg0C",
+      6: "https://buy.stripe.com/5kQ00kb9Xd9C1fzeWv2cg0K",
+      12: "https://buy.stripe.com/7sYeVe6TH6Le5vP8y72cg0L",
     },
   },
   {
     id: -4, tier: "intelligence", min: 101, max: 200, base: 139,
     links: {
       1: "https://buy.stripe.com/fZucN691Pd9CbUd01B2cg0s",
-      3: "https://buy.stripe.com/3cIdRa0vj0mQf6p8y72cg0t",
-      6: "https://buy.stripe.com/4gMfZi91P8Tm7DX01B2cg0u",
-      12: "https://buy.stripe.com/4gM8wQem90mQ3nH7u32cg0v",
+      3: "https://buy.stripe.com/5kQ9AU1znedG7DXg0z2cg0F",
+      6: "https://buy.stripe.com/dRmfZi0vj4D66zT8y72cg0M",
+      12: "https://buy.stripe.com/cNibJ22Dr7Pi7DXg0z2cg0N",
     },
   },
 ] as const;

@@ -148,7 +148,9 @@ function PlanCard({
         </div>
 
         <p className="mb-[22px] text-[12px] text-[var(--muted)]">
-          {cycleMonths > 1 ? t("planes.commitment", { months: cycleMonths }) : t("planes.billedMonthly")}
+          {cycleMonths > 1 && price
+            ? t("planes.commitment", { months: cycleMonths, total: formatMoney(price.monthly_price_cents * cycleMonths) })
+            : t("planes.billedMonthly")}
         </p>
 
         <ul className="mb-6 flex flex-1 flex-col gap-3">

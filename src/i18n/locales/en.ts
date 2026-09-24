@@ -35,7 +35,7 @@ export const messages: Messages = {
     referralPlaceholder: "Discount code (optional)",
     otherMethod: "Want to pay through a platform that isn't listed here? Contact us on Discord, in the support channel.",
     submitting: "Redirecting to Stripe…",
-    pay: "Go to payment — {{price}}/mo",
+    pay: "Go to payment — {{price}}",
     payCrypto: "Pay with stablecoins (USDC) — {{price}} total",
     cryptoNote: "One-time payment for the whole commitment, no auto-renewal. We'll email you before it expires.",
     cancel: "Cancel",
@@ -108,7 +108,7 @@ export const messages: Messages = {
       title: "Intelligence",
     },
     choose: "Choose this plan",
-    commitment: "{{months}}-month commitment, billed monthly",
+    commitment: "{{months}}-month commitment · {{total}} billed upfront",
     cycles: {
       monthly: "Monthly",
       three: "3 months",

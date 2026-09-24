@@ -35,7 +35,7 @@ export const messages: Messages = {
     referralPlaceholder: "Промокод (необязательно)",
     otherMethod: "Хотите оплатить через способ, которого здесь нет? Напишите нам в Discord, в канале поддержки.",
     submitting: "Переход в Stripe…",
-    pay: "Перейти к оплате — {{price}}/мес",
+    pay: "Перейти к оплате — {{price}}",
     payCrypto: "Оплатить стейблкоинами (USDC) — {{price}} всего",
     cryptoNote: "Разовый платёж за весь период, без автопродления. Мы напомним по почте перед истечением срока.",
     cancel: "Отмена",
@@ -108,7 +108,7 @@ export const messages: Messages = {
       title: "Intelligence",
     },
     choose: "Выбрать план",
-    commitment: "{{months}}-месячное обязательство, биллинг ежемесячно",
+    commitment: "Обязательство на {{months}} мес. · {{total}} оплата сразу",
     cycles: {
       monthly: "Ежемесячно",
       three: "3 месяца",

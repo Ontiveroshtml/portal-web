@@ -82,7 +82,12 @@ export function CheckoutModal({ plan, price, onClose }: CheckoutModalProps) {
           >
             {submitting === "card"
               ? t("checkout.submitting")
-              : t("checkout.pay", { price: `$${(price.monthly_price_cents / 100).toFixed(2)}` })}
+              : t("checkout.pay", {
+                  price:
+                    price.commitment_months > 1
+                      ? `$${((price.monthly_price_cents * price.commitment_months) / 100).toFixed(2)}`
+                      : `$${(price.monthly_price_cents / 100).toFixed(2)}${t("planes.perMonth")}`,
+                })}
           </button>
           {CRYPTO_PAYMENTS_ENABLED && (
             <>

@@ -35,7 +35,7 @@ export const messages: Messages = {
     referralPlaceholder: "割引コード（任意）",
     otherMethod: "ここにない決済方法をご希望ですか？サポートのDiscordチャンネルからご連絡ください。",
     submitting: "Stripeに移動中…",
-    pay: "支払いに進む — {{price}}/月",
+    pay: "支払いに進む — {{price}}",
     payCrypto: "ステーブルコイン（USDC）で支払う — 合計 {{price}}",
     cryptoNote: "契約期間全体を一括払いします（自動更新なし）。期限が近づいたらメールでお知らせします。",
     cancel: "キャンセル",
@@ -108,7 +108,7 @@ export const messages: Messages = {
       title: "Intelligence",
     },
     choose: "このプランを選ぶ",
-    commitment: "{{months}}ヶ月契約、月ごとに請求",
+    commitment: "{{months}}ヶ月契約 · {{total}}を前払い",
     cycles: {
       monthly: "月額",
       three: "3ヶ月",
