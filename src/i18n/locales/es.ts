@@ -167,7 +167,7 @@ export const messages: Messages = {
   },
   demo: {
     request: "Solicitar demo",
-    requestNote: "Te respondemos por correo",
+    requestNote: "Acceso al instante por Discord",
     badge: "Demo · Próximamente",
     title: "Vas a poder entrar y probarlo tú mismo,",
     titleAccent: "antes de mover un solo dato de tu clan.",

@@ -167,7 +167,7 @@ export const messages: Messages = {
   },
   demo: {
     request: "Request demo",
-    requestNote: "We'll reply by email",
+    requestNote: "Instant access via Discord",
     badge: "Demo · Coming soon",
     title: "You'll be able to try it yourself,",
     titleAccent: "before moving a single data point of your clan.",

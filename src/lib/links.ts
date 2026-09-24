@@ -5,3 +5,5 @@
 export const DISCORD_URL: string = "https://discord.gg/SbKWkfSphN";
 // Coordinar pagos personalizados / Fondo Común → canal #support-tickets.
 export const DISCORD_PAYMENTS_URL: string = "https://discord.gg/njm3VAUwtK";
+// Pedir la demo (bot GC Billing en #support-tickets) — invitación propia para medir cuánta gente llega por aquí.
+export const DISCORD_DEMO_URL: string = "https://discord.gg/PPNYCqYTEU";

@@ -167,7 +167,7 @@ export const messages: Messages = {
   },
   demo: {
     request: "デモを申し込む",
-    requestNote: "メールでご返信します",
+    requestNote: "Discordですぐにアクセス",
     badge: "デモ · まもなく",
     title: "ご自身でお試しいただけます、",
     titleAccent: "クランのデータを1点も動かす前に。",
