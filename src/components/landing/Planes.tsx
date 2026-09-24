@@ -137,7 +137,7 @@ function PlanCard({
               className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1.5 [font-family:'Montserrat',sans-serif] text-[10px] font-extrabold italic uppercase tracking-[.05em] ${style.chip}`}
             >
               <img
-                src="/vfx/vfx-lightning-yellow-02.png"
+                src="/vfx/vfx-lightning-yellow-02.avif"
                 alt=""
                 aria-hidden="true"
                 className="size-2.5"
@@ -356,7 +356,7 @@ export function Planes() {
                     {"badgeKey" in cycle && (
                       <span className="pointer-events-none absolute -right-1.5 -top-[11px] flex -rotate-6 items-center gap-[3px] whitespace-nowrap rounded-full bg-[var(--accent-gold)] px-2 py-1 [font-family:'Montserrat',sans-serif] text-[9px] font-black italic uppercase leading-none tracking-[.06em] text-[#3a2400] shadow-[0_0_12px_-2px_rgba(255,184,0,.7)]">
                         <img
-                          src="/vfx/vfx-lightning-yellow-01.png"
+                          src="/vfx/vfx-lightning-yellow-01.avif"
                           alt=""
                           aria-hidden="true"
                           className="size-2.5"
@@ -378,7 +378,7 @@ export function Planes() {
             />
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-8 right-0 z-0 hidden size-[150px] rotate-6 bg-[url('/vfx/vfx-lightning-purple.png')] bg-contain bg-no-repeat opacity-[.16] mix-blend-screen lg:block"
+              className="pointer-events-none absolute -bottom-8 right-0 z-0 hidden size-[150px] rotate-6 bg-[url('/vfx/vfx-lightning-purple.avif')] bg-contain bg-no-repeat opacity-[.16] mix-blend-screen lg:block"
             />
 
             <div className="relative z-[1]">
