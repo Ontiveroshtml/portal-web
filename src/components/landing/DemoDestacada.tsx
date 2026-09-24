@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { DemoRequestModal } from "../DemoRequestModal";
 import { LOGIN_URL } from "../../lib/config";
 import { useI18n } from "../../i18n/useI18n";
 
@@ -11,6 +13,7 @@ const INCLUYE = ["real", "loadData", "limits"] as const;
 
 export function DemoDestacada() {
   const { t } = useI18n();
+  const [formularioAbierto, setFormularioAbierto] = useState(false);
 
   return (
     <section
@@ -55,18 +58,16 @@ export function DemoDestacada() {
             ) : (
               <button
                 type="button"
-                disabled
-                aria-disabled="true"
-                title={t("demo.disabledTitle")}
-                className="cursor-not-allowed rounded-full bg-[var(--accent)] px-6 py-2.5 [font-family:'Montserrat',sans-serif] text-[14.5px] font-black italic uppercase tracking-[.04em] text-[#17201e] opacity-55"
+                onClick={() => setFormularioAbierto(true)}
+                className="gc-boton gc-boton-primario rounded-full bg-[var(--accent)] px-6 py-2.5 [font-family:'Montserrat',sans-serif] text-[14.5px] font-black italic uppercase tracking-[.04em] text-[#17201e] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_34px_-6px_rgba(214,250,56,.5)]"
               >
-                {t("demo.cta")}
+                {t("demo.request")}
               </button>
             )}
 
             {!DEMO_LISTA && (
               <span className="[font-family:'JetBrains_Mono',monospace] text-[11px] uppercase tracking-[.12em] text-[var(--muted)]">
-                {t("demo.comingSoon")}
+                {t("demo.requestNote")}
               </span>
             )}
           </div>
@@ -103,6 +104,8 @@ export function DemoDestacada() {
           />
         </div>
       </div>
+
+      {formularioAbierto && <DemoRequestModal onClose={() => setFormularioAbierto(false)} />}
     </section>
   );
 }

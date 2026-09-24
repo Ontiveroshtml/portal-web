@@ -85,3 +85,18 @@ export function startOverrideCheckout(
     body: { email, overrideToken, method: "card" },
   });
 }
+
+export interface DemoRequestInput {
+  name: string;
+  email: string;
+  clanName: string | null;
+  players: number | null;
+  message: string | null;
+  /** Campo trampa del formulario: viaja vacío salvo que lo llene un bot. */
+  website: string;
+}
+
+/** Manda la solicitud de demo al equipo. No crea cuenta ni guarda nada. */
+export function requestDemo(input: DemoRequestInput): Promise<void> {
+  return apiFetch<void>("/public/demo-request", { method: "POST", body: input });
+}
