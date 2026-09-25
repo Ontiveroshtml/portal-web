@@ -141,7 +141,8 @@ export const messages: Messages = {
     payMethod: "支払い方法",
     payCard: "カード",
     payCrypto: "暗号資産",
-    cryptoNote: "⏳ 暗号資産での支払いは近日公開予定です。それまでの間は、お支払い方法についてお問い合わせください。",
+    cryptoNote: "暗号資産でのお支払いは管理者と調整します。Discordに参加して、管理者にご連絡ください。",
+    cryptoContact: "Discordで管理者に連絡",
     pool: {
       title: "クラン共同基金",
       desc: "月額料金を複数のメンバーで分担します。追加料金は、選択したサイクルのすでに割引された価格に対して適用されます。",

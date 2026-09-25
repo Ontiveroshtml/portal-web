@@ -141,7 +141,8 @@ export const messages: Messages = {
     payMethod: "Payment method",
     payCard: "Card",
     payCrypto: "Crypto",
-    cryptoNote: "⏳ Crypto payments will be available very soon. In the meantime, contact us to arrange payment.",
+    cryptoNote: "Crypto payments are arranged with an administrator. Join our Discord and contact one to complete your payment.",
+    cryptoContact: "Contact an admin on Discord",
     pool: {
       title: "Clan pool fund",
       desc: "Split the monthly fee among several members. The surcharge applies on top of the already-discounted cycle price.",

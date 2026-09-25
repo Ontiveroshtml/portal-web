@@ -172,14 +172,27 @@ function PlanCard({
           ))}
         </ul>
 
-        <button
-          type="button"
-          disabled={!price || cryptoMode}
-          onClick={() => price && onChoose(plan, price)}
-          className={`gc-boton w-full cursor-pointer rounded-full px-5 py-3.5 [font-family:'Montserrat',sans-serif] text-[12.5px] font-extrabold italic uppercase tracking-[.04em] transition duration-150 active:scale-[.97] disabled:cursor-not-allowed disabled:opacity-55 ${style.cta}`}
-        >
-          {cryptoMode ? t("hero.comingSoon") : t("planes.choose")}
-        </button>
+        {cryptoMode ? (
+          // Cripto todavía no tiene un pago automático: se coordina con un
+          // administrador en Discord (canal de pagos).
+          <a
+            href={DISCORD_PAYMENTS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`gc-boton block w-full cursor-pointer rounded-full px-5 py-3.5 text-center [font-family:'Montserrat',sans-serif] text-[12.5px] font-extrabold italic uppercase tracking-[.04em] transition duration-150 active:scale-[.97] ${style.cta}`}
+          >
+            {t("planes.cryptoContact")}
+          </a>
+        ) : (
+          <button
+            type="button"
+            disabled={!price}
+            onClick={() => price && onChoose(plan, price)}
+            className={`gc-boton w-full cursor-pointer rounded-full px-5 py-3.5 [font-family:'Montserrat',sans-serif] text-[12.5px] font-extrabold italic uppercase tracking-[.04em] transition duration-150 active:scale-[.97] disabled:cursor-not-allowed disabled:opacity-55 ${style.cta}`}
+          >
+            {t("planes.choose")}
+          </button>
+        )}
       </article>
     </div>
   );

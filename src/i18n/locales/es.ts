@@ -141,7 +141,8 @@ export const messages: Messages = {
     payMethod: "Método de pago",
     payCard: "Tarjeta",
     payCrypto: "Cripto",
-    cryptoNote: "⏳ Los pagos en cripto estarán disponibles muy pronto. Mientras tanto, escríbenos para coordinar el pago.",
+    cryptoNote: "Los pagos en cripto se coordinan con un administrador. Entra a nuestro Discord y contáctalo para completar el pago.",
+    cryptoContact: "Contactar a un admin en Discord",
     pool: {
       title: "Fondo común de clan",
       desc: "Divide la cuota mensual entre varios miembros. El recargo se aplica sobre el precio ya rebajado del ciclo elegido.",
