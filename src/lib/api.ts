@@ -2,7 +2,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
 // Idioma en el que el backend devuelve sus mensajes de error. Lo actualiza el
 // I18nProvider cada vez que el visitante cambia de idioma.
-let apiLanguage = "es";
+let apiLanguage = "en";
 export function setApiLanguage(lang: string) {
   apiLanguage = lang;
 }

@@ -21,7 +21,7 @@ export function CheckoutAMedida() {
     setError(null);
     try {
       const { checkoutUrl } = await startOverrideCheckout(email, token);
-      window.location.href = checkoutUrl;
+      window.location.assign(checkoutUrl);
     } catch (err) {
       setError(err instanceof ApiError ? err.message : t("checkoutMedida.error"));
       setSubmitting(false);

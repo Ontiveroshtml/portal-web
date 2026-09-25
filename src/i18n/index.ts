@@ -7,7 +7,7 @@ import { messages as ru } from "./locales/ru";
 // los ve en la app y en la web con el mismo código.
 export const LANGUAGES = ["en", "es", "ja", "ru"] as const;
 export type Lang = (typeof LANGUAGES)[number];
-export const DEFAULT_LANGUAGE: Lang = "es";
+export const DEFAULT_LANGUAGE: Lang = "en";
 export const STORAGE_KEY = "gc-portal-lang";
 
 // Datos de cada idioma para el selector. Sin banderas: en Windows los emoji
