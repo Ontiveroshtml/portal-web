@@ -8,6 +8,7 @@ export const messages: Messages = {
     ogDescription: "Your clan's screenshots read themselves. Donations, payouts, Events and rankings without spreadsheets.",
   },
   app: {
+    redirectBlocked: "We couldn't open the payment page. Please try again or contact support.",
     checkoutSuccessStrong: "Payment confirmed!",
     checkoutSuccessBody: "Check your email — we sent you a real link to activate your account.",
     checkoutCancel: "The payment was cancelled. You can try again whenever you like.",

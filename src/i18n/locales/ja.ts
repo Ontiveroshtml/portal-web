@@ -8,6 +8,7 @@ export const messages: Messages = {
     ogDescription: "クランのスクリーンショットを自動で読み取り。寄付、分配、イベント、ランキングをスプレッドシートなしで。",
   },
   app: {
+    redirectBlocked: "お支払いページを開けませんでした。もう一度お試しいただくか、サポートまでご連絡ください。",
     checkoutSuccessStrong: "決済が完了しました！",
     checkoutSuccessBody: "メールをご確認ください。アカウントを有効化するための実際のリンクをお送りしました。",
     checkoutCancel: "決済はキャンセルされました。いつでもやり直せます。",

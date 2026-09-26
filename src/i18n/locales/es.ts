@@ -8,6 +8,7 @@ export const messages: Messages = {
     ogDescription: "Las capturas de tu clan se leen solas. Donaciones, repartos, Eventos y rankings sin planillas.",
   },
   app: {
+    redirectBlocked: "No pudimos abrir la página de pago. Inténtalo de nuevo o contacta con soporte.",
     checkoutSuccessStrong: "¡Pago confirmado!",
     checkoutSuccessBody: "Revisa tu correo — te enviamos un enlace real para activar tu cuenta.",
     checkoutCancel: "El pago se canceló. Puedes intentarlo de nuevo cuando quieras.",
