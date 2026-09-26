@@ -222,6 +222,13 @@ function PoolCard({ plan, cycleMonths }: { plan: Plan; cycleMonths: number }) {
         +{rule.surcharge}%
       </div>
       <div className="text-[11px] text-[var(--muted)]">{t("planes.pool.per")}</div>
+      {/* Con un ciclo de 3, 6 o 12 meses se paga todo el periodo de una vez: sin esta línea
+          el "por persona / mes" hace pensar que Stripe cobrará solo esa cifra. */}
+      {perPerson !== null && cycleMonths > 1 && (
+        <div className="mt-1 text-[11px] font-semibold text-[var(--accent)]">
+          {t("planes.pool.oneTime", { amount: formatMoney(Math.round(perPerson * cycleMonths)), months: cycleMonths })}
+        </div>
+      )}
       <a
         href={DISCORD_PAYMENTS_URL}
         target="_blank"

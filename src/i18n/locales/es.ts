@@ -150,7 +150,8 @@ export const messages: Messages = {
       cta: "Coordinar por Discord",
       contributors: "Hasta {{n}} contribuyentes",
       per: "por persona / mes",
-      footnote: "**Cómo se factura:** el compromiso puede ser de 3, 6 o 12 meses, pero cada contribuyente del fondo común paga siempre **mes a mes** — nunca se cobra el total del periodo de una sola vez. El monto por persona es `(cuota mensual con descuento × recargo) ÷ contribuyentes`. Coordina con tu clan quién aporta cuánto y te armamos un link de pago a la medida.",
+      oneTime: "un solo pago de {{amount}} por {{months}} meses",
+      footnote: "**Cómo se factura:** puedes elegir mensual o un compromiso de 3, 6 o 12 meses. Con compromiso, cada contribuyente del fondo común paga su parte del **periodo completo de una sola vez**, como en una compra normal, y se renueva al terminar el periodo; el mensual se paga cada mes. La parte de cada persona es `(cuota mensual con descuento × recargo) ÷ contribuyentes`, y el precio que ves es esa parte por mes. Coordina con tu clan quién aporta cuánto y te armamos un link de pago a la medida.",
     },
   },
   ctaFinal: {

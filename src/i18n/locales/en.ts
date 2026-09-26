@@ -150,7 +150,8 @@ export const messages: Messages = {
       cta: "Coordinate on Discord",
       contributors: "Up to {{n}} contributors",
       per: "per person / month",
-      footnote: "**How billing works:** the commitment can be 3, 6 or 12 months, but each pool contributor always pays **monthly** — the full period is never charged at once. The amount per person is `(discounted monthly price × surcharge) ÷ contributors`. Coordinate with your clan who pays what and we'll set up a custom payment link.",
+      oneTime: "one payment of {{amount}} for {{months}} months",
+      footnote: "**How billing works:** you can choose monthly, or a 3, 6 or 12-month commitment. With a commitment, each pool contributor pays their share of the **whole period at once**, like a normal purchase, and it renews when the period ends; monthly is paid every month. A share is `(discounted monthly price × surcharge) ÷ contributors`, and the price shown is that share per month. Coordinate with your clan who pays what and we'll set up a custom payment link.",
     },
   },
   ctaFinal: {
