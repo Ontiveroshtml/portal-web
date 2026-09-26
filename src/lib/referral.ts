@@ -6,7 +6,7 @@ const STORAGE_KEY = "gc_referral_code";
 // no sea en la misma visita que el link.
 export function captureReferralFromUrl(): void {
   const code = new URLSearchParams(window.location.search).get("ref");
-  if (!code) return;
+  if (!code || !/^[a-z0-9_-]{2,40}$/i.test(code.trim())) return;
   try {
     window.localStorage.setItem(STORAGE_KEY, code.trim().toLowerCase());
   } catch {

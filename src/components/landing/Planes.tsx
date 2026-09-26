@@ -5,6 +5,7 @@ import { useI18n } from "../../i18n/useI18n";
 import { FALLBACK_PLANS, isFallbackPlan, POOL_RULES } from "./planesFallback";
 import { Highlight, RichText } from "./shared";
 import { DISCORD_PAYMENTS_URL } from "../../lib/links";
+import { safeRedirect } from "../../lib/safeRedirect";
 
 // Diseño de `guild-core-planes.html`: selector de método de pago, ciclos
 // centrados, tarjetas con corte de 16px por tramo de jugadores, cabeceras de
@@ -232,7 +233,7 @@ function PoolCard({ plan, cycleMonths }: { plan: Plan; cycleMonths: number }) {
       <a
         href={DISCORD_PAYMENTS_URL}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         className={`mt-3 block w-full rounded-full px-3.5 py-2 text-center [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase tracking-[.04em] transition duration-150 hover:brightness-110 ${style.poolCta}`}
       >
         {t("planes.pool.cta")}
@@ -281,7 +282,7 @@ export function Planes() {
     // el checkout normal (correo + activación de cuenta).
     if (isFallbackPlan(plan)) {
       const link = plan.links[price.commitment_months];
-      if (link) window.location.href = link;
+      if (link) safeRedirect(link);
       return;
     }
     setCheckout({ plan, price });
@@ -471,7 +472,7 @@ export function Planes() {
                 <a
                   href={DISCORD_PAYMENTS_URL}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="gc-boton inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-[var(--accent)] px-4 py-2 [font-family:'Montserrat',sans-serif] text-[11.5px] font-extrabold italic uppercase leading-none tracking-[.04em] text-[#1c2200] transition duration-150 hover:brightness-110"
                 >
                   {t("planes.pool.cta")}

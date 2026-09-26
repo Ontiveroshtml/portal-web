@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ApiError, startOverrideCheckout } from "../lib/api";
 import { useI18n } from "../i18n/useI18n";
+import { safeRedirect } from "../lib/safeRedirect";
 
 /** Página que recibe el link de "oferta a medida" armado por un admin (ver
  * POST /admin/plan-overrides en el backend): token + email vienen en la URL,
@@ -21,7 +22,7 @@ export function CheckoutAMedida() {
     setError(null);
     try {
       const { checkoutUrl } = await startOverrideCheckout(email, token);
-      window.location.assign(checkoutUrl);
+      safeRedirect(checkoutUrl);
     } catch (err) {
       setError(err instanceof ApiError ? err.message : t("checkoutMedida.error"));
       setSubmitting(false);

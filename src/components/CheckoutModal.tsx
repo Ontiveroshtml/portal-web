@@ -3,6 +3,7 @@ import { ApiError, startCheckout, type CheckoutPaymentMethod, type Plan, type Pl
 import { useI18n } from "../i18n/useI18n";
 import { getStoredReferralCode } from "../lib/referral";
 import { DISCORD_PAYMENTS_URL } from "../lib/links";
+import { safeRedirect } from "../lib/safeRedirect";
 
 // Apagado a pedido ("cancelo de cripto hasta nuevo aviso") — el backend
 // también rechaza method:"crypto" mientras tanto (ver checkout.stripe.ts).
@@ -35,7 +36,7 @@ export function CheckoutModal({ plan, price, onClose }: CheckoutModalProps) {
       const { checkoutUrl } = await startCheckout(email.trim(), price.id, method, referralCode.trim() || undefined);
       // Redirect to Stripe's hosted Checkout page — card entry
       // or the crypto wallet connection both happen there, never on this site.
-      window.location.href = checkoutUrl;
+      safeRedirect(checkoutUrl);
     } catch (err) {
       setError(err instanceof ApiError ? err.message : t("checkout.error"));
       setSubmitting(null);
@@ -112,7 +113,7 @@ export function CheckoutModal({ plan, price, onClose }: CheckoutModalProps) {
           <a
             href={DISCORD_PAYMENTS_URL}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="mt-1 block text-center text-[11px] text-[var(--muted)] underline hover:text-[var(--accent)]"
           >
             {t("checkout.otherMethod")}
